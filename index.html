@@ -277,10 +277,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-10-21 15:08:00 / 修改時間：15:49:45" itemprop="dateCreated datePublished" datetime="2020-10-21T15:08:00+08:00">2020-10-21</time>
+              <time title="創建時間：2020-10-21 15:08:00" itemprop="dateCreated datePublished" datetime="2020-10-21T15:08:00+08:00">2020-10-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-10-23 14:21:52" itemprop="dateModified" datetime="2020-10-23T14:21:52+08:00">2020-10-23</time>
+              </span>
 
           
 
@@ -295,8 +301,15 @@
       
           <h2 id="什麼是標頭檔"><a href="#什麼是標頭檔" class="headerlink" title="什麼是標頭檔?"></a>什麼是標頭檔?</h2><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%A4%B4%E6%96%87%E4%BB%B6">wiki</a></p>
 <p>簡單來說，是存放你要使用的功能的地方。</p>
+<p>例如，假如你想要使用 cout 這個功能，便需要在程式的開頭加上這行，因為 cout 是 iostream 裡的功能，所以必須 include 後才能使用。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br></pre></td></tr></table></figure>
+
 <h2 id="什麼是命名空間"><a href="#什麼是命名空間" class="headerlink" title="什麼是命名空間?"></a>什麼是命名空間?</h2><p><a target="_blank" rel="noopener" href="https://atedev.wordpress.com/2007/01/01/c-%E7%9A%84%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93/">教學</a></p>
-<p>簡單來說，用來避免那些功能撞名的東西。</p>
+<p>簡單來說，用來避免那些功能撞名的東西。在 include 後，main 前打上這一段。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
+<p>若沒有這一行，每次使用 cout 以及其他在 std 命名空間下的功能時，將需要寫成如下形式，十分麻煩。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x,y;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;HI\n&quot;</span>;</span><br><span class="line">    x = <span class="built_in">std</span>::min(x,y);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;x&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>使用#include&lt;標頭檔名&gt;引入要使用的標頭檔。</p>
 <p>使用using namespace 名稱; 以使用命名空間。</p>
 <h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Hello World!\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -353,10 +366,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-10-21 14:33:34 / 修改時間：16:18:34" itemprop="dateCreated datePublished" datetime="2020-10-21T14:33:34+08:00">2020-10-21</time>
+              <time title="創建時間：2020-10-21 14:33:34" itemprop="dateCreated datePublished" datetime="2020-10-21T14:33:34+08:00">2020-10-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-10-23 14:48:36" itemprop="dateModified" datetime="2020-10-23T14:48:36+08:00">2020-10-23</time>
+              </span>
 
           
 
@@ -377,9 +396,45 @@
 <p><a target="_blank" rel="noopener" href="https://progressbar.tw/posts/7">Dev-C++使用說明</a></p>
 <h2 id="0-0-Hello-World！-標頭檔與命名空間"><a href="#0-0-Hello-World！-標頭檔與命名空間" class="headerlink" title="0-0 Hello World！ 標頭檔與命名空間"></a><a href="/2020/10/21/0-0/">0-0 Hello World！ 標頭檔與命名空間</a></h2><p><strong>常見程度：★★★★★</strong></p>
 <p><strong>不可替代程度：★★★★★</strong></p>
-<h2 id="0-1-基本輸入輸出"><a href="#0-1-基本輸入輸出" class="headerlink" title="0-1 基本輸入輸出"></a>0-1 基本輸入輸出</h2><p><strong>常見程度：★★★★★</strong></p>
+<h2 id="0-1-變數的宣告"><a href="#0-1-變數的宣告" class="headerlink" title="0-1 變數的宣告"></a>0-1 變數的宣告</h2><p><strong>常見程度：★★★★★</strong></p>
 <p><strong>不可替代程度：★★★★★</strong></p>
-
+<h2 id="0-2-基本輸入輸出"><a href="#0-2-基本輸入輸出" class="headerlink" title="0-2 基本輸入輸出"></a>0-2 基本輸入輸出</h2><p><strong>常見程度：★★★★★</strong></p>
+<p><strong>不可替代程度：★★★★★</strong></p>
+<h2 id="0-3-四則運算"><a href="#0-3-四則運算" class="headerlink" title="0-3 四則運算"></a>0-3 四則運算</h2><p><strong>常見程度：★★★★★</strong></p>
+<p><strong>不可替代程度：★★★★★</strong></p>
+<h2 id="0-4-進階運算與輸入輸出"><a href="#0-4-進階運算與輸入輸出" class="headerlink" title="0-4 進階運算與輸入輸出"></a>0-4 進階運算與輸入輸出</h2><p><strong>常見程度：★★</strong></p>
+<p><strong>不可替代程度：★★★★★</strong></p>
+<h2 id="0-5-條件判斷"><a href="#0-5-條件判斷" class="headerlink" title="0-5 條件判斷"></a>0-5 條件判斷</h2><p><strong>常見程度：★★★★★</strong></p>
+<p><strong>不可替代程度：★★★★★</strong></p>
+<h2 id="0-6-陣列"><a href="#0-6-陣列" class="headerlink" title="0-6 陣列"></a>0-6 陣列</h2><p><strong>常見程度：★★★★★</strong></p>
+<p><strong>不可替代程度：★★★★★</strong></p>
+<h2 id="0-7-迴圈"><a href="#0-7-迴圈" class="headerlink" title="0-7 迴圈"></a>0-7 迴圈</h2><p><strong>常見程度：★★★★★</strong></p>
+<p><strong>不可替代程度：★★★★★</strong></p>
+<h2 id="0-8-函式"><a href="#0-8-函式" class="headerlink" title="0-8 函式"></a>0-8 函式</h2><p><strong>常見程度：★★★</strong></p>
+<p><strong>不可替代程度：★★★</strong></p>
+<h2 id="0-9-遞迴"><a href="#0-9-遞迴" class="headerlink" title="0-9 遞迴"></a>0-9 遞迴</h2><p><strong>常見程度：★★★</strong></p>
+<p><strong>不可替代程度：★★★★★</strong></p>
+<h2 id="0-10-struct"><a href="#0-10-struct" class="headerlink" title="0-10 struct"></a>0-10 struct</h2><p><strong>常見程度：★★</strong></p>
+<p><strong>不可替代程度：★★</strong></p>
+<h2 id="0-11-排序"><a href="#0-11-排序" class="headerlink" title="0-11 排序"></a>0-11 排序</h2><p><strong>常見程度：★★★★</strong></p>
+<p><strong>不可替代程度：★★★★</strong></p>
+<h2 id="0-12-lower-bound-與-upper-bound"><a href="#0-12-lower-bound-與-upper-bound" class="headerlink" title="0-12 lower_bound 與 upper_bound"></a>0-12 lower_bound 與 upper_bound</h2><p><strong>常見程度：★★★</strong></p>
+<p><strong>不可替代程度：★★★</strong></p>
+<h2 id="0-13-段落小結"><a href="#0-13-段落小結" class="headerlink" title="0-13 段落小結"></a>0-13 段落小結</h2><h2 id="0-14-STL簡介"><a href="#0-14-STL簡介" class="headerlink" title="0-14 STL簡介"></a>0-14 STL簡介</h2><p><strong>常見程度：★★★★</strong></p>
+<p><strong>不可替代程度：★★★★</strong></p>
+<h2 id="0-15-pair"><a href="#0-15-pair" class="headerlink" title="0-15 pair"></a>0-15 pair</h2><p><strong>常見程度：★★★★</strong></p>
+<p><strong>不可替代程度：★★★★</strong></p>
+<h2 id="0-16-vector"><a href="#0-16-vector" class="headerlink" title="0-16 vector"></a>0-16 vector</h2><p><strong>常見程度：★★★★</strong></p>
+<p><strong>不可替代程度：★★★★★</strong></p>
+<h2 id="0-17-queue-與-stack"><a href="#0-17-queue-與-stack" class="headerlink" title="0-17 queue 與 stack"></a>0-17 queue 與 stack</h2><p><strong>常見程度：★★★</strong></p>
+<p><strong>不可替代程度：★★</strong></p>
+<h2 id="0-18-set-與-map"><a href="#0-18-set-與-map" class="headerlink" title="0-18 set 與 map"></a>0-18 set 與 map</h2><p><strong>常見程度：★★★</strong></p>
+<p><strong>不可替代程度：★★★★★</strong></p>
+<h2 id="0-19-priority-queue"><a href="#0-19-priority-queue" class="headerlink" title="0-19 priority_queue"></a>0-19 priority_queue</h2><p><strong>常見程度：★★</strong></p>
+<p><strong>不可替代程度：★★</strong></p>
+<h2 id="0-20-bitset"><a href="#0-20-bitset" class="headerlink" title="0-20 bitset"></a>0-20 bitset</h2><p><strong>常見程度：★</strong></p>
+<p><strong>不可替代程度：★★★★</strong></p>
+<h2 id="0-21-本章總結"><a href="#0-21-本章總結" class="headerlink" title="0-21 本章總結"></a>0-21 本章總結</h2>
       
     </div>
 
