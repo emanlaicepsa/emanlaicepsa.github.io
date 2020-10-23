@@ -264,6 +264,112 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/23/0-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門指南">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/23/0-1/" class="post-title-link" itemprop="url">0-1 變數的宣告</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-10-23 15:28:39 / 修改時間：15:59:27" itemprop="dateCreated datePublished" datetime="2020-10-23T15:28:39+08:00">2020-10-23</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.csie.ntu.edu.tw/~b98902112/cpp_and_algo/cpp/variable_type_and_declare.html">教學文章</a> (其實讀這篇就好)</p>
+<h2 id="變數宣告"><a href="#變數宣告" class="headerlink" title="變數宣告"></a>變數宣告</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> b = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">char</span> c = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line"><span class="keyword">double</span> d = <span class="number">2.564</span>;</span><br><span class="line"><span class="built_in">string</span> e = <span class="string">&quot;ABC&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="競程常見資料型態"><a href="#競程常見資料型態" class="headerlink" title="競程常見資料型態"></a>競程常見資料型態</h2><ol>
+<li><strong>int</strong><ul>
+<li>最常出現</li>
+<li>以二進位方式儲存，占 4 個 Byte，32 個 bit</li>
+<li>因此範圍為 $-2^{31}$ ~ $2^{31}-1$</li>
+<li>超過會產生不可預期的結果</li>
+</ul>
+</li>
+<li><strong>long long</strong><ul>
+<li>占 8 個 Byte</li>
+<li>範圍為 $-2^{63}$ ~ $2^{63}-1$</li>
+<li>運算速度較 int 稍慢</li>
+<li><strong>你絕對會因為忘記使用它而 WA</strong></li>
+</ul>
+</li>
+<li><strong>char</strong><ul>
+<li>儲存的是字元</li>
+<li>字元以 <strong>‘’</strong> 括住</li>
+<li>char 與 int 的轉換請見 ASCII TABLE</li>
+<li>可以使用 int() 得到一個字元的ASCII值  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">int</span>(<span class="string">&#x27;a&#x27;</span>)&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure></li>
+<li>可以使用 char() 得到一個ASCII的值對應的字元  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">char</span>(<span class="number">97</span>)&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><strong>double</strong><ul>
+<li>儲存非整數時使用</li>
+<li>不是精準值，存在誤差。<a target="_blank" rel="noopener" href="https://dotblogs.com.tw/daniel/2018/11/10/161148">原因</a></li>
+</ul>
+</li>
+<li><strong>long double</strong><ul>
+<li>更精準的double</li>
+<li>更慢的double</li>
+</ul>
+</li>
+<li><strong>string</strong><ul>
+<li>儲存字串使用</li>
+<li>字串以 <strong>“”</strong> 括住</li>
+<li>也有人會使用 char[] 儲存字串，但 string 方便又好用</li>
+<li>char[] 與 string 在某些時候語法不同，這份教學都會用 string 的語法寫</li>
+</ul>
+</li>
+</ol>
+<h2 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h2><ul>
+<li>因誤差極大，請勿於競程中使用 float。</li>
+<li>基本上不需使用到 short，需要整數直接用 int 就好</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/21/0-0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -384,7 +490,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-10-23 14:48:36" itemprop="dateModified" datetime="2020-10-23T14:48:36+08:00">2020-10-23</time>
+                <time title="修改時間：2020-10-23 15:25:37" itemprop="dateModified" datetime="2020-10-23T15:25:37+08:00">2020-10-23</time>
               </span>
 
           
@@ -525,7 +631,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
