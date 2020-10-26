@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-180989678-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-180989678-1');
+</script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="可能不太好看懂的教學 輸入在以下的程式碼中，宣告了整數a、字元b、浮點數c、與字串d。並將其讀入。 12345int a;char b;double c;string d;cin&gt;&gt;a&gt;&gt;b&gt;&gt;c&gt;&gt;d;  cin的語法很特殊，總之像上面那樣，注意不要打成&lt;&lt;，也不要在中間加入無用空格，像這樣： 123&#x2F;&#x2F;錯誤示範cin&gt;&gt;a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-2 基本輸入輸出">
+<meta property="og:url" content="http://example.com/2020/10/26/0-2/index.html">
+<meta property="og:site_name" content="從零開始的演算法競賽入門指南">
+<meta property="og:description" content="可能不太好看懂的教學 輸入在以下的程式碼中，宣告了整數a、字元b、浮點數c、與字串d。並將其讀入。 12345int a;char b;double c;string d;cin&gt;&gt;a&gt;&gt;b&gt;&gt;c&gt;&gt;d;  cin的語法很特殊，總之像上面那樣，注意不要打成&lt;&lt;，也不要在中間加入無用空格，像這樣： 123&#x2F;&#x2F;錯誤示範cin&gt;&gt;a">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-10-26T02:38:17.000Z">
+<meta property="article:modified_time" content="2020-10-26T04:04:37.628Z">
+<meta property="article:author" content="emanlaicepsa">
+<meta property="article:tag" content="從零到一">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/10/26/0-2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>0-2 基本輸入輸出 | 從零開始的演算法競賽入門指南</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180989678-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-180989678-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">從零開始的演算法競賽入門指南</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>文章</a>
+
+  </li>
+        <li class="menu-item menu-item-從零到一：基礎語法">
+
+    <a href="/tags/%E5%BE%9E%E9%9B%B6%E5%88%B0%E4%B8%80/" rel="section"><i class="fa fa-tags fa-fw"></i>從零到一：基礎語法</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/26/0-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門指南">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          0-2 基本輸入輸出
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-10-26 10:38:17 / 修改時間：12:04:37" itemprop="dateCreated datePublished" datetime="2020-10-26T10:38:17+08:00">2020-10-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://www.csie.ntu.edu.tw/~sylee/courses/35500-99s/elements.htm">可能不太好看懂的教學</a></p>
+<h2 id="輸入"><a href="#輸入" class="headerlink" title="輸入"></a>輸入</h2><p>在以下的程式碼中，宣告了整數a、字元b、浮點數c、與字串d。<br>並將其讀入。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">char</span> b;</span><br><span class="line"><span class="keyword">double</span> c;</span><br><span class="line"><span class="built_in">string</span> d;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;c&gt;&gt;d;</span><br></pre></td></tr></table></figure>
+
+<p>cin的語法很特殊，總之像上面那樣，注意不要打成&lt;&lt;，也不要在中間加入無用空格，像這樣：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//錯誤示範</span></span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;a&gt;&gt;<span class="string">&quot; &quot;</span>&gt;&gt;<span class="string">&#x27;\n&#x27;</span>&gt;&gt;b;</span><br><span class="line"><span class="built_in">cin</span>&lt;&lt;a;</span><br></pre></td></tr></table></figure>
+
+<p>當然，不一定要將輸入的東西全部擠成一行，可以寫作如下形式，效果相同：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cin</span>&gt;&gt;a;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;b;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;c;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;d;</span><br></pre></td></tr></table></figure>
+
+<p>如果輸入了不合法的東西，程式會有不正常的反應，如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;x;</span><br></pre></td></tr></table></figure>
+<p>這時，若輸入<strong>abc</strong>，由於<strong>abc</strong>並非整數，因此x將不會讀入任何值。</p>
+<h2 id="輸出"><a href="#輸出" class="headerlink" title="輸出"></a>輸出</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">char</span> b;</span><br><span class="line"><span class="keyword">double</span> c;</span><br><span class="line"><span class="built_in">string</span> d;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;c&gt;&gt;d;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;a&lt;&lt;b&lt;&lt;c&lt;&lt;d;</span><br></pre></td></tr></table></figure>
+<p>跟cin語法基本相同，但箭頭相反方向。</p>
+<h2 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h2><p>若用上方程式碼輸入這行，得到的輸出會是什麼呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45 a 5.25 sfdljkg</span><br></pre></td></tr></table></figure>
+<p>答案是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45a5.25sfdljkg</span><br></pre></td></tr></table></figure>
+<p>壞掉了嗎？並沒有，那為什麼空白不見了？</p>
+<p>原因是cin會自動忽略所有不可見字元，包含空格以及換行字元。</p>
+<p>因此，只要確實分離，不論輸入是這樣：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45 a 5.25 sfdljkg</span><br></pre></td></tr></table></figure>
+<p>這樣：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45      a   5.25  sfdljkg</span><br></pre></td></tr></table></figure>
+<p>還是這樣：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">45  a</span><br><span class="line"> 5.25 </span><br><span class="line"> sfdljkg</span><br></pre></td></tr></table></figure>
+
+<p>程式都能夠正確讀取！</p>
+<h2 id="cin如何運作"><a href="#cin如何運作" class="headerlink" title="cin如何運作"></a>cin如何運作</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;x;</span><br></pre></td></tr></table></figure>
+<p>若我輸入<strong>123abc</strong>，程式運行結果會是如何？</p>
+<p>答案是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">123</span><br></pre></td></tr></table></figure>
+<p>因此，cin一個整數時，程式會一直讀取直到下一個位置的字元不是數字為止！</p>
+<p>因此，若上方的輸入為：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45a5.25sfdljkg</span><br></pre></td></tr></table></figure>
+<p>首先，整數讀入45後停止，字元讀入一個字元’a’後停止，浮點數讀入5.25後停止，字串讀入至行尾停止。</p>
+<p>因此，在這個範例裡，輸出結果跟原來一模一樣！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45a5.25sfdljkg</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="那-怎麼輸出空格？"><a href="#那-怎麼輸出空格？" class="headerlink" title="那 怎麼輸出空格？"></a>那 怎麼輸出空格？</h2><p>輸出一個空白字元，或者一個含一個空白的字串，接著將其輸出！</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">char</span> space = <span class="string">&#x27; &#x27;</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">12</span>;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;a&lt;&lt;space&lt;&lt;b&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10 12</span><br></pre></td></tr></table></figure>
+
+<h2 id="這麼麻煩嗎？"><a href="#這麼麻煩嗎？" class="headerlink" title="這麼麻煩嗎？"></a>這麼麻煩嗎？</h2><p>其實，輸出的東西，不一定要是變數！</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="number">10</span>&lt;&lt;<span class="string">&#x27; &#x27;</span>&lt;&lt;<span class="number">12</span>&lt;&lt;<span class="string">&quot;hello!&quot;</span>&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10 12 hello!</span><br></pre></td></tr></table></figure>
+
+<p><strong>對比：cin的輸入對象一定要是變數，不然你輸入進來要存在哪裡？</strong></p>
+<p>因此，若要以空格分隔上方輸出，上方程式碼可改寫為：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">char</span> b;</span><br><span class="line"><span class="keyword">double</span> c;</span><br><span class="line"><span class="built_in">string</span> d;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;c&gt;&gt;d;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;b&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;c&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;d&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h2><p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/92/">TOJ 92</a></p>
+<p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/519/">TOJ 519</a></p>
+<p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/520/">TOJ 520</a></p>
+<p>再次提醒，行尾要輸出換行字元’\n’！</p>
+<h2 id="AC-Code"><a href="#AC-Code" class="headerlink" title="AC Code"></a>AC Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TOJ 92</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">string</span> a,b,c;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> a, b, c;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;c;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Hello, &quot;</span>&lt;&lt;a&lt;&lt;<span class="string">&quot;, &quot;</span>&lt;&lt;b&lt;&lt;<span class="string">&quot;, and &quot;</span>&lt;&lt;c&lt;&lt;<span class="string">&quot;!\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TOJ 519</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a, b;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Do you want to say &quot;</span> &lt;&lt; a &lt;&lt;<span class="string">&quot; and &quot;</span> &lt;&lt; b &lt;&lt;<span class="string">&quot; ??\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TOJ 520</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a,b;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;b&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;a&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="備註"><a href="#備註" class="headerlink" title="備註"></a>備註</h2><p>有另外一種輸入輸出方法：scanf / printf，與cin/cout功能相同，若有興趣可自行查詢相關資源。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%BE%9E%E9%9B%B6%E5%88%B0%E4%B8%80/" rel="tag"># 從零到一</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/23/0-1/" rel="prev" title="0-1 變數的宣告">
+      <i class="fa fa-chevron-left"></i> 0-1 變數的宣告
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BC%B8%E5%85%A5"><span class="nav-number">1.</span> <span class="nav-text">輸入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BC%B8%E5%87%BA"><span class="nav-number">2.</span> <span class="nav-text">輸出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85"><span class="nav-number">3.</span> <span class="nav-text">注意事項</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cin%E5%A6%82%E4%BD%95%E9%81%8B%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">cin如何運作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%A3-%E6%80%8E%E9%BA%BC%E8%BC%B8%E5%87%BA%E7%A9%BA%E6%A0%BC%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">那 怎麼輸出空格？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%99%E9%BA%BC%E9%BA%BB%E7%85%A9%E5%97%8E%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">這麼麻煩嗎？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92"><span class="nav-number">7.</span> <span class="nav-text">練習</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AC-Code"><span class="nav-number">8.</span> <span class="nav-text">AC Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%82%99%E8%A8%BB"><span class="nav-number">9.</span> <span class="nav-text">備註</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">emanlaicepsa</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:kevin118033@gmail.com" title="聯絡我 → mailto:kevin118033@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>聯絡我</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-github"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">emanlaicepsa</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
