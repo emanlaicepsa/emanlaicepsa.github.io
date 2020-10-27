@@ -30,15 +30,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="四則運算在C++裡，四則運算大多就跟平常一樣。也遵從著先乘除後加減、括號先算……等等正常的運算規則。 在進行很大的數字相加&#x2F;相乘時務必注意，若於運算中之任何時刻超過int可表示的範圍，即使最終答案在int範圍，也會導致overflow而使答案錯誤 12int a &#x3D; 5, b &#x3D; 3;cout &lt;&lt; a+b &lt;&lt; &amp;#x27; &amp;#x27; &lt;&lt; a-b &amp;lt">
+  <meta name="description" content="四則運算在C++裡，四則運算大多就跟平常一樣。也遵從著先乘除後加減、括號先算……等等正常的運算規則。 在進行很大的數字相加&#x2F;相乘時務必注意，若於運算中之任何時刻超過int可表示的範圍，即使最終答案在int範圍，也會導致overflow而使答案錯誤 overflow的說明 12int a &#x3D; 5, b &#x3D; 3;cout &lt;&lt; a+b &lt;&lt; &amp;#x27; &amp;#x27; &lt;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0-3 四則運算">
 <meta property="og:url" content="http://example.com/2020/10/26/0-3/index.html">
 <meta property="og:site_name" content="從零開始的演算法競賽入門指南">
-<meta property="og:description" content="四則運算在C++裡，四則運算大多就跟平常一樣。也遵從著先乘除後加減、括號先算……等等正常的運算規則。 在進行很大的數字相加&#x2F;相乘時務必注意，若於運算中之任何時刻超過int可表示的範圍，即使最終答案在int範圍，也會導致overflow而使答案錯誤 12int a &#x3D; 5, b &#x3D; 3;cout &lt;&lt; a+b &lt;&lt; &amp;#x27; &amp;#x27; &lt;&lt; a-b &amp;lt">
+<meta property="og:description" content="四則運算在C++裡，四則運算大多就跟平常一樣。也遵從著先乘除後加減、括號先算……等等正常的運算規則。 在進行很大的數字相加&#x2F;相乘時務必注意，若於運算中之任何時刻超過int可表示的範圍，即使最終答案在int範圍，也會導致overflow而使答案錯誤 overflow的說明 12int a &#x3D; 5, b &#x3D; 3;cout &lt;&lt; a+b &lt;&lt; &amp;#x27; &amp;#x27; &lt;">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-10-26T05:36:45.000Z">
-<meta property="article:modified_time" content="2020-10-26T06:36:51.937Z">
+<meta property="article:modified_time" content="2020-10-27T02:23:27.006Z">
 <meta property="article:author" content="emanlaicepsa">
 <meta property="article:tag" content="從零到一">
 <meta name="twitter:card" content="summary">
@@ -197,10 +197,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-10-26 13:36:45 / 修改時間：14:36:51" itemprop="dateCreated datePublished" datetime="2020-10-26T13:36:45+08:00">2020-10-26</time>
+              <time title="創建時間：2020-10-26 13:36:45" itemprop="dateCreated datePublished" datetime="2020-10-26T13:36:45+08:00">2020-10-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-10-27 10:23:27" itemprop="dateModified" datetime="2020-10-27T10:23:27+08:00">2020-10-27</time>
+              </span>
 
           
 
@@ -215,6 +221,7 @@
       
         <h2 id="四則運算"><a href="#四則運算" class="headerlink" title="四則運算"></a>四則運算</h2><p>在C++裡，四則運算大多就跟平常一樣。也遵從著先乘除後加減、括號先算……等等正常的運算規則。</p>
 <p><strong>在進行很大的數字相加/相乘時務必注意，若於運算中之任何時刻超過int可表示的範圍，即使最終答案在int範圍，也會導致overflow而使答案錯誤</strong></p>
+<p><a target="_blank" rel="noopener" href="https://codingsimplifylife.blogspot.com/2016/04/c-3-acquaintance-to-operators.html">overflow的說明</a></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>, b = <span class="number">3</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; a+b &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; a-b &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; a*b &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
 <p>結果：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8 2 15</span><br></pre></td></tr></table></figure>
@@ -287,7 +294,10 @@
     <a href="/2020/10/26/0-2/" rel="prev" title="0-2 基本輸入輸出">
       <i class="fa fa-chevron-left"></i> 0-2 基本輸入輸出
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/27/0-4/" rel="next" title="0-4 條件判斷與基礎邏輯">
+      0-4 條件判斷與基礎邏輯 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -360,7 +370,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
