@@ -264,6 +264,174 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/29/0-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門指南">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/29/0-5/" class="post-title-link" itemprop="url">0-5 進階運算</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-10-29 13:18:30 / 修改時間：15:38:34" itemprop="dateCreated datePublished" datetime="2020-10-29T13:18:30+08:00">2020-10-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="浮點數運算誤差處理"><a href="#浮點數運算誤差處理" class="headerlink" title="浮點數運算誤差處理"></a>浮點數運算誤差處理</h2><p>使用 double 進行加減乘除時，多少會產生一點誤差，例如，100.0 * 99.0 可能被誤算為 9899.9999999。</p>
+<p>此時，若運算中含有 == 等符號，將會出現問題。因此我們不以 == 進行浮點數是否等於的判斷。</p>
+<p>取而代之，我們判斷兩個浮點數是否相等，只需判斷他們之間的差的絕對值是否小於某個特定值即可，這個值我們稱作 epsilon，以eps在程式中出現，一般為 10 的 -9 次方，寫作 1e-9。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> a, b, c;</span><br><span class="line"><span class="keyword">double</span> eps = <span class="number">1e-9</span>;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;c;</span><br><span class="line"><span class="keyword">if</span>(c - a*b &lt;= eps &amp;&amp; c - a*b &gt;= -eps)&#123; <span class="comment">// a * b == c is not good</span></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Equal!\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="字元運算"><a href="#字元運算" class="headerlink" title="字元運算"></a>字元運算</h2><p>其實，字元可以加減！</p>
+<p><a target="_blank" rel="noopener" href="http://kevin.hwai.edu.tw/~kevin/material/JAVA/Sample2016/ASCII.htm">ASCII TABLE</a></p>
+<p>字元在運算的時候，將會被視為其ASCII碼！例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="string">&#x27;a&#x27;</span>+<span class="number">10</span>&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>輸出將會是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">107</span><br></pre></td></tr></table></figure>
+
+<p>因為 ‘a’ 的 ASCII 碼是 97，在運算時便將其視為 97 了！</p>
+<p>知道這個之後，可以做什麼呢？</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> c = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">c += <span class="number">4</span>;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;c&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e</span><br></pre></td></tr></table></figure>
+<p>就可以對字母進行運算，改變它的值了！</p>
+<h3 id="大寫轉小寫"><a href="#大寫轉小寫" class="headerlink" title="大寫轉小寫"></a>大寫轉小寫</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> c;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;c;</span><br><span class="line">c += <span class="string">&#x27;a&#x27;</span> - <span class="string">&#x27;A&#x27;</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;c&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>將輸入進來的大寫字母，加上 ‘a’(ASCII碼：97) 與 ‘A’(ASCII碼：65) 間的差距，就可以將其轉為大寫了！</p>
+<h2 id="字元比較"><a href="#字元比較" class="headerlink" title="字元比較"></a>字元比較</h2><p>字元的比較，以其 ASCII 碼為準。</p>
+<p>例如，’Z’ 的 ASCII 碼是 90，’a’ 是 97，因此 ‘Z’ &lt; ‘a’。</p>
+<h2 id="字串運算"><a href="#字串運算" class="headerlink" title="字串運算"></a>字串運算</h2><p>字串可以進行加法，意思為在其後方串接另一字串。</p>
+<p>例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">s += <span class="string">&quot;def&quot;</span>;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;s&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">s += <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;s&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">s = s + s + s;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;s&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">abcdef</span><br><span class="line">abcdefa</span><br><span class="line">abcdefaabcdefaabcdefa</span><br></pre></td></tr></table></figure>
+
+<p>但要注意，字串只有加法，沒有減、乘、除法。</p>
+<h2 id="字串比較"><a href="#字串比較" class="headerlink" title="字串比較"></a>字串比較</h2><p>字串比較的原則是這樣的：先比第一個字元、一樣的話比第二個、之後比第三個……。如果那個位置是空的，那它比任何字元都小</p>
+<p>例如：</p>
+<p>“abc” &lt; “baa” (第一個字元，’a’ &lt; ‘b’)</p>
+<p>“abc” &lt; “abd” (第三個字元，’c’ &lt; ‘d’)</p>
+<p>“abc” &lt; “abcd” (比到第四個時，前面那個字串已經到尾了)</p>
+<p>如果打開一本英文辭典，會發現單字就是照著這樣的規則排列的，因此這種方法稱為字典序。</p>
+<h2 id="bool的特殊用法"><a href="#bool的特殊用法" class="headerlink" title="bool的特殊用法"></a>bool的特殊用法</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> x = <span class="number">5</span>;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;x&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">x = <span class="number">-1</span>;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;x&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">x = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;x&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">1</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<p>bool的值只有 1 或是 0 。當一個int被指派給 bool，只要那個int不是0，無論正負，bool值都會是1。</p>
+<p>因此，很多時候我們可以這樣寫：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(a)&#123;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//相同於 if(a!=0)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="位元運算"><a href="#位元運算" class="headerlink" title="位元運算"></a>位元運算</h2><p>在電腦中，數值以二進位儲存，所謂位元運算，指的就是以一個一個只有 0 或 1 的位元為單位進行運算。</p>
+<p>對整數而言，我們有以下幾種位元運算：</p>
+<ol>
+<li>and &amp; </li>
+<li>or |</li>
+<li>xor ^</li>
+<li>not ~</li>
+</ol>
+<h3 id="and-amp"><a href="#and-amp" class="headerlink" title="and &amp;"></a>and &amp;</h3><p>以位元為單位的and運算</p>
+<p>1 &amp; 1 -&gt; 1</p>
+<p>1 &amp; 0 -&gt; 0</p>
+<p>0 &amp; 0 -&gt; 0</p>
+<p>在對兩個整數進行 &amp; 運算時，先將其分解為二進位，接著逐位進行 &amp; 運算。</p>
+<p>例如： 6 &amp; 5</p>
+<p>將 6 分解為二進位，是 110</p>
+<p>將 5 分解為二進位，是 101</p>
+<p>逐位進行 &amp; 運算，只有最高位數兩者同時為1，得到結果為 100，為 4 的二進位表示法。</p>
+<p>因此， 6 &amp; 5 == 4</p>
+<h3 id="or"><a href="#or" class="headerlink" title="or |"></a>or |</h3><p>以位元為單位的or運算</p>
+<p>1 | 1 -&gt; 1</p>
+<p>1 | 0 -&gt; 1</p>
+<p>0 | 0 -&gt; 0</p>
+<p>例如： 6 | 5</p>
+<p>將 6 分解為二進位，是 110</p>
+<p>將 5 分解為二進位，是 101</p>
+<p>110 與 101，在任何一個位數都至少有一個 1，因此 | 運算的結果為 111，為 7 的二進位表示法。</p>
+<p>因此， 6 | 5 == 7</p>
+<h3 id="xor"><a href="#xor" class="headerlink" title="xor ^"></a>xor ^</h3><p><strong>不要把它當作次方！C++並沒有次方的運算子！</strong></p>
+<p>一樣是位元運算，xor是什麼意思呢？</p>
+<p>1 ^ 1 -&gt; 0</p>
+<p>1 ^ 0 -&gt; 1</p>
+<p>0 ^ 0 -&gt; 0</p>
+<p>只有一個值為 1 的時候，結果才會為 1，若兩邊同時為 1 或 0，結果都是 0。</p>
+<p>例如： 6 ^ 5</p>
+<p>將 6 分解為二進位，是 110</p>
+<p>將 5 分解為二進位，是 101</p>
+<p>110 與 101，在最高位兩者皆為 1 ，在其他位數只有其中一方為 1 ，因此 ^ 運算的結果為 011，為 3 的二進位表示法。</p>
+<p>因此， 6 ^ 5 == 3</p>
+<h2 id="位元運算的交換律與結合律"><a href="#位元運算的交換律與結合律" class="headerlink" title="位元運算的交換律與結合律"></a>位元運算的交換律與結合律</h2><p>同種位元運算間，皆具有交換律與結合律，例如：</p>
+<p>3 &amp; 5 &amp; 6 == 6 &amp; 3 &amp; 5</p>
+<p>3 ^ (5 ^ 6) == 6 ^ (3 ^ 5)</p>
+<p>3 | 5 | 6 == 6 | 3 | 5</p>
+<p>但不同種位元運算之間則無結合律，例如：</p>
+<p>(7 | 5) &amp; 10 != 7 | (5 &amp; 10)  </p>
+<h2 id="xor-特別的地方"><a href="#xor-特別的地方" class="headerlink" title="xor 特別的地方"></a>xor 特別的地方</h2><p>x ^ x == 0</p>
+<p>因此， (a ^ x) ^ x == a ^ (x ^ x) == a ^ 0 == a</p>
+<p>以及若 a ^ b = c， a ^ b ^ a = c ^ a，b = c ^ a</p>
+<p>正是因為這樣的有趣性質，使得 xor 出現於許多<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%BC%82%E6%88%96%E5%AF%86%E7%A0%81">加密演算法</a>中。</p>
+<h2 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h2><p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/99/">TOJ 99</a></p>
+<p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/100/">TOJ 100</a></p>
+<p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/101/">TOJ 101</a></p>
+<h2 id="AC-Code"><a href="#AC-Code" class="headerlink" title="AC Code"></a>AC Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//TOJ 99</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">double</span> a,b,c,d;</span><br><span class="line"><span class="keyword">double</span> eps = <span class="number">1e-9</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;c&gt;&gt;d;</span><br><span class="line">    <span class="keyword">double</span> det = a*d - b*c; </span><br><span class="line">    <span class="keyword">if</span>(det &lt; eps &amp;&amp; det &gt; -eps)&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="number">0</span>&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="number">1</span>&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TOJ 100</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">char</span> c;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; c;</span><br><span class="line">    <span class="keyword">if</span>(c == <span class="string">&#x27;A&#x27;</span>)&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&#x27;@&#x27;</span>&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        c--;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;c&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TOJ 101</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">char</span> c = n + <span class="string">&#x27;A&#x27;</span> - <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 5 + &#x27;A&#x27; - 1 = &#x27;A&#x27; + 4 = &#x27;E&#x27;</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; c &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/27/0-4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -287,10 +455,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-10-27 10:23:41 / 修改時間：17:20:41" itemprop="dateCreated datePublished" datetime="2020-10-27T10:23:41+08:00">2020-10-27</time>
+              <time title="創建時間：2020-10-27 10:23:41" itemprop="dateCreated datePublished" datetime="2020-10-27T10:23:41+08:00">2020-10-27</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-10-29 15:47:27" itemprop="dateModified" datetime="2020-10-29T15:47:27+08:00">2020-10-29</time>
+              </span>
 
           
 
@@ -407,9 +581,17 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> year;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;year;</span><br><span class="line"><span class="keyword">if</span>(year%<span class="number">4</span>==<span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(year%<span class="number">100</span>==<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(year%<span class="number">400</span>==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;YES\n&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;NO\n&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;YES\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;NO\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>另一種寫法是</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(year%<span class="number">4</span>==<span class="number">0</span> &amp;&amp; year%<span class="number">100</span>==<span class="number">0</span> &amp;&amp; year%<span class="number">400</span>==<span class="number">0</span>)&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;YES\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(year%<span class="number">100</span>==<span class="number">0</span>)&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;NO\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(year%<span class="number">4</span>==<span class="number">0</span>)&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;YES\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;NO\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(year%<span class="number">400</span>==<span class="number">0</span>)&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;YES\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(year%<span class="number">100</span>==<span class="number">0</span>)&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;NO\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(year%<span class="number">4</span>==<span class="number">0</span>)&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;YES\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;NO\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>對於同樣的一個問題，我們可能會產生不同解法，而這就是程式解題的迷人之處！</p>
+<h2 id="特別注意"><a href="#特別注意" class="headerlink" title="特別注意"></a>特別注意</h2><p>小於/大於不支援超過兩個數字的比較，因此請勿寫成：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(a&lt;=b&lt;=c)</span><br></pre></td></tr></table></figure>
+<p>危險的地方是，<strong>這個程式碼並不會導致編譯錯誤</strong>！<br>進行運算時，程式首先判斷 a&lt;=b，得到的結果為 true / false。接著，再將其與 c 做比較，因此如 a &lt;= b，會變成：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="literal">true</span> &lt;= c)</span><br></pre></td></tr></table></figure>
+<p>而 true 的值為 1，false 為 0。因此程式便判斷 1 &lt;= c 是否成立，至此，已經完全不是原來所想的那樣了。</p>
+<p>若要判斷 $a \le b \le c$，應該寫成這樣才是正確的：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(a&lt;=b &amp;&amp; b&lt;=c)</span><br></pre></td></tr></table></figure>
+
 <h2 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h2><p>條件判斷這個章節，可能是你第一個卡關的地方，有些人需要大量的實際練習才能熟悉，因此這裡提供大量題目，讀者可根據自己狀況進行練習。</p>
 <p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/94/">TOJ 94</a></p>
 <p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/95/">TOJ 95</a></p>
@@ -437,7 +619,7 @@
 
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TOJ 461</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> x;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;x;</span><br><span class="line">    <span class="keyword">if</span>(x==<span class="number">0</span>||x==<span class="number">180</span>)&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;2&quot;</span>&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;4&quot;</span>&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ZJ f312</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a1,b1,c1,a2,b2,c2,n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;a1&gt;&gt;b1&gt;&gt;c1&gt;&gt;a2&gt;&gt;b2&gt;&gt;c2&gt;&gt;n;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">double</span> x = <span class="number">1.0</span> * (<span class="number">2</span> * a2 * n + b2 - b1) / (<span class="number">2</span> * (a1 + a2));</span><br><span class="line">    <span class="comment">// 找到二次函數極值發生的位置，與端點取max</span></span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">-100000000</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> p = x, l = n-p;</span><br><span class="line">	<span class="keyword">if</span>(<span class="number">0</span> &lt;= p &amp;&amp; p &lt;= n)&#123;</span><br><span class="line">		<span class="keyword">int</span> ans1 = a1 * p * p + b1 * p + c1 + a2 * l * l + b2 * l + c2;</span><br><span class="line">		<span class="keyword">if</span>(ans1 &gt; ans) ans = ans1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 微分後答案不一定是整數，因此要試兩個點</span></span><br><span class="line">	p++, l--;</span><br><span class="line">	<span class="keyword">if</span>(<span class="number">0</span> &lt;= p &amp;&amp; p &lt;= n)&#123;</span><br><span class="line">		<span class="keyword">int</span> ans1 = a1 * p * p + b1 * p + c1 + a2 * l * l + b2 * l + c2;</span><br><span class="line">		<span class="keyword">if</span>(ans1 &gt; ans) ans = ans1;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> ans0 = a2 * n * n + b2 * n + c2 + c1;</span><br><span class="line">	<span class="keyword">int</span> ansn = a1 * n * n + b1 * n + c1 + c2;</span><br><span class="line">	<span class="keyword">if</span>(ans0 &gt; ans) ans = ans0;</span><br><span class="line">	<span class="keyword">if</span>(ansn &gt; ans) ans = ansn;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ZJ f312</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a1,b1,c1,a2,b2,c2,n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;a1&gt;&gt;b1&gt;&gt;c1&gt;&gt;a2&gt;&gt;b2&gt;&gt;c2&gt;&gt;n;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">double</span> x = <span class="number">1.0</span> * (<span class="number">2</span> * a2 * n + b2 - b1) / (<span class="number">2</span> * (a1 + a2));</span><br><span class="line">    <span class="comment">// 找到二次函數極值發生的位置，與端點取max</span></span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">-100000000</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> p = x, l = n-p;</span><br><span class="line">	<span class="keyword">if</span>(<span class="number">0</span> &lt;= p &amp;&amp; p &lt;= n)&#123;</span><br><span class="line">		<span class="keyword">int</span> ans1 = a1 * p * p + b1 * p + c1 + a2 * l * l + b2 * l + c2;</span><br><span class="line">		<span class="keyword">if</span>(ans1 &gt; ans) ans = ans1; <span class="comment">// ans = max(ans, ans1)</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 微分後答案不一定是整數，因此要試兩個點</span></span><br><span class="line">	p++, l--;</span><br><span class="line">	<span class="keyword">if</span>(<span class="number">0</span> &lt;= p &amp;&amp; p &lt;= n)&#123;</span><br><span class="line">		<span class="keyword">int</span> ans1 = a1 * p * p + b1 * p + c1 + a2 * l * l + b2 * l + c2;</span><br><span class="line">		<span class="keyword">if</span>(ans1 &gt; ans) ans = ans1;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> ans0 = a2 * n * n + b2 * n + c2 + c1; <span class="comment">// 左端點</span></span><br><span class="line">	<span class="keyword">int</span> ansn = a1 * n * n + b1 * n + c1 + c2; <span class="comment">// 右端點</span></span><br><span class="line">	<span class="keyword">if</span>(ans0 &gt; ans) ans = ans0; <span class="comment">// ans = max(ans, ans0)</span></span><br><span class="line">	<span class="keyword">if</span>(ansn &gt; ans) ans = ansn; <span class="comment">// ans = max(ans, ansn)</span></span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -487,7 +669,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-10-27 17:37:01" itemprop="dateModified" datetime="2020-10-27T17:37:01+08:00">2020-10-27</time>
+                <time title="修改時間：2020-10-29 15:45:55" itemprop="dateModified" datetime="2020-10-29T15:45:55+08:00">2020-10-29</time>
               </span>
 
           
@@ -515,6 +697,7 @@
 
 <p>會有這樣的結果是因為，5是一個整數，3也是一個整數，整數之間的運算，結果在C++裡只會是整數。</p>
 <p>因此，小數點以後的部分被捨棄了。</p>
+<h2 id="除以-0"><a href="#除以-0" class="headerlink" title="除以 0"></a>除以 0</h2><p>在除以 0 時，程式會產生執行期間錯誤(Runtime Error)，在 Online Judge 上顯示為 RE / Runtime Error / Segmentation fault。請務必注意此情形，並且預先處理掉除數可能為 0 的情況。</p>
 <h2 id="如何讓整數之間的運算結果產生小數"><a href="#如何讓整數之間的運算結果產生小數" class="headerlink" title="如何讓整數之間的運算結果產生小數"></a>如何讓整數之間的運算結果產生小數</h2><p>你可以在運算時預先乘上 1.0 ，這樣，在進行運算時，數字是以浮點數的方式進行運算，最終結果也自然就是浮點數了。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>, b = <span class="number">3</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="number">1.0</span>*a/b &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
@@ -962,7 +1145,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-10-27 13:05:09" itemprop="dateModified" datetime="2020-10-27T13:05:09+08:00">2020-10-27</time>
+                <time title="修改時間：2020-10-29 15:39:08" itemprop="dateModified" datetime="2020-10-29T15:39:08+08:00">2020-10-29</time>
               </span>
 
           
@@ -992,10 +1175,10 @@
 <p><strong>不可替代程度：★★★★★</strong></p>
 <h2 id="0-4-條件判斷與基礎邏輯"><a href="#0-4-條件判斷與基礎邏輯" class="headerlink" title="0-4 條件判斷與基礎邏輯"></a><a href="/2020/10/27/0-4/">0-4 條件判斷與基礎邏輯</a></h2><p><strong>常見程度：★★★★★</strong></p>
 <p><strong>不可替代程度：★★★★★</strong></p>
-<h2 id="0-5-進階運算與進階輸入輸出"><a href="#0-5-進階運算與進階輸入輸出" class="headerlink" title="0-5 進階運算與進階輸入輸出"></a>0-5 進階運算與進階輸入輸出</h2><p><strong>常見程度：★★</strong></p>
+<h2 id="0-5-進階運算"><a href="#0-5-進階運算" class="headerlink" title="0-5 進階運算"></a><a href="/2020/10/29/0-5/">0-5 進階運算</a></h2><p><strong>常見程度：★★★</strong></p>
 <p><strong>不可替代程度：★★★★★</strong></p>
-<h2 id="0-6-變數的作用範圍"><a href="#0-6-變數的作用範圍" class="headerlink" title="0-6 變數的作用範圍"></a>0-6 變數的作用範圍</h2><p><strong>常見程度：★★★★</strong></p>
-<p><strong>不可替代程度：★★★★★</strong></p>
+<h2 id="0-6-進階輸入輸出"><a href="#0-6-進階輸入輸出" class="headerlink" title="0-6 進階輸入輸出"></a>0-6 進階輸入輸出</h2><p><strong>常見程度：★★</strong></p>
+<p><strong>不可替代程度：★★★★</strong></p>
 <h2 id="0-7-陣列"><a href="#0-7-陣列" class="headerlink" title="0-7 陣列"></a>0-7 陣列</h2><p><strong>常見程度：★★★★★</strong></p>
 <p><strong>不可替代程度：★★★★★</strong></p>
 <h2 id="0-8-迴圈"><a href="#0-8-迴圈" class="headerlink" title="0-8 迴圈"></a>0-8 迴圈</h2><p><strong>常見程度：★★★★★</strong></p>
@@ -1006,7 +1189,7 @@
 <p><strong>不可替代程度：★★★★★</strong></p>
 <h2 id="0-11-struct"><a href="#0-11-struct" class="headerlink" title="0-11 struct"></a>0-11 struct</h2><p><strong>常見程度：★★</strong></p>
 <p><strong>不可替代程度：★★</strong></p>
-<h2 id="0-12-變數的作用範圍-進階"><a href="#0-12-變數的作用範圍-進階" class="headerlink" title="0-12 變數的作用範圍-進階"></a>0-12 變數的作用範圍-進階</h2><p><strong>常見程度：★★★</strong></p>
+<h2 id="0-12-變數的作用範圍"><a href="#0-12-變數的作用範圍" class="headerlink" title="0-12 變數的作用範圍"></a>0-12 變數的作用範圍</h2><p><strong>常見程度：★★★</strong></p>
 <p><strong>不可替代程度：★★★★</strong></p>
 <h2 id="0-13-排序"><a href="#0-13-排序" class="headerlink" title="0-13 排序"></a>0-13 排序</h2><p><strong>常見程度：★★★★</strong></p>
 <p><strong>不可替代程度：★★★★</strong></p>
@@ -1107,7 +1290,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>

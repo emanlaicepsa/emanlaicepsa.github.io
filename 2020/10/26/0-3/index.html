@@ -38,7 +38,7 @@
 <meta property="og:description" content="四則運算在C++裡，四則運算大多就跟平常一樣。也遵從著先乘除後加減、括號先算……等等正常的運算規則。 在進行很大的數字相加&#x2F;相乘時務必注意，若於運算中之任何時刻超過int可表示的範圍，即使最終答案在int範圍，也會導致overflow而使答案錯誤 overflow的說明 12int a &#x3D; 5, b &#x3D; 3;cout &lt;&lt; a+b &lt;&lt; &amp;#x27; &amp;#x27; &lt;">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-10-26T05:36:45.000Z">
-<meta property="article:modified_time" content="2020-10-27T09:37:01.974Z">
+<meta property="article:modified_time" content="2020-10-29T07:45:55.842Z">
 <meta property="article:author" content="emanlaicepsa">
 <meta property="article:tag" content="從零到一">
 <meta name="twitter:card" content="summary">
@@ -205,7 +205,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-10-27 17:37:01" itemprop="dateModified" datetime="2020-10-27T17:37:01+08:00">2020-10-27</time>
+                <time title="修改時間：2020-10-29 15:45:55" itemprop="dateModified" datetime="2020-10-29T15:45:55+08:00">2020-10-29</time>
               </span>
 
           
@@ -233,6 +233,7 @@
 
 <p>會有這樣的結果是因為，5是一個整數，3也是一個整數，整數之間的運算，結果在C++裡只會是整數。</p>
 <p>因此，小數點以後的部分被捨棄了。</p>
+<h2 id="除以-0"><a href="#除以-0" class="headerlink" title="除以 0"></a>除以 0</h2><p>在除以 0 時，程式會產生執行期間錯誤(Runtime Error)，在 Online Judge 上顯示為 RE / Runtime Error / Segmentation fault。請務必注意此情形，並且預先處理掉除數可能為 0 的情況。</p>
 <h2 id="如何讓整數之間的運算結果產生小數"><a href="#如何讓整數之間的運算結果產生小數" class="headerlink" title="如何讓整數之間的運算結果產生小數"></a>如何讓整數之間的運算結果產生小數</h2><p>你可以在運算時預先乘上 1.0 ，這樣，在進行運算時，數字是以浮點數的方式進行運算，最終結果也自然就是浮點數了。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>, b = <span class="number">3</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="number">1.0</span>*a/b &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
@@ -365,7 +366,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%89%87%E9%81%8B%E7%AE%97"><span class="nav-number">1.</span> <span class="nav-text">四則運算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%A4%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">除法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%93%E6%95%B4%E6%95%B8%E4%B9%8B%E9%96%93%E7%9A%84%E9%81%8B%E7%AE%97%E7%B5%90%E6%9E%9C%E7%94%A2%E7%94%9F%E5%B0%8F%E6%95%B8"><span class="nav-number">3.</span> <span class="nav-text">如何讓整數之間的運算結果產生小數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%B0%8F%E6%95%B8%E9%BB%9E%E4%BB%A5%E4%B8%8B%E7%9A%84%E8%BC%B8%E5%87%BA%E4%BD%8D%E6%95%B8"><span class="nav-number">4.</span> <span class="nav-text">控制小數點以下的輸出位數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E9%81%8B%E7%AE%97"><span class="nav-number">5.</span> <span class="nav-text">模運算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%8B%E7%AE%97%E5%BE%8C%E6%8C%87%E6%B4%BE"><span class="nav-number">6.</span> <span class="nav-text">運算後指派</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92"><span class="nav-number">7.</span> <span class="nav-text">練習</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AC-Code-%E5%BC%B7%E7%83%88%E5%BB%BA%E8%AD%B0%E8%87%AA%E8%A1%8C%E5%AF%AB%E5%AE%8C%E5%BE%8C%E5%86%8D%E7%9C%8B"><span class="nav-number">8.</span> <span class="nav-text">AC Code (強烈建議自行寫完後再看)</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%89%87%E9%81%8B%E7%AE%97"><span class="nav-number">1.</span> <span class="nav-text">四則運算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%A4%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">除法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%A4%E4%BB%A5-0"><span class="nav-number">3.</span> <span class="nav-text">除以 0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%93%E6%95%B4%E6%95%B8%E4%B9%8B%E9%96%93%E7%9A%84%E9%81%8B%E7%AE%97%E7%B5%90%E6%9E%9C%E7%94%A2%E7%94%9F%E5%B0%8F%E6%95%B8"><span class="nav-number">4.</span> <span class="nav-text">如何讓整數之間的運算結果產生小數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%B0%8F%E6%95%B8%E9%BB%9E%E4%BB%A5%E4%B8%8B%E7%9A%84%E8%BC%B8%E5%87%BA%E4%BD%8D%E6%95%B8"><span class="nav-number">5.</span> <span class="nav-text">控制小數點以下的輸出位數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E9%81%8B%E7%AE%97"><span class="nav-number">6.</span> <span class="nav-text">模運算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%8B%E7%AE%97%E5%BE%8C%E6%8C%87%E6%B4%BE"><span class="nav-number">7.</span> <span class="nav-text">運算後指派</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92"><span class="nav-number">8.</span> <span class="nav-text">練習</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AC-Code-%E5%BC%B7%E7%83%88%E5%BB%BA%E8%AD%B0%E8%87%AA%E8%A1%8C%E5%AF%AB%E5%AE%8C%E5%BE%8C%E5%86%8D%E7%9C%8B"><span class="nav-number">9.</span> <span class="nav-text">AC Code (強烈建議自行寫完後再看)</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -379,7 +380,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
