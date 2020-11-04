@@ -38,7 +38,7 @@
 <meta property="og:description" content="浮點數運算誤差處理使用 double 進行加減乘除時，多少會產生一點誤差，例如，100.0 * 99.0 可能被誤算為 9899.9999999。 此時，若運算中含有 &#x3D;&#x3D; 等符號，將會出現問題。因此我們不以 &#x3D;&#x3D; 進行浮點數是否等於的判斷。 取而代之，我們判斷兩個浮點數是否相等，只需判斷他們之間的差的絕對值是否小於某個特定值即可，這個值我們稱作 epsilon，以eps在程式中出現，一般為 10">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-10-29T05:18:30.000Z">
-<meta property="article:modified_time" content="2020-10-29T07:38:34.606Z">
+<meta property="article:modified_time" content="2020-11-04T07:32:28.030Z">
 <meta property="article:author" content="emanlaicepsa">
 <meta property="article:tag" content="從零到一">
 <meta name="twitter:card" content="summary">
@@ -197,10 +197,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-10-29 13:18:30 / 修改時間：15:38:34" itemprop="dateCreated datePublished" datetime="2020-10-29T13:18:30+08:00">2020-10-29</time>
+              <time title="創建時間：2020-10-29 13:18:30" itemprop="dateCreated datePublished" datetime="2020-10-29T13:18:30+08:00">2020-10-29</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-11-04 15:32:28" itemprop="dateModified" datetime="2020-11-04T15:32:28+08:00">2020-11-04</time>
+              </span>
 
           
 
@@ -226,10 +232,11 @@
 
 <p>因為 ‘a’ 的 ASCII 碼是 97，在運算時便將其視為 97 了！</p>
 <p>知道這個之後，可以做什麼呢？</p>
+<p>可以注意到，**’A’～’Z’以及’a’～’z’以及’0’～’9’，在ASCII table的位置是連續的**，因此若將 ‘a’ 加上 4，就會變成在小寫字母裡，排在 ‘a’ 後面 4 個位置的 ‘e’ 。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> c = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">c += <span class="number">4</span>;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;c&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
 <p>輸出：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e</span><br></pre></td></tr></table></figure>
-<p>就可以對字母進行運算，改變它的值了！</p>
+
 <h3 id="大寫轉小寫"><a href="#大寫轉小寫" class="headerlink" title="大寫轉小寫"></a>大寫轉小寫</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> c;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;c;</span><br><span class="line">c += <span class="string">&#x27;a&#x27;</span> - <span class="string">&#x27;A&#x27;</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;c&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
 <p>將輸入進來的大寫字母，加上 ‘a’(ASCII碼：97) 與 ‘A’(ASCII碼：65) 間的差距，就可以將其轉為大寫了！</p>
@@ -320,10 +327,6 @@
 
 
 
-
-
-
-
     </div>
 
     
@@ -344,7 +347,10 @@
     <a href="/2020/10/27/0-4/" rel="prev" title="0-4 條件判斷與基礎邏輯">
       <i class="fa fa-chevron-left"></i> 0-4 條件判斷與基礎邏輯
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/04/0-6/" rel="next" title="0-6 進階輸入輸出">
+      0-6 進階輸入輸出 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -417,12 +423,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">標籤</span>
       </div>
   </nav>
