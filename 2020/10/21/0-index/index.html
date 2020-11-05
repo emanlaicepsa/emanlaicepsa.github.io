@@ -99,8 +99,6 @@
 
 </head>
 
-<%- fbcommentshead() %>
-
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
     <div class="headband"></div>
@@ -190,6 +188,7 @@
       <meta itemprop="name" content="從零開始的演算法競賽入門指南">
     </span>
       <header class="post-header">
+        <%- fbcommentshead() %>
         <h1 class="post-title" itemprop="name headline">
           從零到一：那些演算法競賽會用到的基礎語法 目錄
         </h1>
@@ -273,6 +272,7 @@
 <h2 id="0-22-bitset"><a href="#0-22-bitset" class="headerlink" title="0-22 bitset"></a>0-22 bitset</h2><p><strong>常見程度：★</strong></p>
 <p><strong>不可替代程度：★★★★</strong></p>
 <h2 id="0-23-本章總結"><a href="#0-23-本章總結" class="headerlink" title="0-23 本章總結"></a>0-23 本章總結</h2>
+      <%- fbcomments(page.permalink) %>
     </div>
 
     
@@ -466,6 +466,5 @@
 
   
 
-  <%- fbcomments(page.permalink) %>
 </body>
 </html>
