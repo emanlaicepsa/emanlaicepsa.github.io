@@ -2,7 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://emanlaicepsa.github.io/Privacy-Policy/index.html</loc>
+    <loc>https://emanlaicepsa.github.io/2020/11/04/0-6/</loc>
+    
+    <lastmod>2020-11-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://emanlaicepsa.github.io/2020/10/23/0-1/</loc>
     
     <lastmod>2020-11-05</lastmod>
     
@@ -16,14 +23,14 @@
   </url>
   
   <url>
-    <loc>https://emanlaicepsa.github.io/2020/10/21/0-index/</loc>
+    <loc>https://emanlaicepsa.github.io/Privacy-Policy/index.html</loc>
     
-    <lastmod>2020-11-04</lastmod>
+    <lastmod>2020-11-05</lastmod>
     
   </url>
   
   <url>
-    <loc>https://emanlaicepsa.github.io/2020/11/04/0-6/</loc>
+    <loc>https://emanlaicepsa.github.io/2020/10/21/0-index/</loc>
     
     <lastmod>2020-11-04</lastmod>
     
@@ -58,13 +65,6 @@
   </url>
   
   <url>
-    <loc>https://emanlaicepsa.github.io/2020/10/23/0-1/</loc>
-    
-    <lastmod>2020-10-27</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://emanlaicepsa.github.io/2020/10/26/0-2/</loc>
     
     <lastmod>2020-10-26</lastmod>
@@ -81,7 +81,7 @@
 
   <url>
     <loc>https://emanlaicepsa.github.io/</loc>
-    <lastmod>2020-11-05</lastmod>
+    <lastmod>2020-11-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -89,21 +89,35 @@
   
   <url>
     <loc>https://emanlaicepsa.github.io/tags/%E5%BE%9E%E9%9B%B6%E5%88%B0%E4%B8%80/</loc>
-    <lastmod>2020-11-05</lastmod>
+    <lastmod>2020-11-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://emanlaicepsa.github.io/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AB%B6%E8%B3%BD/</loc>
+    <lastmod>2020-11-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://emanlaicepsa.github.io/tags/%E8%BC%B8%E5%85%A5%E5%84%AA%E5%8C%96/</loc>
-    <lastmod>2020-11-05</lastmod>
+    <lastmod>2020-11-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://emanlaicepsa.github.io/tags/getline/</loc>
-    <lastmod>2020-11-05</lastmod>
+    <lastmod>2020-11-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://emanlaicepsa.github.io/tags/%E9%99%A3%E5%88%97/</loc>
+    <lastmod>2020-11-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
