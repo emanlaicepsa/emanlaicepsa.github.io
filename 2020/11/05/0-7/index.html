@@ -33,13 +33,13 @@
 
   <meta name="description" content="陣列詳細的陣列教學文 當我們要儲存 5 個變數時，要怎麼做呢？ 1int a, b, c, d, e;  我們可能會這樣寫。但，如果今天要儲存 5000 個變數時，要怎麼做呢？ 宣告使用陣列，可以以陣列名稱+位置，儲存大量資料，基本語法如下： 1234int arr[15];char c[15];double d[20];string strs[15]; arr 是這個 int 陣列的名稱，而15">
 <meta property="og:type" content="article">
-<meta property="og:title" content="0-7">
+<meta property="og:title" content="0-7 陣列">
 <meta property="og:url" content="https://emanlaicepsa.github.io/2020/11/05/0-7/index.html">
 <meta property="og:site_name" content="從零開始的演算法競賽入門指南">
 <meta property="og:description" content="陣列詳細的陣列教學文 當我們要儲存 5 個變數時，要怎麼做呢？ 1int a, b, c, d, e;  我們可能會這樣寫。但，如果今天要儲存 5000 個變數時，要怎麼做呢？ 宣告使用陣列，可以以陣列名稱+位置，儲存大量資料，基本語法如下： 1234int arr[15];char c[15];double d[20];string strs[15]; arr 是這個 int 陣列的名稱，而15">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-11-05T04:35:55.000Z">
-<meta property="article:modified_time" content="2020-11-05T09:04:57.335Z">
+<meta property="article:modified_time" content="2020-11-06T05:50:31.783Z">
 <meta property="article:author" content="emanlaicepsa">
 <meta property="article:tag" content="從零到一">
 <meta property="article:tag" content="演算法競賽">
@@ -59,7 +59,7 @@
   };
 </script>
 
-  <title>0-7 | 從零開始的演算法競賽入門指南</title>
+  <title>0-7 陣列 | 從零開始的演算法競賽入門指南</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180989678-1"></script>
     <script>
@@ -191,7 +191,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          0-7
+          0-7 陣列
         </h1>
 
         <div class="post-meta">
@@ -200,26 +200,18 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-11-05 12:35:55 / 修改時間：17:04:57" itemprop="dateCreated datePublished" datetime="2020-11-05T12:35:55+08:00">2020-11-05</time>
+              <time title="創建時間：2020-11-05 12:35:55" itemprop="dateCreated datePublished" datetime="2020-11-05T12:35:55+08:00">2020-11-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-11-06 13:50:31" itemprop="dateModified" datetime="2020-11-06T13:50:31+08:00">2020-11-06</time>
+              </span>
 
           
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2020/11/05/0-7/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/11/05/0-7/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
 
         </div>
       </header>
@@ -317,7 +309,10 @@
     <a href="/2020/11/04/0-6/" rel="prev" title="0-6 進階輸入輸出">
       <i class="fa fa-chevron-left"></i> 0-6 進階輸入輸出
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/06/0-8/" rel="next" title="0-8 迴圈">
+      0-8 迴圈 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -397,12 +392,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">標籤</span>
       </div>
   </nav>
@@ -550,20 +545,10 @@
   
 
 <script>
-  function loadCount() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://emanlaicepsa.disqus.com/count.js';
-    s.id = 'dsq-count-scr';
-    (d.head || d.body).appendChild(s);
-  }
-  // defer loading until the whole page loading is completed
-  window.addEventListener('load', loadCount, false);
-</script>
-<script>
   var disqus_config = function() {
     this.page.url = "https://emanlaicepsa.github.io/2020/11/05/0-7/";
     this.page.identifier = "2020/11/05/0-7/";
-    this.page.title = "0-7";
+    this.page.title = "0-7 陣列";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
