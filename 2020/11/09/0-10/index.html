@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="KtMH6V68Z2PZJ6LKvSp5sqJFn7TxZp3dVQovd_wsgOI" />
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-180989678-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-180989678-1');
+</script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"emanlaicepsa.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="遞迴是什麼狹義的遞迴，指的是一個函式，在運行過程中，直接或間接的去呼叫了自己這個函式。沒錯，這是可以的，且是許多演算法實作過程的一部分。 但其實，遞迴不僅僅是語法，而是一種概念。將一個問題，歸約到一個或多個規模較小的子問題，不管它的實作方式是使用遞迴還是迴圈，我認為都可以算是遞迴的一部份。遞迴的這個概念，在演算法競賽裡非常重要。未來在第二、三章節，會一次又一次的，以不同模樣出現，DP根本就是遞迴、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-10">
+<meta property="og:url" content="https://emanlaicepsa.github.io/2020/11/09/0-10/index.html">
+<meta property="og:site_name" content="從零開始的演算法競賽入門教學">
+<meta property="og:description" content="遞迴是什麼狹義的遞迴，指的是一個函式，在運行過程中，直接或間接的去呼叫了自己這個函式。沒錯，這是可以的，且是許多演算法實作過程的一部分。 但其實，遞迴不僅僅是語法，而是一種概念。將一個問題，歸約到一個或多個規模較小的子問題，不管它的實作方式是使用遞迴還是迴圈，我認為都可以算是遞迴的一部份。遞迴的這個概念，在演算法競賽裡非常重要。未來在第二、三章節，會一次又一次的，以不同模樣出現，DP根本就是遞迴、">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-11-09T06:49:37.000Z">
+<meta property="article:modified_time" content="2020-11-09T08:59:36.190Z">
+<meta property="article:author" content="emanlaicepsa">
+<meta property="article:tag" content="演算法競賽">
+<meta property="article:tag" content="教學">
+<meta property="article:tag" content="入門">
+<meta property="article:tag" content="從零到一">
+<meta property="article:tag" content="函式">
+<meta property="article:tag" content="遞迴">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://emanlaicepsa.github.io/2020/11/09/0-10/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>0-10 | 從零開始的演算法競賽入門教學</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180989678-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-180989678-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">從零開始的演算法競賽入門教學</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>文章</a>
+
+  </li>
+        <li class="menu-item menu-item-從零到一：基礎語法">
+
+    <a href="/tags/%E5%BE%9E%E9%9B%B6%E5%88%B0%E4%B8%80/" rel="section"><i class="fa fa-tags fa-fw"></i>從零到一：基礎語法</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/11/09/0-10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          0-10
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-11-09 14:49:37 / 修改時間：16:59:36" itemprop="dateCreated datePublished" datetime="2020-11-09T14:49:37+08:00">2020-11-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="遞迴是什麼"><a href="#遞迴是什麼" class="headerlink" title="遞迴是什麼"></a>遞迴是什麼</h2><p>狹義的遞迴，指的是一個函式，在運行過程中，直接或間接的去呼叫了自己這個函式。沒錯，這是可以的，且是許多演算法實作過程的一部分。</p>
+<p>但其實，遞迴不僅僅是語法，而是一種概念。將一個問題，歸約到一個或多個規模較小的子問題，不管它的實作方式是使用遞迴還是迴圈，我認為都可以算是遞迴的一部份。遞迴的這個概念，在演算法競賽裡非常重要。未來在第二、三章節，會一次又一次的，以不同模樣出現，DP根本就是遞迴、排序、資料結構在實作的過程中，亦有許多遞迴的影子。</p>
+<p>但現在，我們就來看看狹義遞迴的語法吧</p>
+<h2 id="語法"><a href="#語法" class="headerlink" title="語法"></a>語法</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    func();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>基本上，概念是這樣的。當然，如果沒有自己設定，遞迴是不可能停下來的。由於非常容易掛掉以及 debug 較為困難，因此遞迴成為了不少人的惡夢。</p>
+<p>在撰寫遞迴程式時，務必再三確認中止條件是否正確，若停不下來的話會相當糟糕。</p>
+<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><p>今天，我要印出從 1 ~ n 裡的每一個整數。當然，我可以使用迴圈實作，而且迴圈也是更好的作法。但為了使讀者更明白遞迴的過程，這裡使用遞迴撰寫。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span>(x == n) <span class="keyword">return</span>; <span class="comment">// 中止條件 相當重要</span></span><br><span class="line">    print(x + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    print(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>問題相對直觀，得到參數 x 後，輸出它，並且以 x + 1 作為參數呼叫下一次遞迴，直到 x 等於 5 時才停下。輸出為：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+
+<p>但如果今天程式是這樣呢？</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x &lt; n) print(x + <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    print(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這時候，變成我先呼叫 print(x + 1)後，再輸出 x，這樣的輸出會是什麼呢？稍微有點難想，但若從 5 反推回來，print(5)只輸出 5，print(4) 是 print(5) 後輸出 4，print(3) 是 print(4) 後輸出 3，可以發現，輸出應該就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">4</span><br><span class="line">3</span><br><span class="line">2</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<p>困難的來了，如果我的程式是這樣：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x &lt; n)&#123;</span><br><span class="line">        print(x + <span class="number">1</span>);</span><br><span class="line">        print(x + <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    print(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這就不是個簡單的遞迴函式了，事實上，我也無法在不借助紙筆的方式下，得知它的輸出。呼叫 print(1) 時，我先呼叫了 print(2)，這時 print(2) 會一直遞迴下去，直到 print(2) 完全結束以後，再呼叫 print(3)。等到 print(3) 結束後，最後輸出 1。</p>
+<p>最後的輸出長這樣：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">6</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">3</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">4</span><br><span class="line">2</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">3</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<p>很難理解吧！我們嘗試透過一些輔助的文字去幫助理解，紀錄一個值d，代表我現在處於遞迴中的第d層，輸出該數前，我先輸出d個空格，以此區分不同層的輸出。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x &lt; n)&#123;</span><br><span class="line">        print(x + <span class="number">1</span>, d + <span class="number">1</span>);</span><br><span class="line">        print(x + <span class="number">2</span>, d + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;d;i++) <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    print(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">    5</span><br><span class="line">    6</span><br><span class="line">   4</span><br><span class="line">   5</span><br><span class="line">  3</span><br><span class="line">   5</span><br><span class="line">   6</span><br><span class="line">  4</span><br><span class="line"> 2</span><br><span class="line">   5</span><br><span class="line">   6</span><br><span class="line">  4</span><br><span class="line">  5</span><br><span class="line"> 3</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<p>恩…還是有點難懂，不然我們在呼叫print(x+1)跟print(x+2)時，都輸出一句話好了！</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x &lt; n)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;d;i++) <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;x = &quot;</span> &lt;&lt; x &lt;&lt;<span class="string">&quot;, print(x+1):\n&quot;</span>;</span><br><span class="line">        print(x + <span class="number">1</span>, d + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;d;i++) <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;x = &quot;</span> &lt;&lt; x &lt;&lt;<span class="string">&quot;, print(x+2):\n&quot;</span>;</span><br><span class="line">        print(x + <span class="number">2</span>, d + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;d;i++) <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    print(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">x &#x3D; 1, print(x+1): &#x2F;&#x2F; a</span><br><span class="line"> x &#x3D; 2, print(x+1): &#x2F;&#x2F; b</span><br><span class="line">  x &#x3D; 3, print(x+1): &#x2F;&#x2F; c</span><br><span class="line">   x &#x3D; 4, print(x+1): &#x2F;&#x2F; d</span><br><span class="line">    5</span><br><span class="line">   x &#x3D; 4, print(x+2): &#x2F;&#x2F; d</span><br><span class="line">    6</span><br><span class="line">   4</span><br><span class="line">  x &#x3D; 3, print(x+2): &#x2F;&#x2F; c</span><br><span class="line">   5</span><br><span class="line">  3</span><br><span class="line"> x &#x3D; 2, print(x+2): &#x2F;&#x2F; b</span><br><span class="line">  x &#x3D; 4, print(x+1):</span><br><span class="line">   5</span><br><span class="line">  x &#x3D; 4, print(x+2):</span><br><span class="line">   6</span><br><span class="line">  4</span><br><span class="line"> 2</span><br><span class="line">x &#x3D; 1, print(x+2): &#x2F;&#x2F; a</span><br><span class="line"> x &#x3D; 3, print(x+1):</span><br><span class="line">  x &#x3D; 4, print(x+1):</span><br><span class="line">   5</span><br><span class="line">  x &#x3D; 4, print(x+2):</span><br><span class="line">   6</span><br><span class="line">  4</span><br><span class="line"> x &#x3D; 3, print(x+2):</span><br><span class="line">  5</span><br><span class="line"> 3</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<p>其中，// 後方的字相同者，表示其分別是同一層中的 print(x+1) 與 print(x+2) 兩個函式，不是程式實際輸出。</p>
+<p>遞迴的思考相當抽象，建議搭配<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=BWrfNs7k5CY">影片</a>理解。</p>
+<p>但也因為這樣，遞迴可以用來解一般正常思考下想不到或難解決的問題，下方練習題皆為遞迴經典題，具有相當的難度，但理解後，會發現，用遞迴寫，原來這麼簡潔、乾淨、漂亮！</p>
+<h2 id="遞迴是…"><a href="#遞迴是…" class="headerlink" title="遞迴是…"></a>遞迴是…</h2><p>我覺得，解決遞迴問題的過程，就像是人生。未來過於遙遠，無法想像、無法預測，我們唯一能夠改變的，只有每個當下的自己。不需要去猜測未來到底會變得如何，我們所能做的一切，只是把握此時此刻，努力面對並解決今天遇到的問題。並且相信：明天一定會更好的！</p>
+<p>唯一不同的是，人生會在執行到一半時，突然發生大量意外，但程式基本上不會，除非你寫爛了。</p>
+<h2 id="練習題"><a href="#練習題" class="headerlink" title="練習題"></a>練習題</h2><p><a target="_blank" rel="noopener" href="http://www.fivedream.com/page1.aspx?no=221249&step=1&newsno=26283">河內塔問題</a>(易 建議完全了解此題)：<br><a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=a227">ZeroJudge a227</a></p>
+<p>合成函數：(中偏難) : <a target="_blank" rel="noopener" href="https://judge.tcirc.tw/ShowProblem?problemid=d002">tcirc d002</a></p>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BA%A6%E7%91%9F%E5%A4%AB%E6%96%AF%E9%97%AE%E9%A2%98">約瑟夫問題</a>(難 有興趣可寫)：<a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=c296">ZeroJudge c296</a></p>
+<h2 id="AC-Code"><a href="#AC-Code" class="headerlink" title="AC Code"></a>AC Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ZeroJudge a227</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">hanoi</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">char</span> from, <span class="keyword">char</span> to, <span class="keyword">char</span> mid)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n == <span class="number">1</span>)&#123; <span class="comment">// 遞迴停止條件即為只需移一個盤子</span></span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt; <span class="string">&quot;Move ring &quot;</span> &lt;&lt; n &lt;&lt; <span class="string">&quot; from &quot;</span> &lt;&lt; from &lt;&lt; <span class="string">&quot; to &quot;</span> &lt;&lt; to &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	hanoi(n<span class="number">-1</span>, from, mid, to); <span class="comment">// 先想辦法把前面 n-1 個搬到中間那根柱子</span></span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt; <span class="string">&quot;Move ring &quot;</span> &lt;&lt; n &lt;&lt; <span class="string">&quot; from &quot;</span> &lt;&lt; from &lt;&lt; <span class="string">&quot; to &quot;</span> &lt;&lt; to &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; </span><br><span class="line">	hanoi(n<span class="number">-1</span>, mid, to, from); <span class="comment">// 把前面 n-1 個柱子從中間搬到目標上</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n)&#123;</span><br><span class="line">		hanoi(n,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;C&#x27;</span>,<span class="string">&#x27;B&#x27;</span>);</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 合成函數</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long <span class="comment">// 將程式裡的 ll 視為 long long 的意思</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">ll n;</span><br><span class="line"><span class="built_in">string</span> s;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">str_to_int</span><span class="params">(<span class="built_in">string</span> s)</span></span>&#123; <span class="comment">// 將字串轉為整數</span></span><br><span class="line">	ll ans = <span class="number">0</span>, st = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">bool</span> neg = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(s[st] == <span class="string">&#x27;-&#x27;</span>) neg = <span class="number">1</span>, st++;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=st;i&lt;s.size();i++) ans = ans * <span class="number">10</span> + s[i] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">	<span class="keyword">if</span>(neg) ans = -ans;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; s; <span class="comment">// 讀入下一個</span></span><br><span class="line">	<span class="keyword">if</span>(s == <span class="string">&quot;f&quot;</span>)&#123;</span><br><span class="line">		ll x = solve(); <span class="comment">// f 後面 有 1 個參數</span></span><br><span class="line">		<span class="keyword">return</span> x * <span class="number">2</span> - <span class="number">3</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(s == <span class="string">&quot;g&quot;</span>)&#123;</span><br><span class="line">		ll x = solve(); <span class="comment">// g 後面 有 2 個參數</span></span><br><span class="line">		ll y = solve();</span><br><span class="line">		<span class="keyword">return</span> x * <span class="number">2</span> + y - <span class="number">7</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(s == <span class="string">&quot;h&quot;</span>)&#123;</span><br><span class="line">		ll x = solve(); <span class="comment">// h 後面 有 3 個參數</span></span><br><span class="line">		ll y = solve();</span><br><span class="line">		ll z = solve();</span><br><span class="line">		<span class="keyword">return</span> <span class="number">3</span> * x - <span class="number">2</span> * y + z;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> str_to_int(s); <span class="comment">// 是數字的話 就直接回傳</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;solve()&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.facebook.com/nthuioncamp/posts/438261166736061">定時K彈詳解</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定時K彈 最短的最難 https://www.facebook.com/nthuioncamp/posts/438261166736061</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> N, M, K;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> N, <span class="keyword">int</span> M, <span class="keyword">int</span> K)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(K == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> (solve(N<span class="number">-1</span>, M, K<span class="number">-1</span>) + M) % N;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; N &gt;&gt; M &gt;&gt; K;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; solve(N, M, K) + <span class="number">1</span> &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AB%B6%E8%B3%BD/" rel="tag"># 演算法競賽</a>
+              <a href="/tags/%E6%95%99%E5%AD%B8/" rel="tag"># 教學</a>
+              <a href="/tags/%E5%85%A5%E9%96%80/" rel="tag"># 入門</a>
+              <a href="/tags/%E5%BE%9E%E9%9B%B6%E5%88%B0%E4%B8%80/" rel="tag"># 從零到一</a>
+              <a href="/tags/%E5%87%BD%E5%BC%8F/" rel="tag"># 函式</a>
+              <a href="/tags/%E9%81%9E%E8%BF%B4/" rel="tag"># 遞迴</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/09/0-9/" rel="prev" title="0-9 函式">
+      <i class="fa fa-chevron-left"></i> 0-9 函式
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%9E%E8%BF%B4%E6%98%AF%E4%BB%80%E9%BA%BC"><span class="nav-number">1.</span> <span class="nav-text">遞迴是什麼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AA%9E%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">語法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">範例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%9E%E8%BF%B4%E6%98%AF%E2%80%A6"><span class="nav-number">4.</span> <span class="nav-text">遞迴是…</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92%E9%A1%8C"><span class="nav-number">5.</span> <span class="nav-text">練習題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AC-Code"><span class="nav-number">6.</span> <span class="nav-text">AC Code</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">emanlaicepsa</p>
+  <div class="site-description" itemprop="description">由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100005895303371" title="聯絡我 → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100005895303371" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>聯絡我</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-github"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">emanlaicepsa</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://emanlaicepsa.github.io/2020/11/09/0-10/";
+    this.page.identifier = "2020/11/09/0-10/";
+    this.page.title = "0-10";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://emanlaicepsa.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
