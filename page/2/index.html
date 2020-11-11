@@ -177,6 +177,136 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/10/26/0-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/26/0-2/" class="post-title-link" itemprop="url">0-2 基本輸入輸出</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-10-26 10:38:17" itemprop="dateCreated datePublished" datetime="2020-10-26T10:38:17+08:00">2020-10-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-11-09 10:43:51" itemprop="dateModified" datetime="2020-11-09T10:43:51+08:00">2020-11-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.csie.ntu.edu.tw/~sylee/courses/35500-99s/elements.htm">可能不太好看懂的教學</a></p>
+<h2 id="輸入"><a href="#輸入" class="headerlink" title="輸入"></a>輸入</h2><p>在以下的程式碼中，宣告了整數a、字元b、浮點數c、與字串d。<br>並將其讀入。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">char</span> b;</span><br><span class="line"><span class="keyword">double</span> c;</span><br><span class="line"><span class="built_in">string</span> d;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;c&gt;&gt;d;</span><br></pre></td></tr></table></figure>
+
+<p>cin的語法很特殊，總之像上面那樣，注意不要打成&lt;&lt;，也不要在中間加入無用空格，像這樣：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//錯誤示範</span></span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;a&gt;&gt;<span class="string">&quot; &quot;</span>&gt;&gt;<span class="string">&#x27;\n&#x27;</span>&gt;&gt;b;</span><br><span class="line"><span class="built_in">cin</span>&lt;&lt;a;</span><br></pre></td></tr></table></figure>
+
+<p>當然，不一定要將輸入的東西全部擠成一行，可以寫作如下形式，效果相同：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cin</span>&gt;&gt;a;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;b;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;c;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;d;</span><br></pre></td></tr></table></figure>
+
+<p>如果輸入了不合法的東西，程式會有不正常的反應，如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;x;</span><br></pre></td></tr></table></figure>
+<p>這時，若輸入<strong>abc</strong>，由於<strong>abc</strong>並非整數，因此x將不會讀入任何值。</p>
+<h2 id="輸出"><a href="#輸出" class="headerlink" title="輸出"></a>輸出</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">char</span> b;</span><br><span class="line"><span class="keyword">double</span> c;</span><br><span class="line"><span class="built_in">string</span> d;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;c&gt;&gt;d;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;a&lt;&lt;b&lt;&lt;c&lt;&lt;d;</span><br></pre></td></tr></table></figure>
+<p>跟cin語法基本相同，但箭頭相反方向。</p>
+<h2 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h2><p>若用上方程式碼輸入這行，得到的輸出會是什麼呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45 a 5.25 sfdljkg</span><br></pre></td></tr></table></figure>
+<p>答案是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45a5.25sfdljkg</span><br></pre></td></tr></table></figure>
+<p>壞掉了嗎？並沒有，那為什麼空白不見了？</p>
+<p>原因是cin會自動忽略所有不可見字元，包含空格以及換行字元。</p>
+<p>因此，只要確實分離，不論輸入是這樣：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45 a 5.25 sfdljkg</span><br></pre></td></tr></table></figure>
+<p>這樣：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45      a   5.25  sfdljkg</span><br></pre></td></tr></table></figure>
+<p>還是這樣：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">45  a</span><br><span class="line"> 5.25 </span><br><span class="line"> sfdljkg</span><br></pre></td></tr></table></figure>
+
+<p>程式都能夠正確讀取！</p>
+<h2 id="cin如何運作"><a href="#cin如何運作" class="headerlink" title="cin如何運作"></a>cin如何運作</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;x;</span><br></pre></td></tr></table></figure>
+<p>若我輸入<strong>123abc</strong>，程式運行結果會是如何？</p>
+<p>答案是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">123</span><br></pre></td></tr></table></figure>
+<p>因此，cin一個整數時，程式會一直讀取直到下一個位置的字元不是數字為止！</p>
+<p>因此，若上方的輸入為：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45a5.25sfdljkg</span><br></pre></td></tr></table></figure>
+<p>首先，整數讀入45後停止，字元讀入一個字元’a’後停止，浮點數讀入5.25後停止，字串讀入至行尾停止。</p>
+<p>因此，在這個範例裡，輸出結果跟原來一模一樣！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45a5.25sfdljkg</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="那-怎麼輸出空格？"><a href="#那-怎麼輸出空格？" class="headerlink" title="那 怎麼輸出空格？"></a>那 怎麼輸出空格？</h2><p>輸出一個空白字元，或者一個含一個空白的字串，接著將其輸出！</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">char</span> space = <span class="string">&#x27; &#x27;</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">12</span>;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;a&lt;&lt;space&lt;&lt;b&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10 12</span><br></pre></td></tr></table></figure>
+
+<h2 id="這麼麻煩嗎？"><a href="#這麼麻煩嗎？" class="headerlink" title="這麼麻煩嗎？"></a>這麼麻煩嗎？</h2><p>其實，輸出的東西，不一定要是變數！</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="number">10</span>&lt;&lt;<span class="string">&#x27; &#x27;</span>&lt;&lt;<span class="number">12</span>&lt;&lt;<span class="string">&quot;hello!&quot;</span>&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10 12 hello!</span><br></pre></td></tr></table></figure>
+
+<p><strong>對比：cin的輸入對象一定要是變數，不然你輸入進來要存在哪裡？</strong></p>
+<p>因此，若要以空格分隔上方輸出，上方程式碼可改寫為：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">char</span> b;</span><br><span class="line"><span class="keyword">double</span> c;</span><br><span class="line"><span class="built_in">string</span> d;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;c&gt;&gt;d;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;b&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;c&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;d&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h2><p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/92/">TOJ 92</a></p>
+<p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/519/">TOJ 519</a></p>
+<p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/520/">TOJ 520</a></p>
+<p>再次提醒，行尾要輸出換行字元’\n’！</p>
+<h2 id="AC-Code"><a href="#AC-Code" class="headerlink" title="AC Code"></a>AC Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TOJ 92</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">string</span> a,b,c;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> a, b, c;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;c;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Hello, &quot;</span>&lt;&lt;a&lt;&lt;<span class="string">&quot;, &quot;</span>&lt;&lt;b&lt;&lt;<span class="string">&quot;, and &quot;</span>&lt;&lt;c&lt;&lt;<span class="string">&quot;!\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TOJ 519</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a, b;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Do you want to say &quot;</span> &lt;&lt; a &lt;&lt;<span class="string">&quot; and &quot;</span> &lt;&lt; b &lt;&lt;<span class="string">&quot; ??\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TOJ 520</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a,b;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;b&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;a&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="備註"><a href="#備註" class="headerlink" title="備註"></a>備註</h2><p>有另外一種輸入輸出方法：scanf / printf，與cin/cout功能相同，若有興趣可自行查詢相關資源。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/10/23/0-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -433,7 +563,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-11-09 17:00:32" itemprop="dateModified" datetime="2020-11-09T17:00:32+08:00">2020-11-09</time>
+                <time title="修改時間：2020-11-11 15:58:08" itemprop="dateModified" datetime="2020-11-11T15:58:08+08:00">2020-11-11</time>
               </span>
 
           
@@ -475,7 +605,7 @@
 <p><strong>不可替代程度：★★★</strong></p>
 <h2 id="0-10-遞迴"><a href="#0-10-遞迴" class="headerlink" title="0-10 遞迴"></a><a href="/2020/11/09/0-10/">0-10 遞迴</a></h2><p><strong>常見程度：★★★</strong></p>
 <p><strong>不可替代程度：★★★★★</strong></p>
-<h2 id="0-11-struct"><a href="#0-11-struct" class="headerlink" title="0-11 struct"></a>0-11 struct</h2><p><strong>常見程度：★★</strong></p>
+<h2 id="0-11-struct"><a href="#0-11-struct" class="headerlink" title="0-11 struct"></a><a href="/2020/11/11/0-11/">0-11 struct</a></h2><p><strong>常見程度：★★</strong></p>
 <p><strong>不可替代程度：★★</strong></p>
 <h2 id="0-12-變數的作用範圍"><a href="#0-12-變數的作用範圍" class="headerlink" title="0-12 變數的作用範圍"></a>0-12 變數的作用範圍</h2><p><strong>常見程度：★★★</strong></p>
 <p><strong>不可替代程度：★★★★</strong></p>
@@ -581,12 +711,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">標籤</span>
       </div>
   </nav>
