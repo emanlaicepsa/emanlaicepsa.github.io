@@ -31,15 +31,15 @@
     var CONFIG = {"hostname":"emanlaicepsa.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="什麼是標頭檔?wiki 簡單來說，是存放你要使用的功能的地方。 例如，假如你想要使用 cout 這個功能，便需要在程式的開頭加上這行，因為 cout 是 iostream 裡的功能，所以必須 include 後才能使用。 1#include&lt;iostream&gt;  什麼是命名空間?教學 簡單來說，用來避免那些功能撞名的東西。在 include 後，main 前打上這一段。 1using">
+  <meta name="description" content="Hello World!我們直接來看一下，要如何在螢幕上輸出 Hello World 吧！ 學完後，就可以說：我會C++喔 123456#include&lt;iostream&gt;using namespace std;int main()&amp;#123;    cout&lt;&lt;&quot;Hello World!\n&quot;;&amp;#125;  程式應該會輸出： 1Hello World">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0-0 Hello World! 標頭檔與命名空間">
 <meta property="og:url" content="https://emanlaicepsa.github.io/2020/10/21/0-0/index.html">
 <meta property="og:site_name" content="從零開始的演算法競賽入門教學">
-<meta property="og:description" content="什麼是標頭檔?wiki 簡單來說，是存放你要使用的功能的地方。 例如，假如你想要使用 cout 這個功能，便需要在程式的開頭加上這行，因為 cout 是 iostream 裡的功能，所以必須 include 後才能使用。 1#include&lt;iostream&gt;  什麼是命名空間?教學 簡單來說，用來避免那些功能撞名的東西。在 include 後，main 前打上這一段。 1using">
+<meta property="og:description" content="Hello World!我們直接來看一下，要如何在螢幕上輸出 Hello World 吧！ 學完後，就可以說：我會C++喔 123456#include&lt;iostream&gt;using namespace std;int main()&amp;#123;    cout&lt;&lt;&quot;Hello World!\n&quot;;&amp;#125;  程式應該會輸出： 1Hello World">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-10-21T07:08:00.000Z">
-<meta property="article:modified_time" content="2020-11-09T02:43:12.551Z">
+<meta property="article:modified_time" content="2020-11-13T08:13:06.147Z">
 <meta property="article:author" content="emanlaicepsa">
 <meta property="article:tag" content="演算法競賽">
 <meta property="article:tag" content="入門">
@@ -209,7 +209,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-11-09 10:43:12" itemprop="dateModified" datetime="2020-11-09T10:43:12+08:00">2020-11-09</time>
+                <time title="修改時間：2020-11-13 16:13:06" itemprop="dateModified" datetime="2020-11-13T16:13:06+08:00">2020-11-13</time>
               </span>
 
           
@@ -223,28 +223,49 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="什麼是標頭檔"><a href="#什麼是標頭檔" class="headerlink" title="什麼是標頭檔?"></a>什麼是標頭檔?</h2><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%A4%B4%E6%96%87%E4%BB%B6">wiki</a></p>
+        <h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World!"></a>Hello World!</h2><p>我們直接來看一下，要如何在螢幕上輸出 Hello World 吧！</p>
+<p><del>學完後，就可以說：我會C++喔</del></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Hello World!\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程式應該會輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello World!</span><br></pre></td></tr></table></figure>
+<p>下面，我們就一個一個來看，每一行在做什麼吧！</p>
+<h2 id="標頭檔"><a href="#標頭檔" class="headerlink" title="標頭檔"></a>標頭檔</h2><p>#include<iostream> 這句，意思是引入名為 iostream 的標頭檔。</p>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%A4%B4%E6%96%87%E4%BB%B6">標頭檔wiki</a></p>
 <p>簡單來說，是存放你要使用的功能的地方。</p>
 <p>例如，假如你想要使用 cout 這個功能，便需要在程式的開頭加上這行，因為 cout 是 iostream 裡的功能，所以必須 include 後才能使用。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br></pre></td></tr></table></figure>
 
-<h2 id="什麼是命名空間"><a href="#什麼是命名空間" class="headerlink" title="什麼是命名空間?"></a>什麼是命名空間?</h2><p><a target="_blank" rel="noopener" href="https://atedev.wordpress.com/2007/01/01/c-%E7%9A%84%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93/">教學</a></p>
-<p>簡單來說，用來避免那些功能撞名的東西。在 include 後，main 前打上這一段。</p>
+<h2 id="命名空間"><a href="#命名空間" class="headerlink" title="命名空間"></a>命名空間</h2><p>using namespace std 這句，意思是使用名為 std 的命名空間。</p>
+<p><a target="_blank" rel="noopener" href="https://atedev.wordpress.com/2007/01/01/c-%E7%9A%84%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93/">教學</a></p>
+<p>若有兩個人同名，我們不知道要如何分辨時，我們可能會說：X年X班的XXX….</p>
+<p>在這裡概念是類似的！using namespace std 就是跟程式說，我接下來叫的人，是在 std 這個班級裡，這樣就不用每次叫人都加上班級了！</p>
+<p>在 include 後，main 前打上這一段。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
 <p>若沒有這一行，每次使用 cout 以及其他在 std 命名空間下的功能時，將需要寫成如下形式，十分麻煩。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x,y;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;HI\n&quot;</span>;</span><br><span class="line">    x = <span class="built_in">std</span>::min(x,y);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;x&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x,y;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;HI\n&quot;</span>;</span><br><span class="line">    x = <span class="built_in">std</span>::min(x,y);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;x&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>使用#include&lt;標頭檔名&gt;引入要使用的標頭檔。</p>
-<p>使用using namespace 名稱; 以使用命名空間。</p>
-<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Hello World!\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="main-函式"><a href="#main-函式" class="headerlink" title="main 函式"></a>main 函式</h2><p>函式，可以想成一個機器，工作在函式裡執行。之後將有函式的詳細介紹</p>
+<p>一個 C++ 程式裡，開始執行的地方，我們叫它 main 函式。</p>
+<p>語法是：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="競程上"><a href="#競程上" class="headerlink" title="競程上"></a>競程上</h2><p>以下一律引入萬用標頭檔 bits/stdc++.h，並且使用 std 命名空間。bits/stdc++.h 包含了如 iostream 以及 algorithm 等競程上99%你所需要的標頭檔，直接用就對了，namespace std 同理。</p>
-<p>看不懂的話，這章可以先跳過，那兩行code背起來就對了。</p>
-<p>我不鼓勵背 code，但這章是唯一例外。</p>
-<h2 id="你說你被會-C-的人嘴砲了"><a href="#你說你被會-C-的人嘴砲了" class="headerlink" title="你說你被會 C++ 的人嘴砲了?"></a>你說你被會 C++ 的人嘴砲了?</h2><p>在實務中，這是非常糟糕的寫法，請避免使用。</p>
-<p>但是競程不是實務，所以一點關係都沒有！</p>
+<p>由大括號包覆起來的區塊，就是我們要寫程式的地方！</p>
+<h2 id="cout"><a href="#cout" class="headerlink" title="cout"></a>cout</h2><p>C++ 裡的輸出指令，cout後面加上&lt;&lt;，再加上你要輸出的東西，就可以將它顯示在螢幕上！</p>
+<p>“Hello World” 是一個字串，以雙引號包覆。</p>
+<p>‘\n’ 為換行字元，雖然看不到，但可以將輸出換行，在 Online Judge 裡非常重要。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Hello World\n&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>這句的意思，就是輸出 Hello World 後換行！</p>
+<h2 id="組合"><a href="#組合" class="headerlink" title="組合"></a>組合</h2><p>將上面全部拼合在一起，就是我們的第一個 C++ 程式啦。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Hello World!\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>複製到自己的 Dev C++ 裡，按下 F11 試試看吧！</p>
+<p>之後，自己試著寫一次！</p>
+<h2 id="競程上"><a href="#競程上" class="headerlink" title="競程上"></a>競程上</h2><p>競程上，我們通常使用萬用標頭檔 bits/stdc++.h，並且使用 std 命名空間。bits/stdc++.h 包含了如 iostream 以及 algorithm 等競程上 99% 你所需要的標頭檔，直接用就對了，namespace std 也是，你需要的所有東西都在裡面了。</p>
 <h2 id="練習題"><a href="#練習題" class="headerlink" title="練習題"></a>練習題</h2><p><a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=d483">zerojudge d483</a></p>
-<h2 id="AC-code"><a href="#AC-code" class="headerlink" title="AC code"></a>AC code</h2><p>在多數的Online Judge中，即使無特別要求，也請在最後多輸出一個換行符號(“\n”)！</p>
+<h2 id="AC-code"><a href="#AC-code" class="headerlink" title="AC code"></a>AC code</h2><p>在多數的Online Judge中的共識，是輸出後要換行。且因為輸出是嚴格比對的，即使只少一個換行字元，解答都會被視為完全錯誤。</p>
+<p>因此，請記得一定要在輸出結尾加上一個換行符號(“\n”)！</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;hello, world\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -341,7 +362,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF%E6%A8%99%E9%A0%AD%E6%AA%94"><span class="nav-number">1.</span> <span class="nav-text">什麼是標頭檔?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93"><span class="nav-number">2.</span> <span class="nav-text">什麼是命名空間?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B"><span class="nav-number">4.</span> <span class="nav-text">範例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%B6%E7%A8%8B%E4%B8%8A"><span class="nav-number">5.</span> <span class="nav-text">競程上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%A0%E8%AA%AA%E4%BD%A0%E8%A2%AB%E6%9C%83-C-%E7%9A%84%E4%BA%BA%E5%98%B4%E7%A0%B2%E4%BA%86"><span class="nav-number">6.</span> <span class="nav-text">你說你被會 C++ 的人嘴砲了?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92%E9%A1%8C"><span class="nav-number">7.</span> <span class="nav-text">練習題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AC-code"><span class="nav-number">8.</span> <span class="nav-text">AC code</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-World"><span class="nav-number">1.</span> <span class="nav-text">Hello World!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%99%E9%A0%AD%E6%AA%94"><span class="nav-number">2.</span> <span class="nav-text">標頭檔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93"><span class="nav-number">3.</span> <span class="nav-text">命名空間</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main-%E5%87%BD%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">main 函式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cout"><span class="nav-number">5.</span> <span class="nav-text">cout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%84%E5%90%88"><span class="nav-number">6.</span> <span class="nav-text">組合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%B6%E7%A8%8B%E4%B8%8A"><span class="nav-number">7.</span> <span class="nav-text">競程上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92%E9%A1%8C"><span class="nav-number">8.</span> <span class="nav-text">練習題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AC-code"><span class="nav-number">9.</span> <span class="nav-text">AC code</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
