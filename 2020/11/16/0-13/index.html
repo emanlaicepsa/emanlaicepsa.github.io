@@ -33,13 +33,13 @@
 
   <meta name="description" content="排序其實這有點算是演算法的範圍，不過因為我認為排序對於基礎演算法、時間複雜度、分治、二分搜、常用函式等等主題來說，都是相當好的範例，因此，決定將其置於此。 這篇中，將會帶大家認識時間複雜度的概念、以泡沫排序介紹演算法、使用預設的sort函式及自定義比較函式。進階的排序方法與逆序數對等主題，將會於下一本書中介紹。 排序是什麼把一堆東西，按照某個特定的規則排好。例如：由小排到大或由大排到小等等。 來看">
 <meta property="og:type" content="article">
-<meta property="og:title" content="0-13">
+<meta property="og:title" content="0-13 排序">
 <meta property="og:url" content="https://emanlaicepsa.github.io/2020/11/16/0-13/index.html">
 <meta property="og:site_name" content="從零開始的演算法競賽入門教學">
 <meta property="og:description" content="排序其實這有點算是演算法的範圍，不過因為我認為排序對於基礎演算法、時間複雜度、分治、二分搜、常用函式等等主題來說，都是相當好的範例，因此，決定將其置於此。 這篇中，將會帶大家認識時間複雜度的概念、以泡沫排序介紹演算法、使用預設的sort函式及自定義比較函式。進階的排序方法與逆序數對等主題，將會於下一本書中介紹。 排序是什麼把一堆東西，按照某個特定的規則排好。例如：由小排到大或由大排到小等等。 來看">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-11-16T01:55:48.000Z">
-<meta property="article:modified_time" content="2020-11-16T07:43:13.050Z">
+<meta property="article:modified_time" content="2020-11-16T07:47:59.128Z">
 <meta property="article:author" content="emanlaicepsa">
 <meta property="article:tag" content="演算法競賽">
 <meta property="article:tag" content="教學">
@@ -61,7 +61,7 @@
   };
 </script>
 
-  <title>0-13 | 從零開始的演算法競賽入門教學</title>
+  <title>0-13 排序 | 從零開始的演算法競賽入門教學</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z8B2VTRGNW"></script>
     <script>
@@ -193,7 +193,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          0-13
+          0-13 排序
         </h1>
 
         <div class="post-meta">
@@ -204,7 +204,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-11-16 09:55:48 / 修改時間：15:43:13" itemprop="dateCreated datePublished" datetime="2020-11-16T09:55:48+08:00">2020-11-16</time>
+              <time title="創建時間：2020-11-16 09:55:48 / 修改時間：15:47:59" itemprop="dateCreated datePublished" datetime="2020-11-16T09:55:48+08:00">2020-11-16</time>
             </span>
 
           
@@ -257,7 +257,7 @@
 <p><strong>演算法不僅要正確，速度也是很重要的！</strong></p>
 <p>現在，我們就試著分析一下選擇排序法的複雜度。</p>
 <p>選擇排序法的主要概念，便是重複 N 次找最大值的過程。在每一次的過程中，程式需要去遍歷整個陣列。那麼，基本操作在哪裡？</p>
-<p><strong>j++**，</strong>arr[j] &gt; mx<strong>，</strong>swap(arr[i], arr[j])<strong>，這些全部都是基本操作。其中，前兩個基本操作，在第 i 回合時，都會執行到 N-i+1 次。因此，我們知道，</strong>j++** 總共被執行的數量，應該是 1 + 2 + 3 + 4…… + N = (N) * (N+1) / 2 次。</p>
+<p>j++，arr[j] &gt; mx，swap(arr[i], arr[j])，這些全部都是基本操作。其中，前兩個基本操作，在第 i 回合時，都會執行到 N-i+1 次。因此，我們知道，<strong>j++</strong> 總共被執行的數量，應該是 1 + 2 + 3 + 4…… + N = (N) * (N+1) / 2 次。</p>
 <p>在 N = 1000，也就是上題的限制時，總共約需要執行 500000 次的 **j++**，但電腦一秒可以跑 $10^8$ 次，因此能夠順利通過前一題。</p>
 <p>但在本題的最大範圍： N = 1000000 下，總共約需要執行 $5 \times 10^{11}$ 次 **j++**，因此，光是 j++ 這個動作，電腦就需要花上 5000 秒，想當然，這就是 TLE 的原因。</p>
 <h2 id="O-N-O-N-2"><a href="#O-N-O-N-2" class="headerlink" title="$O(N)$? $O(N^2)$?"></a>$O(N)$? $O(N^2)$?</h2><p>但要是我們將所有基本操作都列入計算，例如：i++ 執行 N 次，if(arr[j] &gt; mx)執行 N * (N-1) / 2 次，可能光算出來就花很久了，而且，我們也不需要那麼精密的計算，估個大概就好。</p>
@@ -590,7 +590,7 @@
   var disqus_config = function() {
     this.page.url = "https://emanlaicepsa.github.io/2020/11/16/0-13/";
     this.page.identifier = "2020/11/16/0-13/";
-    this.page.title = "0-13";
+    this.page.title = "0-13 排序";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
