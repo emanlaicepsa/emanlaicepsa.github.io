@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="KtMH6V68Z2PZJ6LKvSp5sqJFn7TxZp3dVQovd_wsgOI" />
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-180989678-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-180989678-1');
+</script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"emanlaicepsa.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="排序其實這有點算是演算法的範圍，不過因為我認為排序對於基礎演算法、時間複雜度、分治、二分搜、常用函式等等主題來說，都是相當好的範例，因此，決定將其置於此。 這篇中，將會帶大家認識時間複雜度的概念、以泡沫排序介紹演算法、使用預設的sort函式及自定義比較函式。進階的排序方法與逆序數對等主題，將會於下一本書中介紹。 排序是什麼把一堆東西，按照某個特定的規則排好。例如：由小排到大或由大排到小等等。 來看">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-13">
+<meta property="og:url" content="https://emanlaicepsa.github.io/2020/11/16/0-13/index.html">
+<meta property="og:site_name" content="從零開始的演算法競賽入門教學">
+<meta property="og:description" content="排序其實這有點算是演算法的範圍，不過因為我認為排序對於基礎演算法、時間複雜度、分治、二分搜、常用函式等等主題來說，都是相當好的範例，因此，決定將其置於此。 這篇中，將會帶大家認識時間複雜度的概念、以泡沫排序介紹演算法、使用預設的sort函式及自定義比較函式。進階的排序方法與逆序數對等主題，將會於下一本書中介紹。 排序是什麼把一堆東西，按照某個特定的規則排好。例如：由小排到大或由大排到小等等。 來看">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-11-16T01:55:48.000Z">
+<meta property="article:modified_time" content="2020-11-16T07:43:13.050Z">
+<meta property="article:author" content="emanlaicepsa">
+<meta property="article:tag" content="演算法競賽">
+<meta property="article:tag" content="教學">
+<meta property="article:tag" content="入門">
+<meta property="article:tag" content="從零到一">
+<meta property="article:tag" content="排序">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://emanlaicepsa.github.io/2020/11/16/0-13/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>0-13 | 從零開始的演算法競賽入門教學</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z8B2VTRGNW"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Z8B2VTRGNW');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">從零開始的演算法競賽入門教學</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>文章</a>
+
+  </li>
+        <li class="menu-item menu-item-從零到一：基礎語法">
+
+    <a href="/tags/%E5%BE%9E%E9%9B%B6%E5%88%B0%E4%B8%80/" rel="section"><i class="fa fa-tags fa-fw"></i>從零到一：基礎語法</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/11/16/0-13/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          0-13
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-11-16 09:55:48 / 修改時間：15:43:13" itemprop="dateCreated datePublished" datetime="2020-11-16T09:55:48+08:00">2020-11-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>其實這有點算是演算法的範圍，不過因為我認為排序對於基礎演算法、時間複雜度、分治、二分搜、常用函式等等主題來說，都是相當好的範例，因此，決定將其置於此。</p>
+<p>這篇中，將會帶大家認識時間複雜度的概念、以泡沫排序介紹演算法、使用預設的sort函式及自定義比較函式。進階的排序方法與逆序數對等主題，將會於下一本書中介紹。</p>
+<h2 id="排序是什麼"><a href="#排序是什麼" class="headerlink" title="排序是什麼"></a>排序是什麼</h2><p>把一堆東西，按照某個特定的規則排好。例如：由小排到大或由大排到小等等。</p>
+<p>來看一下這個題目：</p>
+<p><a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=a104">ZeroJudge a104</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">有多筆測資以EOF為結束</span><br><span class="line"></span><br><span class="line">第一行有一個正整數n(1&lt;&#x3D;n&lt;&#x3D;1000)，代表有幾個數字要請你幫忙排</span><br><span class="line"></span><br><span class="line">第二行有n個可以用int儲存的正整數</span><br></pre></td></tr></table></figure>
+
+<p>假設輸入是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 3 2 4 5</span><br></pre></td></tr></table></figure>
+
+<p>你當然可以說，那我把2、3交換位置，就排好了。</p>
+<p>但是今天，程式要做的，是對於<strong>所有在限制範圍內的輸入</strong>，都要能夠在限制時間內，輸出正確解答。也就是說，要有一個通解程式！</p>
+<p>而這，就是演算法的基本概念，演算法，就是<strong>解決問題的方法</strong>。</p>
+<p>直接將輸入原封不動的輸出，對於特定測試資料(例如：本來就已經排好)的輸出答案會是正確的，但它並不會對於所有輸入都能夠產生正確解答。這也是為什麼你的程式常常能夠通過範例測試，但卻在 Online Judge 上一直 WA 的原因。<strong>因為你的程式通過範例只是運氣好，它沒有辦法對任意輸入都輸出正確解</strong>。</p>
+<h2 id="思考一下吧"><a href="#思考一下吧" class="headerlink" title="思考一下吧"></a>思考一下吧</h2><p>先想個三分鐘，想想看如何運用簡單的陣列、迴圈，寫出針對上題的排序演算法吧！</p>
+<p>範例程式碼會在最下方提供。這裡，我想提供兩種想法。</p>
+<h2 id="1-選擇排序法-Selection-Sort"><a href="#1-選擇排序法-Selection-Sort" class="headerlink" title="1. 選擇排序法(Selection Sort)"></a>1. 選擇排序法(Selection Sort)</h2><p>每次找到陣列中最小的值，將其放入新的陣列後，從原本的陣列移除，若原陣列長度為 N，重複執行 N 次後，當所有的元素都從原本的陣列移除後，我們就排序好了！</p>
+<p>但其實，我們不用開新的陣列，只需要在第 i 次執行時，將找到的那個值，換到第 i 個位置。在下一次尋找時，從 i+1 位置開始尋找就好，可以省下約兩倍的時間與空間。</p>
+<p><a target="_blank" rel="noopener" href="https://emn178.pixnet.net/blog/post/93915544">選擇排序法圖解</a></p>
+<h2 id="2-泡沫排序法"><a href="#2-泡沫排序法" class="headerlink" title="2. 泡沫排序法"></a>2. 泡沫排序法</h2><p>不停的掃過整條陣列，當發現左邊的數字比右邊的還要大的時候，就交換兩數，直到再也找不到這樣的數字為止。</p>
+<p>但實作上有個優化，每次從左往右掃，並交換需要交換的數字。先看位置 1 是否比位置 2 大，如果是的話就交換，再看 2 跟 3，3 跟 4，……最後看 N-1 跟 N。</p>
+<p>可以發現，在從左往右掃完一次陣列時，最大的數字，一定可以成功被換到最右邊。所以第二次時，就只需考慮 1 ~ N-1 的陣列了。從左往右掃完第二次陣列時，第二大的數字，就會成功被換到 N-1 的位置。</p>
+<p>就這樣執行 N (其實是N-1) 次後，陣列就順利排序好了！</p>
+<p><a target="_blank" rel="noopener" href="https://medium.com/@oturngo/study-note-01-%E6%B0%A3%E6%B3%A1%E6%8E%92%E5%BA%8F%E6%B3%95-bubble-sort-ee534b6f91eb">泡沫排序法圖解</a></p>
+<h2 id="複雜度"><a href="#複雜度" class="headerlink" title="複雜度"></a>複雜度</h2><p>在 AC 了剛剛那一題後(請先 AC 上面那一題再繼續看下去)，拿原本的 code 傳這一題看看：</p>
+<p><a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=a233">ZeroJudge a223</a></p>
+<p>奇怪，怎麼 TLE 了？</p>
+<p>這應該是你遇到的第 2、3 個 TLE，前面的章節的練習裡，會出現 TLE 的原因是什麼呢？</p>
+<p>啊！對了！是輸入太慢！</p>
+<p>於是，你加上輸入優化，但還是沒過。為什麼呢？</p>
+<p>這裡，來稍微介紹一下<strong>複雜度</strong>的概念。複雜度，就是<strong>你的程式在最差情況下，會執行多少次基本操作</strong>。</p>
+<p>什麼是基本操作呢？</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a++;</span><br><span class="line">b--;</span><br><span class="line">c*=<span class="number">5</span>;</span><br><span class="line">a+=<span class="number">9</span>*<span class="number">45</span>/<span class="number">7</span>;</span><br><span class="line">a[<span class="number">1</span>] = a[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+
+<p>這些只需要一步就能完成的動作，我們叫它基本操作。其實，非基本操作好像都還沒出現在這本講義~</p>
+<p>電腦一秒鐘能執行的基本動作數量，大約是 $10^8$ 左右。這下，明白為什麼題目要設置時間限制了嗎？</p>
+<p><strong>演算法不僅要正確，速度也是很重要的！</strong></p>
+<p>現在，我們就試著分析一下選擇排序法的複雜度。</p>
+<p>選擇排序法的主要概念，便是重複 N 次找最大值的過程。在每一次的過程中，程式需要去遍歷整個陣列。那麼，基本操作在哪裡？</p>
+<p><strong>j++**，</strong>arr[j] &gt; mx<strong>，</strong>swap(arr[i], arr[j])<strong>，這些全部都是基本操作。其中，前兩個基本操作，在第 i 回合時，都會執行到 N-i+1 次。因此，我們知道，</strong>j++** 總共被執行的數量，應該是 1 + 2 + 3 + 4…… + N = (N) * (N+1) / 2 次。</p>
+<p>在 N = 1000，也就是上題的限制時，總共約需要執行 500000 次的 **j++**，但電腦一秒可以跑 $10^8$ 次，因此能夠順利通過前一題。</p>
+<p>但在本題的最大範圍： N = 1000000 下，總共約需要執行 $5 \times 10^{11}$ 次 **j++**，因此，光是 j++ 這個動作，電腦就需要花上 5000 秒，想當然，這就是 TLE 的原因。</p>
+<h2 id="O-N-O-N-2"><a href="#O-N-O-N-2" class="headerlink" title="$O(N)$? $O(N^2)$?"></a>$O(N)$? $O(N^2)$?</h2><p>但要是我們將所有基本操作都列入計算，例如：i++ 執行 N 次，if(arr[j] &gt; mx)執行 N * (N-1) / 2 次，可能光算出來就花很久了，而且，我們也不需要那麼精密的計算，估個大概就好。</p>
+<p>因此，我們捨棄所有<strong>跟題目限制沒有關係的常數，以最高次項為代表</strong>。</p>
+<p>假設算出來程式會執行 $2 \times N^2 + 60 \times N + 7895$ 次，我們就直接捨棄 $N^2$ 以外的東西，畢竟，在 N 高達數千、甚至數萬的情況下，$60 \times N$ 再怎麼大，都遠小於 $N^2$，因此在估算上，直接捨去就好。</p>
+<p>所以，要是一個演算法的最高次項是 $N^2$，我們就會說： <strong>這是一個 $O(N^2)$ 的演算法</strong></p>
+<p>$O(N)$這個符號，其實是有嚴格的定義的，有興趣的可以點<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6">這裡</a>，不過這邊就容我略過了。</p>
+<h2 id="sort函式"><a href="#sort函式" class="headerlink" title="sort函式"></a>sort函式</h2><p>知道時間複雜度的概念以後，應該可以知道TLE的原因了吧！那，要如何通過這題呢？顯然我們需要一個比 $O(N^2)$ 還要快的排序演算法。</p>
+<p>排序演算法在極限情況下，可以在 $O(NlogN)$ 的時間內完成排序工作。常見的 $O(NlogN)$ 排序有 <a target="_blank" rel="noopener" href="https://emn178.pixnet.net/blog/post/88613503">quick sort</a> 以及 <a target="_blank" rel="noopener" href="https://medium.com/appworks-school/%E5%88%9D%E5%AD%B8%E8%80%85%E5%AD%B8%E6%BC%94%E7%AE%97%E6%B3%95-%E6%8E%92%E5%BA%8F%E6%B3%95%E9%80%B2%E9%9A%8E-%E5%90%88%E4%BD%B5%E6%8E%92%E5%BA%8F%E6%B3%95-6252651c6f7e">merge sort</a> 等等。但由於其概念較難懂，將放至下一本說明，有興趣的話可以點進連結。</p>
+<p>這裡要介紹的，是 C++ 內建的函式：sort。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort(arr+<span class="number">1</span>, arr+<span class="number">1</span>+N);</span><br></pre></td></tr></table></figure>
+
+<p>這樣，就sort好了。更棒的是，它的時間複雜度是 $O(NlogN)$。因此，就順利的通過了這題。</p>
+<p>sort函式中，需要傳入兩個參數：開始與結束位置。而由於採用左閉右開(左界包含，右界不含)的設計，開始位置是有放東西的第一格，結束位置是最後一個有放東西的位置的<strong>下一格</strong>。</p>
+<p>假設現在我有長度為 4 的陣列 arr，並從 1 開始放了 3 個數字在 arr[1], arr[2], arr[3] 的位置，那在 sort 時，就寫：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sort(arr+<span class="number">1</span>, arr+<span class="number">4</span>);</span><br><span class="line"><span class="comment">//    開始   結束</span></span><br></pre></td></tr></table></figure>
+
+<p>假設我從 0 開始，放在 arr[0], arr[1], arr[2]，那在 sort 時，就寫：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort(arr, arr+<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>那如果我從 1 開始放，放 N 個，當然就是這樣寫啦：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort(arr+<span class="number">1</span>, arr+<span class="number">1</span>+N);</span><br></pre></td></tr></table></figure>
+<p>這行執行完後，你就會神奇的發現，陣列排序好了！</p>
+<h2 id="自定義比較函式"><a href="#自定義比較函式" class="headerlink" title="自定義比較函式"></a>自定義比較函式</h2><p>sort 預設是由小排到大。那如果我現在要由大排到小，要怎麼做呢？</p>
+<p>sort 隱藏的第三個參數，是比較函式。若在排序後的陣列中 A 必定要置於 B 之前，那麼此函式在接收到 A, B 時，必須回傳 true。否則回傳 false。</p>
+<p>範例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, arr[<span class="number">1000005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a &gt; b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">cin</span> &gt;&gt; arr[i];</span><br><span class="line">    sort(arr+<span class="number">1</span>, arr+<span class="number">1</span>+n, cmp);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">cout</span> &lt;&lt; arr[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>注意的一點是，回傳 true 的條件是，A 必定要置於 B 之前。因此若 A == B，是不可以回傳 true 的。回傳 true 的話，由於不管傳入 (A, B) 或是 (B, A) 都回傳 true，程式會停不下來，通常會導致 Runtime Error 的結果。</p>
+<h2 id="不單純的-sort"><a href="#不單純的-sort" class="headerlink" title="不單純的 sort"></a>不單純的 sort</h2><p>來看看這題：</p>
+<p><a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=a915">ZeroJudge a915</a></p>
+<p>(請自動忽略簡體字)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">給你n個二維平面上的點，要求你把他們按照以x軸坐標為第一關鍵字，y軸坐標為第二關鍵字的方式從小到大來進行排序。</span><br></pre></td></tr></table></figure>
+
+<p>也就是說，先比 x，x 一樣的話再比 y。</p>
+<p>二維平面上的點是由兩個整數組成，要怎麼將兩個整數合起來視為一個點？如果將 x 跟 y 分開存，sort 後不是會跑掉嗎？</p>
+<p>所以，我們使用上一節教的 struct。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x, y;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Point arr[<span class="number">1005</span>];</span><br></pre></td></tr></table></figure>
+
+<p>那要怎麼 sort 呢？要 sort 的條件是，必須要有 &lt; 這個運算子，這樣程式才知道怎麼排嘛。還記得上一節教的定義運算子嗎？</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x, y;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(Point b)&#123;</span><br><span class="line">        <span class="keyword">if</span>(x != b.x) <span class="keyword">return</span> x &lt; b.x;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> y &lt; b.y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Point arr[<span class="number">1005</span>];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; arr[i].x &gt;&gt; arr[i].y;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(arr+<span class="number">1</span>, arr+<span class="number">1</span>+n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這樣，就可以使用 sort 了。</p>
+<h2 id="另一種方法"><a href="#另一種方法" class="headerlink" title="另一種方法"></a>另一種方法</h2><p>如果將 x 跟 y 分開存，能 sort 嗎？</p>
+<p>當然，只是我們不能對存他們的陣列 sort，但是我們可以另外開一個裡面是 1~N 的陣列，代表他們的位置。接著，透過自定義比較函式，比較 a 與 b 時，我們就比較 x[a] 跟 x[b] 誰比較小，如果一樣的話再比 y[a] 跟 y[b]，這樣 sort 出來的陣列，就是他們由小排到大的順序了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> x[<span class="number">1005</span>], y[<span class="number">1005</span>], idx[<span class="number">1005</span>], n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x[a] != x[b]) <span class="keyword">return</span> x[a] &lt; x[b];</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> y[a] &lt; y[b];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; x[i] &gt;&gt; y[i];</span><br><span class="line">        idx[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(idx+<span class="number">1</span>, idx+<span class="number">1</span>+n, cmp);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; x[idx[i]] &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; y[idx[i]] &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="內建這麼好用，全部都用內建的-sort-就好啦"><a href="#內建這麼好用，全部都用內建的-sort-就好啦" class="headerlink" title="內建這麼好用，全部都用內建的 sort 就好啦"></a>內建這麼好用，全部都用內建的 sort 就好啦</h2><p>恩，你先寫寫看例題吧。</p>
+<h2 id="例題"><a href="#例題" class="headerlink" title="例題"></a>例題</h2><p><a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=a104">ZeroJudge a104</a></p>
+<p><a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=a233">ZeroJudge a233</a></p>
+<p><a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=a915">ZeroJudge a915</a></p>
+<p>★★ <a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/15/">TOJ 15</a></p>
+<p>★★★ <a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/539/">TOJ 539</a> </p>
+<p>★★★★ <a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=c471">ZeroJudge 471</a></p>
+<p>Hint: 找到 A 必定要置於 B 之前的條件</p>
+<p>★★★★★ <a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/11/">TOJ 11</a></p>
+<p>Hint: 如果我只要問：最小的數字在這過程中，會需要交換幾次呢？</p>
+<h2 id="AC-code"><a href="#AC-code" class="headerlink" title="AC code"></a>AC code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ZJ a104 selection sort</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, arr[<span class="number">1005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">cin</span> &gt;&gt; arr[i];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">			<span class="keyword">int</span> mn = arr[i], id = i;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">				<span class="keyword">if</span>(arr[j] &lt; mn) id = j, mn = arr[j];</span><br><span class="line">			&#125;</span><br><span class="line">			swap(arr[i], arr[id]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; arr[i];</span><br><span class="line">			<span class="keyword">if</span>(i &lt; n) <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">			<span class="keyword">else</span> <span class="built_in">cout</span>&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ZJ a104 bubble sort</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, arr[<span class="number">1005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">cin</span> &gt;&gt; arr[i];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n-i;j++)&#123;</span><br><span class="line">				<span class="keyword">if</span>(arr[j] &gt; arr[j+<span class="number">1</span>]) swap(arr[j], arr[j+<span class="number">1</span>]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; arr[i];</span><br><span class="line">			<span class="keyword">if</span>(i &lt; n) <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">			<span class="keyword">else</span> <span class="built_in">cout</span>&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ZJ a233</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, arr[<span class="number">1000005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="number">0</span>), <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">cin</span> &gt;&gt; arr[i];</span><br><span class="line">	sort(arr+<span class="number">1</span>, arr+<span class="number">1</span>+n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; arr[i];</span><br><span class="line">		<span class="keyword">if</span>(i &lt; n) <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ZJ a915 struct</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x, y;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(Point b)&#123;</span><br><span class="line">        <span class="keyword">if</span>(x != b.x) <span class="keyword">return</span> x &lt; b.x;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> y &lt; b.y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Point arr[<span class="number">1005</span>];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; arr[i].x &gt;&gt; arr[i].y;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(arr+<span class="number">1</span>, arr+<span class="number">1</span>+n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; arr[i].x &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; arr[i].y &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ZJ a915 no struct</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> x[<span class="number">1005</span>], y[<span class="number">1005</span>], idx[<span class="number">1005</span>], n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x[a] != x[b]) <span class="keyword">return</span> x[a] &lt; x[b];</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> y[a] &lt; y[b];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; x[i] &gt;&gt; y[i];</span><br><span class="line">        idx[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(idx+<span class="number">1</span>, idx+<span class="number">1</span>+n, cmp);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; x[idx[i]] &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; y[idx[i]] &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//TOJ 15</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">cat</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> rk, age;</span><br><span class="line">	<span class="built_in">string</span> name;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(cat b)&#123;</span><br><span class="line">		<span class="keyword">if</span>(rk != b.rk) <span class="keyword">return</span> rk &lt; b.rk;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(age != b.age)&#123;</span><br><span class="line">			<span class="keyword">if</span>(rk == <span class="number">5</span>) <span class="keyword">return</span> age &lt; b.age;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">return</span> age &gt; b.age;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">return</span> name &lt; b.name;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">cat arr[<span class="number">10005</span>];</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="built_in">string</span> ord = <span class="string">&quot; enkwamdl&quot;</span>; <span class="comment">// first char of their work</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="number">0</span>), <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,age;i&lt;=n;i++)&#123;</span><br><span class="line">			<span class="built_in">string</span> name, work;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; name &gt;&gt; work &gt;&gt; age;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=<span class="number">8</span>;j++)&#123;</span><br><span class="line">				<span class="keyword">if</span>(work[<span class="number">0</span>] == ord[j])&#123;</span><br><span class="line">					arr[i] = &#123;j, age, name&#125;;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		sort(arr+<span class="number">1</span>, arr+<span class="number">1</span>+n);</span><br><span class="line">		<span class="keyword">if</span>(n &lt; m) m = n;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; arr[i].name &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TOJ 539</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">ll n, k, arr[<span class="number">200005</span>][<span class="number">2</span>], dif[<span class="number">200005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="number">0</span>), <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</span><br><span class="line">    ll tot = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">cin</span> &gt;&gt; arr[i][<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">cin</span> &gt;&gt; arr[i][<span class="number">1</span>], tot += arr[i][<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) dif[i] = arr[i][<span class="number">1</span>] - arr[i][<span class="number">0</span>];</span><br><span class="line">    sort(dif+<span class="number">1</span>, dif+<span class="number">1</span>+n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(tot - dif[i] &lt; k)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; i<span class="number">-1</span> &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        tot -= dif[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; n &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ZJ c471</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">ll n, w[<span class="number">100005</span>], f[<span class="number">100005</span>], id[<span class="number">100005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> f[a] * w[b] &gt; f[b] * w[a]; </span><br><span class="line">    <span class="comment">// 如果 f[a] * w[b] &gt; f[b] * w[a]，那麼 a 一定會排在 b 的上面，否則交換 a, b 後，答案會更小</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="number">0</span>), <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">cin</span> &gt;&gt; w[i];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">cin</span> &gt;&gt; f[i], id[i] = i;</span><br><span class="line">	sort(id+<span class="number">1</span>, id+<span class="number">1</span>+n, cmp);</span><br><span class="line">	ll top = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		ans += top * f[id[i]];</span><br><span class="line">		top += w[id[i]];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TOJ 11 關鍵字：逆序數對/ counting inversion</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> arr[<span class="number">2000005</span>], tmp[<span class="number">2000005</span>], n;</span><br><span class="line">ll ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge_sort</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l == r) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> m = (l+r)/<span class="number">2</span>;</span><br><span class="line">    merge_sort(l, m);</span><br><span class="line">    merge_sort(m+<span class="number">1</span>, r);</span><br><span class="line">    <span class="keyword">int</span> lid = l, rid = m+<span class="number">1</span>, id = l;</span><br><span class="line">    <span class="keyword">while</span>(lid &lt;= m &amp;&amp; rid &lt;= r)&#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[lid] &lt;= arr[rid]) tmp[id++] = arr[lid++]; <span class="comment">// tmp[id] = arr[lid], id++, lid++;</span></span><br><span class="line">        <span class="keyword">else</span> tmp[id++] = arr[rid++], ans += m+<span class="number">1</span>-lid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(lid &lt;= m) tmp[id++] = arr[lid++];<span class="comment">// tmp[id] = arr[lid], id++, lid++;</span></span><br><span class="line">    <span class="keyword">while</span>(rid &lt;= r) tmp[id++] = arr[rid++];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=l;i&lt;=r;i++) arr[i] = tmp[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="number">0</span>), <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n)&#123;</span><br><span class="line">        ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">cin</span> &gt;&gt; arr[i];</span><br><span class="line">        merge_sort(<span class="number">1</span>, n);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AB%B6%E8%B3%BD/" rel="tag"># 演算法競賽</a>
+              <a href="/tags/%E6%95%99%E5%AD%B8/" rel="tag"># 教學</a>
+              <a href="/tags/%E5%85%A5%E9%96%80/" rel="tag"># 入門</a>
+              <a href="/tags/%E5%BE%9E%E9%9B%B6%E5%88%B0%E4%B8%80/" rel="tag"># 從零到一</a>
+              <a href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag"># 排序</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/13/0-12/" rel="prev" title="0-12 變數的作用範圍">
+      <i class="fa fa-chevron-left"></i> 0-12 變數的作用範圍
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E6%98%AF%E4%BB%80%E9%BA%BC"><span class="nav-number">2.</span> <span class="nav-text">排序是什麼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E4%B8%80%E4%B8%8B%E5%90%A7"><span class="nav-number">3.</span> <span class="nav-text">思考一下吧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%81%B8%E6%93%87%E6%8E%92%E5%BA%8F%E6%B3%95-Selection-Sort"><span class="nav-number">4.</span> <span class="nav-text">1. 選擇排序法(Selection Sort)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%B3%A1%E6%B2%AB%E6%8E%92%E5%BA%8F%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">2. 泡沫排序法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A4%87%E9%9B%9C%E5%BA%A6"><span class="nav-number">6.</span> <span class="nav-text">複雜度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#O-N-O-N-2"><span class="nav-number">7.</span> <span class="nav-text">$O(N)$? $O(N^2)$?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort%E5%87%BD%E5%BC%8F"><span class="nav-number">8.</span> <span class="nav-text">sort函式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E7%BE%A9%E6%AF%94%E8%BC%83%E5%87%BD%E5%BC%8F"><span class="nav-number">9.</span> <span class="nav-text">自定義比較函式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%96%AE%E7%B4%94%E7%9A%84-sort"><span class="nav-number">10.</span> <span class="nav-text">不單純的 sort</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%A6%E4%B8%80%E7%A8%AE%E6%96%B9%E6%B3%95"><span class="nav-number">11.</span> <span class="nav-text">另一種方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A7%E5%BB%BA%E9%80%99%E9%BA%BC%E5%A5%BD%E7%94%A8%EF%BC%8C%E5%85%A8%E9%83%A8%E9%83%BD%E7%94%A8%E5%85%A7%E5%BB%BA%E7%9A%84-sort-%E5%B0%B1%E5%A5%BD%E5%95%A6"><span class="nav-number">12.</span> <span class="nav-text">內建這麼好用，全部都用內建的 sort 就好啦</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A1%8C"><span class="nav-number">13.</span> <span class="nav-text">例題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AC-code"><span class="nav-number">14.</span> <span class="nav-text">AC code</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">emanlaicepsa</p>
+  <div class="site-description" itemprop="description">由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100005895303371" title="聯絡我 → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100005895303371" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>聯絡我</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-github"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">emanlaicepsa</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://emanlaicepsa.github.io/2020/11/16/0-13/";
+    this.page.identifier = "2020/11/16/0-13/";
+    this.page.title = "0-13";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://emanlaicepsa.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

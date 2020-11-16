@@ -2,14 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://emanlaicepsa.github.io/2020/10/21/0-0/</loc>
+    <loc>https://emanlaicepsa.github.io/2020/11/16/0-13/</loc>
     
-    <lastmod>2020-11-13</lastmod>
+    <lastmod>2020-11-16</lastmod>
     
   </url>
   
   <url>
     <loc>https://emanlaicepsa.github.io/2020/10/21/0-index/</loc>
+    
+    <lastmod>2020-11-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://emanlaicepsa.github.io/2020/10/21/0-0/</loc>
     
     <lastmod>2020-11-13</lastmod>
     
@@ -229,6 +236,13 @@
   
   <url>
     <loc>https://emanlaicepsa.github.io/tags/struct/</loc>
+    <lastmod>2020-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://emanlaicepsa.github.io/tags/%E6%8E%92%E5%BA%8F/</loc>
     <lastmod>2020-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
