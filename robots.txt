@@ -5,6 +5,5 @@ Allow: /categories/
 Allow: /tags/
 Disallow: /vendors/
 Disallow: /fonts/
-Disallow: /vendors/
 Disallow: /fancybox/
 Sitemap: https://emanlaicepsa.github.io/sitemap.xml
