@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://emanlaicepsa.github.io/2020/11/30/0-17/</loc>
+    
+    <lastmod>2020-11-30</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://emanlaicepsa.github.io/2020/11/30/0-16/</loc>
     
     <lastmod>2020-11-30</lastmod>
@@ -271,6 +278,13 @@
   
   <url>
     <loc>https://emanlaicepsa.github.io/tags/STL/</loc>
+    <lastmod>2020-11-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://emanlaicepsa.github.io/tags/vector/</loc>
     <lastmod>2020-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
