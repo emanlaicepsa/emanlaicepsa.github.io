@@ -177,6 +177,160 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/11/09/0-9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/09/0-9/" class="post-title-link" itemprop="url">0-9 函式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-11-09 07:53:26" itemprop="dateCreated datePublished" datetime="2020-11-09T07:53:26+08:00">2020-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-11-10 17:37:48" itemprop="dateModified" datetime="2020-11-10T17:37:48+08:00">2020-11-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="函式是什麼"><a href="#函式是什麼" class="headerlink" title="函式是什麼"></a>函式是什麼</h2><p>函式就像一台大機器，接受輸入(有時也可以沒有輸入)，回傳輸出給使用者。發現了嗎？其實到目前為止，你寫的每一個程式，都是函式，因為它接收了一些東西，並輸出結果。</p>
+<p>適當的使用函式，可以使程式碼更為簡潔，可讀性更高。不僅這樣，在下一章的遞迴中，函式這個工具是無法替代的必要基礎，因此，讓我們一起來看看函式怎麼寫吧！</p>
+<h2 id="語法"><a href="#語法" class="headerlink" title="語法"></a>語法</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//一般寫在main函式前</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">biggest</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a &gt;= b &amp;&amp; a &gt;= c) <span class="keyword">return</span> a;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(b &gt;= a &amp;&amp; b &gt;= c) <span class="keyword">return</span> b;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x, y, z;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y &gt;&gt; z;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; biggest(x, y, z) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>輸入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5 8 9</span><br></pre></td></tr></table></figure>
+
+<p>輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">9</span><br></pre></td></tr></table></figure>
+
+<p>這個函式接收三個數，並回傳三者的最大值。下面就來一一介紹每個片段的意思。</p>
+<h2 id="回傳值型態"><a href="#回傳值型態" class="headerlink" title="回傳值型態"></a>回傳值型態</h2><p>位於函式最前方的 int，代表此函式的回傳值型態。也就是，我回傳(return)給使用者的東西會是什麼型態的。</p>
+<p>在本範例中，函式接收三個整數，並回傳三者的最大值，這個最大值自然也是一個整數，所以我們使用 int 作為回傳值。</p>
+<p>常見的回傳值就跟變數型態一樣，int、double、string、char、bool 全部都可以作為回傳值。</p>
+<p>不過，函式也不一定要 return 東西，如果我只是想單純執行某些指令，不須回傳，就可以使用 void 作為型態，結束時只需寫 return 即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//一般寫在main函式前</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;a = &quot;</span> &lt;&lt; a &lt;&lt; <span class="string">&quot;\nb = &quot;</span>&lt;&lt; b &lt;&lt; <span class="string">&quot;\nc = &quot;</span> &lt;&lt; c &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span>; <span class="comment">// (void 函式可省略)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x, y, z;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y &gt;&gt; z;</span><br><span class="line">    print(x, y, z);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>回傳值與輸入值，並沒有一定要是相同型態，輸入值為 int，也可以回傳 string。</p>
+<h2 id="名稱"><a href="#名稱" class="headerlink" title="名稱"></a>名稱</h2><p>範例中的名稱即為函式名稱，命名上與變數命名相同，不要碰到關鍵字，其他都可以。</p>
+<p>但建議函式最好命名成讓人知道這個函式在做什麼，避免 ‘a’, ‘owo’ 之類的名稱出現。</p>
+<h2 id="參數"><a href="#參數" class="headerlink" title="參數"></a>參數</h2><p>由括號包住的部分，即為傳入之參數，數量沒有限制，要幾個就幾個。不必與傳入時變數名稱相同，但數量一定要相同，不然會CE。</p>
+<p>參數需要宣告型態，傳入時，需與參數型態相同，如果不相同，傳入的數字會自動轉型，如果無法轉型，會導致 CE。例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//一般寫在main函式前</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">biggest</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a &gt;= b &amp;&amp; a &gt;= c) <span class="keyword">return</span> a;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(b &gt;= a &amp;&amp; b &gt;= c) <span class="keyword">return</span> b;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> x, y;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; biggest(x, y, <span class="number">1.12</span>) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>輸入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2.35 2.54</span><br></pre></td></tr></table></figure>
+
+<p>輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
+
+<p>於進入函式時，double 已被轉型為 int，因此在 biggest 函式中的 a, b, c，是 2, 2, 1。</p>
+<p>傳入的方式，其實是將原資料複製一次以後，再拿複製出來的版本給函式中的變數，因此，函式中不管對變數進行了什麼操作，對原資料都是沒有影響的。將變數命名為相同名稱也沒有用，即使有著相同名稱，由於作用範圍不同，他們也不是相同的變數。這部分將於之後”變數的作用範圍”中進一步的探討。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//一般寫在main函式前</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">nothing_happened</span><span class="params">(<span class="keyword">int</span> a)</span></span>&#123;</span><br><span class="line">    a -= <span class="number">2</span>;</span><br><span class="line">    a = a * <span class="number">9</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line">    nothing_happened(a);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3</span><br></pre></td></tr></table></figure>
+
+<p>不過，其實也是有辦法直接傳那個變數的，使用<a target="_blank" rel="noopener" href="https://openhome.cc/Gossip/CppGossip/Reference.html">參照(reference)</a>，可以告訴程式，我不要複製，我就是要直接改這個變數！方法也很簡單，只需要加一個&amp;，變成這樣：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//一般寫在main函式前</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">nothing_happened</span><span class="params">(<span class="keyword">int</span> a)</span></span>&#123;</span><br><span class="line">    a -= <span class="number">2</span>;</span><br><span class="line">    a = a * <span class="number">9</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">something_happened</span><span class="params">(<span class="keyword">int</span> &amp;a)</span></span>&#123;</span><br><span class="line">    a -= <span class="number">2</span>;</span><br><span class="line">    a = a * <span class="number">9</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line">    nothing_happened(a);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    something_happened(a);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">9</span><br></pre></td></tr></table></figure>
+
+<p>函式也可以沒有輸入：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">say_hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;hello!\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    say_hello();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello!</span><br></pre></td></tr></table></figure>
+
+<h2 id="函式主體"><a href="#函式主體" class="headerlink" title="函式主體"></a>函式主體</h2><p>大致上，你平常怎麼做，函式裡就怎麼寫。if/else、迴圈…全部都跟在main函式裡一樣用就好。</p>
+<p>想特別提出來講的一點是，可以使用哪些變數。在main函式中的變數，是無法使用的，函式可以使用的變數，是傳入的參數、在函式裡自己宣告的變數、以及全域且在函式之前宣告的變數。例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">say_A</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; A &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> A = <span class="number">5</span>;</span><br><span class="line">    say_A();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這是一個會 CE 的程式碼，因為 A 是屬於 main 函式的。</p>
+<p>你可以這樣寫：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">say_A</span><span class="params">(<span class="keyword">int</span> A)</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; A &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> A = <span class="number">5</span>;</span><br><span class="line">    say_A(A);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>將 A 作為參數傳入，或者是：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> A = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">say_A</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; A &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    say_A();</span><br><span class="line">    A = <span class="number">3</span>;</span><br><span class="line">    say_A();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+<p>將 A 宣告於全域變數，這樣它就是 <strong>“大家的A”</strong> 了！</p>
+<p>這也是建議陣列應該宣告於全域變數的原因，這樣在使用函式時比較方便。雖然陣列也能透過<a target="_blank" rel="noopener" href="https://www.cnblogs.com/oomusou/archive/2007/02/09/646440.html">傳遞指標的方式作為參數傳入</a>，但較為麻煩，因此建議大型陣列一律開在全域，以方便函式使用。</p>
+<h2 id="回傳值"><a href="#回傳值" class="headerlink" title="回傳值"></a>回傳值</h2><p>return即為回傳的意思，與break等不同，return會直接結束整個函式並回傳其後方接著的值給呼叫它的人。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//一般寫在main函式前</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">biggest</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a &gt;= b &amp;&amp; a &gt;= c) <span class="keyword">return</span> a;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(b &gt;= a &amp;&amp; b &gt;= c) <span class="keyword">return</span> b;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x, y;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y;</span><br><span class="line">    <span class="keyword">int</span> n = biggest(x, y, <span class="number">9</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>main 函式最後一行，其意思即為，將 n 設為 biggest(x, y, 9) 的回傳值。</p>
+<p>回傳值的型態，必須與宣告的回傳型態相同，否則一樣會進行型態轉換，無法轉換則會 CE 。</p>
+<p>在型態是 void 的函式中，return 的意思僅為結束函式，畢竟沒有回傳值嘛。</p>
+<h2 id="函式中呼叫另一函式"><a href="#函式中呼叫另一函式" class="headerlink" title="函式中呼叫另一函式"></a>函式中呼叫另一函式</h2><p>比較少見的情況，不過如果 A 函式中需要用到 B 函式，那 B 函式必須在 A 函式以前宣告，否則會 CE，因為在編譯到 A 函式內部的時候，編譯器還不知道有 B 函式，所以會跳錯誤。</p>
+<p>錯誤範例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">A</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</span><br><span class="line">        B(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">B</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;x&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    A();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>正確：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">B</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;x&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">A</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</span><br><span class="line">        B(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    A();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那如果，A 函式中需要用到 B 函式，B 函式中也需要用到 A 函式呢？</p>
+<p>這其實就有點遞迴的感覺了，下一章會詳細介紹，不過我們先來解決語法問題。</p>
+<p>其實，在宣告函式時，可以先不寫內容，之後再寫！</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">A</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">B</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">A</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</span><br><span class="line">        B(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">B</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x == <span class="number">4</span>) A();</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;x&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    A();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>只是執行這段程式會停不下來就是了XD。</p>
+<h2 id="使用時機"><a href="#使用時機" class="headerlink" title="使用時機"></a>使用時機</h2><ol>
+<li><p>避免重複寫多次相同的式子。例如，我們需要輸入a, b, c，並計算其三次方加一時，比起這樣：</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a, b, c;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">    a = a * a * a + <span class="number">1</span>;</span><br><span class="line">    b = b * b * b + <span class="number">1</span>;</span><br><span class="line">    c = c * c * c + <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; b &lt;&lt; c &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 這樣寫可以避免重複：</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x * x * x + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a, b, c;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">    a = func(a);</span><br><span class="line">    b = func(b);</span><br><span class="line">    c = func(c);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; b &lt;&lt; c &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>於大型程式，例如超過200行的程式裡，使用函式將大問題拆解成小問題分別處理，增加程式的可讀性。</p>
+</li>
+<li><p>進行遞迴</p>
+<p> 下一章再見！</p>
+</li>
+</ol>
+<h2 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h2><p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/170/">TOJ 170</a></p>
+<h2 id="AC-Code"><a href="#AC-Code" class="headerlink" title="AC Code"></a>AC Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">A</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123; </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> g=<span class="number">1</span>;g&lt;=n;g++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n-g;j++)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=<span class="number">2</span>*g<span class="number">-1</span>;j++)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;*&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">B</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123; </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> z=<span class="number">1</span>;z&lt;=<span class="number">2</span>;z++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> g=<span class="number">1</span>;g&lt;=n;g++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n-g;j++)&#123;</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=<span class="number">2</span>*g<span class="number">-1</span>;j++)&#123;</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;*&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//2</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123; </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> z=<span class="number">1</span>;z&lt;=n;z++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> g=<span class="number">1</span>;g&lt;=z;g++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n-g;j++)&#123;</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=<span class="number">2</span>*g<span class="number">-1</span>;j++)&#123;</span><br><span class="line">                <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;*&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//3</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">D</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    A(<span class="number">10</span>*n);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//4</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">E</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123; </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> g=<span class="number">1</span>;g&lt;=n;g++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n-g+<span class="number">2</span>;j++)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=<span class="number">2</span>*g<span class="number">-1</span>;j++)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;*&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> z=<span class="number">1</span>;z&lt;=<span class="number">2</span>*n+<span class="number">3</span>;z++)&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;#&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//5</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">I</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123; </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> g=<span class="number">1</span>;g&lt;=n;g++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n-g;j++)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=<span class="number">2</span>*g<span class="number">-1</span>;j++)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;*&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> T;</span><br><span class="line"><span class="keyword">char</span> k;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;T;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>, x;i&lt;=T;i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;c&gt;&gt;x;</span><br><span class="line">        <span class="keyword">if</span> (k==<span class="string">&#x27;A&#x27;</span>) A(x);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (k==<span class="string">&#x27;B&#x27;</span>) B(x);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (k==<span class="string">&#x27;C&#x27;</span>) C(x);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (k==<span class="string">&#x27;D&#x27;</span>) D(x);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (k==<span class="string">&#x27;E&#x27;</span>) E(x);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (k==<span class="string">&#x27;F&#x27;</span>) A(<span class="number">2</span>*x);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (k==<span class="string">&#x27;G&#x27;</span>) A(<span class="number">3</span>*x);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (k==<span class="string">&#x27;H&#x27;</span>) A(<span class="number">7</span>*x);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (k==<span class="string">&#x27;I&#x27;</span>) I(<span class="number">4</span>*x<span class="number">-1</span>);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/11/06/0-8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1485,124 +1639,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/10/21/0-index/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="emanlaicepsa">
-      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/21/0-index/" class="post-title-link" itemprop="url">從零到一：那些演算法競賽會用到的基礎語法 目錄</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2020-10-21 14:33:34" itemprop="dateCreated datePublished" datetime="2020-10-21T14:33:34+08:00">2020-10-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-11-23 11:52:21" itemprop="dateModified" datetime="2020-11-23T11:52:21+08:00">2020-11-23</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h2><p>以下為競程中常見的語法，僅列出作者平常會使用的，若我忘記加了某個重要語法，歡迎<a href="mailto:kevin118033@gmail.com">發PR</a>。</p>
-<p>每個語法分別會有其常見程度以及其不可替代程度，以 1 到 5 評分，分數越高表示越常見/不可由其他語法替代，反之則表示越稀少/容易用其他語法替代。</p>
-<p>基本上，若只需要打競程，學習本章節中提到的語法便已綽綽有餘。放下你的 C++ 使用手冊，看這篇吧!</p>
-<h2 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h2><p>請務必親自實作每個章節中之內容！在程式學習中，親手實作是最重要的！</p>
-<p><a target="_blank" rel="noopener" href="https://sourceforge.net/projects/orwelldevcpp/">下載 Dev-C++</a></p>
-<p><a target="_blank" rel="noopener" href="https://progressbar.tw/posts/7">Dev-C++使用說明</a></p>
-<h2 id="0-0-Hello-World！-標頭檔與命名空間"><a href="#0-0-Hello-World！-標頭檔與命名空間" class="headerlink" title="0-0 Hello World！ 標頭檔與命名空間"></a><a href="/2020/10/21/0-0/">0-0 Hello World！ 標頭檔與命名空間</a></h2><p><strong>常見程度：★★★★★</strong></p>
-<p><strong>不可替代程度：★★★★★</strong></p>
-<h2 id="0-1-變數的宣告與指派"><a href="#0-1-變數的宣告與指派" class="headerlink" title="0-1 變數的宣告與指派"></a><a href="/2020/10/23/0-1/">0-1 變數的宣告與指派</a></h2><p><strong>常見程度：★★★★★</strong></p>
-<p><strong>不可替代程度：★★★★★</strong></p>
-<h2 id="0-2-基本輸入輸出"><a href="#0-2-基本輸入輸出" class="headerlink" title="0-2 基本輸入輸出"></a><a href="/2020/10/26/0-2/">0-2 基本輸入輸出</a></h2><p><strong>常見程度：★★★★★</strong></p>
-<p><strong>不可替代程度：★★★★★</strong></p>
-<h2 id="0-3-四則運算"><a href="#0-3-四則運算" class="headerlink" title="0-3 四則運算"></a><a href="/2020/10/26/0-3/">0-3 四則運算</a></h2><p><strong>常見程度：★★★★★</strong></p>
-<p><strong>不可替代程度：★★★★★</strong></p>
-<h2 id="0-4-條件判斷與基礎邏輯"><a href="#0-4-條件判斷與基礎邏輯" class="headerlink" title="0-4 條件判斷與基礎邏輯"></a><a href="/2020/10/27/0-4/">0-4 條件判斷與基礎邏輯</a></h2><p><strong>常見程度：★★★★★</strong></p>
-<p><strong>不可替代程度：★★★★★</strong></p>
-<h2 id="0-5-進階運算"><a href="#0-5-進階運算" class="headerlink" title="0-5 進階運算"></a><a href="/2020/10/29/0-5/">0-5 進階運算</a></h2><p><strong>常見程度：★★★</strong></p>
-<p><strong>不可替代程度：★★★★★</strong></p>
-<h2 id="0-6-進階輸入輸出"><a href="#0-6-進階輸入輸出" class="headerlink" title="0-6 進階輸入輸出"></a><a href="/2020/11/04/0-6/">0-6 進階輸入輸出</a></h2><p><strong>常見程度：★★</strong></p>
-<p><strong>不可替代程度：★★★★</strong></p>
-<h2 id="0-7-陣列"><a href="#0-7-陣列" class="headerlink" title="0-7 陣列"></a><a href="/2020/11/05/0-7/">0-7 陣列</a></h2><p><strong>常見程度：★★★★★</strong></p>
-<p><strong>不可替代程度：★★★★★</strong></p>
-<h2 id="0-8-迴圈"><a href="#0-8-迴圈" class="headerlink" title="0-8 迴圈"></a><a href="/2020/11/06/0-8/">0-8 迴圈</a></h2><p><strong>常見程度：★★★★★</strong></p>
-<p><strong>不可替代程度：★★★★★</strong></p>
-<h2 id="0-9-函式"><a href="#0-9-函式" class="headerlink" title="0-9 函式"></a><a href="/2020/11/09/0-9/">0-9 函式</a></h2><p><strong>常見程度：★★★</strong></p>
-<p><strong>不可替代程度：★★★</strong></p>
-<h2 id="0-10-遞迴"><a href="#0-10-遞迴" class="headerlink" title="0-10 遞迴"></a><a href="/2020/11/09/0-10/">0-10 遞迴</a></h2><p><strong>常見程度：★★★</strong></p>
-<p><strong>不可替代程度：★★★★★</strong></p>
-<h2 id="0-11-struct"><a href="#0-11-struct" class="headerlink" title="0-11 struct"></a><a href="/2020/11/11/0-11/">0-11 struct</a></h2><p><strong>常見程度：★★</strong></p>
-<p><strong>不可替代程度：★★</strong></p>
-<h2 id="0-12-變數的作用範圍"><a href="#0-12-變數的作用範圍" class="headerlink" title="0-12 變數的作用範圍"></a><a href="/2020/11/13/0-12/">0-12 變數的作用範圍</a></h2><p><strong>常見程度：★★★</strong></p>
-<p><strong>不可替代程度：★★★★</strong></p>
-<h2 id="0-13-排序"><a href="#0-13-排序" class="headerlink" title="0-13 排序"></a><a href="/2020/11/16/0-13/">0-13 排序</a></h2><p><strong>常見程度：★★★★</strong></p>
-<p><strong>不可替代程度：★★★★</strong></p>
-<h2 id="0-14-常用工具-函式"><a href="#0-14-常用工具-函式" class="headerlink" title="0-14 常用工具/函式"></a><a href="/2020/11/18/0-14/">0-14 常用工具/函式</a></h2><p><strong>常見程度：★★★★★</strong></p>
-<p><strong>不可替代程度：★★★</strong></p>
-<h2 id="0-15-段落小結"><a href="#0-15-段落小結" class="headerlink" title="0-15 段落小結"></a><a href="/2020/11/23/0-15/">0-15 段落小結</a></h2><h2 id="0-16-STL簡介"><a href="#0-16-STL簡介" class="headerlink" title="0-16 STL簡介"></a>0-16 STL簡介</h2><p><strong>常見程度：★★★★</strong></p>
-<p><strong>不可替代程度：★★★★</strong></p>
-<h2 id="0-17-pair"><a href="#0-17-pair" class="headerlink" title="0-17 pair"></a>0-17 pair</h2><p><strong>常見程度：★★★★</strong></p>
-<p><strong>不可替代程度：★★★★</strong></p>
-<h2 id="0-18-vector"><a href="#0-18-vector" class="headerlink" title="0-18 vector"></a>0-18 vector</h2><p><strong>常見程度：★★★★</strong></p>
-<p><strong>不可替代程度：★★★★★</strong></p>
-<h2 id="0-19-queue-與-stack"><a href="#0-19-queue-與-stack" class="headerlink" title="0-19 queue 與 stack"></a>0-19 queue 與 stack</h2><p><strong>常見程度：★★★</strong></p>
-<p><strong>不可替代程度：★★</strong></p>
-<h2 id="0-20-set-與-map"><a href="#0-20-set-與-map" class="headerlink" title="0-20 set 與 map"></a>0-20 set 與 map</h2><p><strong>常見程度：★★★</strong></p>
-<p><strong>不可替代程度：★★★★★</strong></p>
-<h2 id="0-21-priority-queue"><a href="#0-21-priority-queue" class="headerlink" title="0-21 priority_queue"></a>0-21 priority_queue</h2><p><strong>常見程度：★★</strong></p>
-<p><strong>不可替代程度：★★</strong></p>
-<h2 id="0-22-bitset"><a href="#0-22-bitset" class="headerlink" title="0-22 bitset"></a>0-22 bitset</h2><p><strong>常見程度：★</strong></p>
-<p><strong>不可替代程度：★★★★</strong></p>
-<h2 id="0-23-本章總結"><a href="#0-23-本章總結" class="headerlink" title="0-23 本章總結"></a>0-23 本章總結</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
   </nav>
 
 
@@ -1668,12 +1708,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">標籤</span>
       </div>
   </nav>
