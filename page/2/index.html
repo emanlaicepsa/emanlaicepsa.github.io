@@ -177,6 +177,112 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/11/09/0-10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/09/0-10/" class="post-title-link" itemprop="url">0-10 遞迴</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-11-09 14:49:37 / 修改時間：17:11:21" itemprop="dateCreated datePublished" datetime="2020-11-09T14:49:37+08:00">2020-11-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="遞迴是什麼"><a href="#遞迴是什麼" class="headerlink" title="遞迴是什麼"></a>遞迴是什麼</h2><p>狹義的遞迴，指的是一個函式，在運行過程中，直接或間接的去呼叫了自己這個函式。沒錯，這是可以的，且是許多演算法實作過程的一部分。</p>
+<p>但其實，遞迴不僅僅是語法，而是一種概念。將一個問題，歸約到一個或多個規模較小的子問題，不管它的實作方式是使用遞迴還是迴圈，我認為都可以算是遞迴的一部份。遞迴的這個概念，在演算法競賽裡非常重要。未來在第二、三章節，會一次又一次的，以不同模樣出現，DP根本就是遞迴，排序、資料結構在實作的過程中，亦有許多遞迴的影子。</p>
+<p>但現在，我們就來看看狹義遞迴的語法吧</p>
+<h2 id="語法"><a href="#語法" class="headerlink" title="語法"></a>語法</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    func();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>基本上，概念是這樣的。當然，如果沒有自己設定，遞迴是不可能停下來的。由於非常容易掛掉以及 debug 較為困難，因此遞迴成為了不少人的惡夢。</p>
+<p>在撰寫遞迴程式時，務必再三確認是否有設定中止條件，以及其是否正確，不然要是停不下來的話就糟糕了。</p>
+<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><p>今天，我要印出從 1 ~ n 裡的每一個整數。當然，我可以使用迴圈實作，而且迴圈也是更好的作法。但為了使讀者更明白遞迴的過程，這裡使用遞迴撰寫。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span>(x == n) <span class="keyword">return</span>; <span class="comment">// 中止條件 相當重要</span></span><br><span class="line">    print(x + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    print(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>問題相對直觀，得到參數 x 後，輸出它，並且以 x + 1 作為參數呼叫下一次遞迴，直到 x 等於 5 時才停下。輸出為：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+
+<p>但如果今天程式是這樣呢？</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x &lt; n) print(x + <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    print(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這時候，變成我先呼叫 print(x + 1)後，再輸出 x，這樣的輸出會是什麼呢？稍微有點難想，但若從 5 反推回來，print(5)只輸出 5，print(4) 是 print(5) 後輸出 4，print(3) 是 print(4) 後輸出 3，可以發現，輸出應該就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">4</span><br><span class="line">3</span><br><span class="line">2</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<p>困難的來了，如果我的程式是這樣：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x &lt; n)&#123;</span><br><span class="line">        print(x + <span class="number">1</span>);</span><br><span class="line">        print(x + <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    print(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這就不是個簡單的遞迴函式了，事實上，我也無法在不借助紙筆的方式下，得知它的輸出。呼叫 print(1) 時，我先呼叫了 print(2)，這時 print(2) 會一直遞迴下去，直到 print(2) 完全結束以後，再呼叫 print(3)。等到 print(3) 結束後，最後輸出 1。</p>
+<p>最後的輸出長這樣：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">6</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">3</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">4</span><br><span class="line">2</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">3</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<p>很難理解吧！我們嘗試透過一些輔助的文字去幫助理解，紀錄一個值d，代表我現在處於遞迴中的第d層，輸出該數前，我先輸出d個空格，以此區分不同層的輸出。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x &lt; n)&#123;</span><br><span class="line">        print(x + <span class="number">1</span>, d + <span class="number">1</span>);</span><br><span class="line">        print(x + <span class="number">2</span>, d + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;d;i++) <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    print(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">    5</span><br><span class="line">    6</span><br><span class="line">   4</span><br><span class="line">   5</span><br><span class="line">  3</span><br><span class="line">   5</span><br><span class="line">   6</span><br><span class="line">  4</span><br><span class="line"> 2</span><br><span class="line">   5</span><br><span class="line">   6</span><br><span class="line">  4</span><br><span class="line">  5</span><br><span class="line"> 3</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<p>恩…還是有點難懂，不然我們在呼叫print(x+1)跟print(x+2)時，都輸出一句話好了！</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x &lt; n)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;d;i++) <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;x = &quot;</span> &lt;&lt; x &lt;&lt;<span class="string">&quot;, print(x+1):\n&quot;</span>;</span><br><span class="line">        print(x + <span class="number">1</span>, d + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;d;i++) <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;x = &quot;</span> &lt;&lt; x &lt;&lt;<span class="string">&quot;, print(x+2):\n&quot;</span>;</span><br><span class="line">        print(x + <span class="number">2</span>, d + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;d;i++) <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    print(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">x &#x3D; 1, print(x+1): &#x2F;&#x2F; a</span><br><span class="line"> x &#x3D; 2, print(x+1): &#x2F;&#x2F; b</span><br><span class="line">  x &#x3D; 3, print(x+1): &#x2F;&#x2F; c</span><br><span class="line">   x &#x3D; 4, print(x+1): &#x2F;&#x2F; d</span><br><span class="line">    5</span><br><span class="line">   x &#x3D; 4, print(x+2): &#x2F;&#x2F; d</span><br><span class="line">    6</span><br><span class="line">   4</span><br><span class="line">  x &#x3D; 3, print(x+2): &#x2F;&#x2F; c</span><br><span class="line">   5</span><br><span class="line">  3</span><br><span class="line"> x &#x3D; 2, print(x+2): &#x2F;&#x2F; b</span><br><span class="line">  x &#x3D; 4, print(x+1):</span><br><span class="line">   5</span><br><span class="line">  x &#x3D; 4, print(x+2):</span><br><span class="line">   6</span><br><span class="line">  4</span><br><span class="line"> 2</span><br><span class="line">x &#x3D; 1, print(x+2): &#x2F;&#x2F; a</span><br><span class="line"> x &#x3D; 3, print(x+1):</span><br><span class="line">  x &#x3D; 4, print(x+1):</span><br><span class="line">   5</span><br><span class="line">  x &#x3D; 4, print(x+2):</span><br><span class="line">   6</span><br><span class="line">  4</span><br><span class="line"> x &#x3D; 3, print(x+2):</span><br><span class="line">  5</span><br><span class="line"> 3</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<p>其中，// 後方的字相同者，表示其分別是同一層中的 print(x+1) 與 print(x+2) 兩個函式，不是程式實際輸出。</p>
+<p>遞迴的思考相當抽象，建議搭配<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=BWrfNs7k5CY">影片</a>理解。</p>
+<p>但也因為這樣，<strong>遞迴可以用來解一般正常思考下想不到或難解決的問題</strong>，下方練習題皆為遞迴經典題，具有相當的難度，但理解後，會發現，用遞迴寫，原來這麼簡潔、乾淨、漂亮！</p>
+<h2 id="遞迴是…"><a href="#遞迴是…" class="headerlink" title="遞迴是…"></a>遞迴是…</h2><p>我覺得，解決遞迴問題的過程，就像是人生。未來過於遙遠，無法想像、無法預測，我們唯一能夠改變的，只有每個當下的自己。不需要去猜測未來到底會變得如何，我們所能做的一切，只是把握此時此刻，努力面對並解決今天遇到的問題。並且相信：明天一定會更好的！</p>
+<p>唯一不同的是，人生會在執行到一半時，突然發生大量意外，但程式基本上不會，除非你寫爛了。</p>
+<h2 id="練習題"><a href="#練習題" class="headerlink" title="練習題"></a>練習題</h2><p><a target="_blank" rel="noopener" href="http://www.fivedream.com/page1.aspx?no=221249&step=1&newsno=26283">河內塔問題</a>(易 建議完全了解此題)：<br><a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=a227">ZeroJudge a227</a></p>
+<p>合成函數：(中偏難) : <a target="_blank" rel="noopener" href="https://judge.tcirc.tw/ShowProblem?problemid=d002">tcirc d002</a></p>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BA%A6%E7%91%9F%E5%A4%AB%E6%96%AF%E9%97%AE%E9%A2%98">約瑟夫問題 定時K彈</a>(難 有興趣可寫)：<a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=c296">ZeroJudge c296</a></p>
+<h2 id="AC-Code"><a href="#AC-Code" class="headerlink" title="AC Code"></a>AC Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ZeroJudge a227</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">hanoi</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">char</span> from, <span class="keyword">char</span> to, <span class="keyword">char</span> mid)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n == <span class="number">1</span>)&#123; <span class="comment">// 遞迴停止條件即為只需移一個盤子</span></span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt; <span class="string">&quot;Move ring &quot;</span> &lt;&lt; n &lt;&lt; <span class="string">&quot; from &quot;</span> &lt;&lt; from &lt;&lt; <span class="string">&quot; to &quot;</span> &lt;&lt; to &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	hanoi(n<span class="number">-1</span>, from, mid, to); <span class="comment">// 先想辦法把前面 n-1 個搬到中間那根柱子</span></span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt; <span class="string">&quot;Move ring &quot;</span> &lt;&lt; n &lt;&lt; <span class="string">&quot; from &quot;</span> &lt;&lt; from &lt;&lt; <span class="string">&quot; to &quot;</span> &lt;&lt; to &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; </span><br><span class="line">	hanoi(n<span class="number">-1</span>, mid, to, from); <span class="comment">// 把前面 n-1 個柱子從中間搬到目標上</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n)&#123;</span><br><span class="line">		hanoi(n,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;C&#x27;</span>,<span class="string">&#x27;B&#x27;</span>);</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 合成函數</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long <span class="comment">// 將程式裡的 ll 視為 long long 的意思</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">ll n;</span><br><span class="line"><span class="built_in">string</span> s;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">str_to_int</span><span class="params">(<span class="built_in">string</span> s)</span></span>&#123; <span class="comment">// 將字串轉為整數</span></span><br><span class="line">	ll ans = <span class="number">0</span>, st = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">bool</span> neg = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(s[st] == <span class="string">&#x27;-&#x27;</span>) neg = <span class="number">1</span>, st++;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=st;i&lt;s.size();i++) ans = ans * <span class="number">10</span> + s[i] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">	<span class="keyword">if</span>(neg) ans = -ans;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; s; <span class="comment">// 讀入下一個</span></span><br><span class="line">	<span class="keyword">if</span>(s == <span class="string">&quot;f&quot;</span>)&#123;</span><br><span class="line">		ll x = solve(); <span class="comment">// f 後面 有 1 個參數</span></span><br><span class="line">		<span class="keyword">return</span> x * <span class="number">2</span> - <span class="number">3</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(s == <span class="string">&quot;g&quot;</span>)&#123;</span><br><span class="line">		ll x = solve(); <span class="comment">// g 後面 有 2 個參數</span></span><br><span class="line">		ll y = solve();</span><br><span class="line">		<span class="keyword">return</span> x * <span class="number">2</span> + y - <span class="number">7</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(s == <span class="string">&quot;h&quot;</span>)&#123;</span><br><span class="line">		ll x = solve(); <span class="comment">// h 後面 有 3 個參數</span></span><br><span class="line">		ll y = solve();</span><br><span class="line">		ll z = solve();</span><br><span class="line">		<span class="keyword">return</span> <span class="number">3</span> * x - <span class="number">2</span> * y + z;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> str_to_int(s); <span class="comment">// 是數字的話 就直接回傳</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;solve()&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.facebook.com/nthuioncamp/posts/438261166736061">定時K彈詳解</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定時K彈 最短的最難 https://www.facebook.com/nthuioncamp/posts/438261166736061</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> N, M, K;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> N, <span class="keyword">int</span> M, <span class="keyword">int</span> K)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(K == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> (solve(N<span class="number">-1</span>, M, K<span class="number">-1</span>) + M) % N;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; N &gt;&gt; M &gt;&gt; K;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; solve(N, M, K) + <span class="number">1</span> &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/11/09/0-9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1529,116 +1635,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/10/21/0-0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="emanlaicepsa">
-      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/21/0-0/" class="post-title-link" itemprop="url">0-0:Hello World! 標頭檔與命名空間</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2020-10-21 15:08:00" itemprop="dateCreated datePublished" datetime="2020-10-21T15:08:00+08:00">2020-10-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-11-23 10:48:28" itemprop="dateModified" datetime="2020-11-23T10:48:28+08:00">2020-11-23</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World!"></a>Hello World!</h2><p>我們直接來看一下，要如何在螢幕上輸出 Hello World 吧！</p>
-<p><del>學完後，就可以說：我會C++喔</del></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Hello World!\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>程式應該會輸出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello World!</span><br></pre></td></tr></table></figure>
-<p>下面，我們就一個一個來看，每一行在做什麼吧！</p>
-<h2 id="標頭檔"><a href="#標頭檔" class="headerlink" title="標頭檔"></a>標頭檔</h2><p>#include<iostream> 這句，意思是引入名為 iostream 的標頭檔。</p>
-<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%A4%B4%E6%96%87%E4%BB%B6">標頭檔wiki</a></p>
-<p>簡單來說，是存放你要使用的功能的地方。</p>
-<p>例如，假如你想要使用 cout 這個功能，便需要在程式的開頭加上這行，因為 cout 是 iostream 裡的功能，所以必須 include 後才能使用。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="命名空間"><a href="#命名空間" class="headerlink" title="命名空間"></a>命名空間</h2><p>using namespace std 這句，意思是使用名為 std 的命名空間。</p>
-<p><a target="_blank" rel="noopener" href="https://atedev.wordpress.com/2007/01/01/c-%E7%9A%84%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93/">教學</a></p>
-<p>若有兩個人同名，我們不知道要如何分辨時，我們可能會說：X年X班的XXX….</p>
-<p>在這裡概念是類似的！using namespace std 就是跟程式說，我接下來叫的人，是在 std 這個班級裡，這樣就不用每次叫人都加上班級了！</p>
-<p>在 include 後，main 前打上這一段。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
-<p>若沒有這一行，每次使用 cout 以及其他在 std 命名空間下的功能時，將需要寫成如下形式，十分麻煩。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x,y;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;HI\n&quot;</span>;</span><br><span class="line">    x = <span class="built_in">std</span>::min(x,y);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;x&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="main-函式"><a href="#main-函式" class="headerlink" title="main 函式"></a>main 函式</h2><p>函式，可以想成一個機器，工作在函式裡執行。之後將有函式的詳細介紹</p>
-<p>一個 C++ 程式裡，開始執行的地方，我們叫它 main 函式。</p>
-<p>語法是：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>由大括號包覆起來的區塊，就是我們要寫程式的地方！</p>
-<h2 id="cout"><a href="#cout" class="headerlink" title="cout"></a>cout</h2><p>C++ 裡的輸出指令，cout後面加上&lt;&lt;，再加上你要輸出的東西，就可以將它顯示在螢幕上！</p>
-<p>“Hello World” 是一個字串，以雙引號包覆。</p>
-<p>‘\n’ 為換行字元，雖然看不到，但可以將輸出換行，在 Online Judge 裡非常重要。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Hello World\n&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>這句的意思，就是輸出 Hello World 後換行！</p>
-<h2 id="組合"><a href="#組合" class="headerlink" title="組合"></a>組合</h2><p>將上面全部拼合在一起，就是我們的第一個 C++ 程式啦。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Hello World!\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>複製到自己的 Dev C++ 裡，按下 F11 試試看吧！</p>
-<p>之後，自己試著寫一次！</p>
-<h2 id="競程上"><a href="#競程上" class="headerlink" title="競程上"></a>競程上</h2><p>競程上，我們通常使用萬用標頭檔 bits/stdc++.h，並且使用 std 命名空間。bits/stdc++.h 包含了如 iostream 以及 algorithm 等競程上 99% 你所需要的標頭檔，直接用就對了，namespace std 也是，你需要的所有東西都在裡面了。</p>
-<h2 id="練習題"><a href="#練習題" class="headerlink" title="練習題"></a>練習題</h2><p><a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=d483">zerojudge d483</a></p>
-<h2 id="AC-code"><a href="#AC-code" class="headerlink" title="AC code"></a>AC code</h2><p>在多數的Online Judge中的共識，是輸出後要換行。且因為輸出是嚴格比對的，即使只少一個換行字元，解答都會被視為完全錯誤。</p>
-<p>因此，請記得一定要在輸出結尾加上一個換行符號(“\n”)！</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;hello, world\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1708,12 +1704,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">標籤</span>
       </div>
   </nav>

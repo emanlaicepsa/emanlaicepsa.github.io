@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="KtMH6V68Z2PZJ6LKvSp5sqJFn7TxZp3dVQovd_wsgOI" />
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-180989678-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-180989678-1');
+</script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"emanlaicepsa.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="隊列(queue)想像有一天，你來到了師大最熱門的 TOI 拉麵店，店內空間不大，只有三十個左右，因此門外的人排成了長長的隊伍。你加入到了隊列的尾端，等待老闆叫號。隨著時間過去，前面的人依序進入店裡，也看到不少人帶著滿足的笑容走出。終於，就快輪到你了！ 只能從後方加入，並且只能從前方取出，這就稱作 queue！ 實作知道了概念，但要怎麼實作 queue 呢？ 我們可以先開一個足夠大的陣列，並且記錄">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-19 queue 與 stack">
+<meta property="og:url" content="https://emanlaicepsa.github.io/2020/12/03/0-19/index.html">
+<meta property="og:site_name" content="從零開始的演算法競賽入門教學">
+<meta property="og:description" content="隊列(queue)想像有一天，你來到了師大最熱門的 TOI 拉麵店，店內空間不大，只有三十個左右，因此門外的人排成了長長的隊伍。你加入到了隊列的尾端，等待老闆叫號。隨著時間過去，前面的人依序進入店裡，也看到不少人帶著滿足的笑容走出。終於，就快輪到你了！ 只能從後方加入，並且只能從前方取出，這就稱作 queue！ 實作知道了概念，但要怎麼實作 queue 呢？ 我們可以先開一個足夠大的陣列，並且記錄">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-12-03T08:06:33.000Z">
+<meta property="article:modified_time" content="2020-12-04T02:00:17.590Z">
+<meta property="article:author" content="emanlaicepsa">
+<meta property="article:tag" content="演算法競賽">
+<meta property="article:tag" content="教學">
+<meta property="article:tag" content="入門">
+<meta property="article:tag" content="從零到一">
+<meta property="article:tag" content="STL">
+<meta property="article:tag" content="queue">
+<meta property="article:tag" content="stack">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://emanlaicepsa.github.io/2020/12/03/0-19/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>0-19 queue 與 stack | 從零開始的演算法競賽入門教學</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z8B2VTRGNW"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Z8B2VTRGNW');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">從零開始的演算法競賽入門教學</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>文章</a>
+
+  </li>
+        <li class="menu-item menu-item-從零到一：基礎語法">
+
+    <a href="/tags/%E5%BE%9E%E9%9B%B6%E5%88%B0%E4%B8%80/" rel="section"><i class="fa fa-tags fa-fw"></i>從零到一：基礎語法</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/12/03/0-19/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          0-19 queue 與 stack
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-12-03 16:06:33" itemprop="dateCreated datePublished" datetime="2020-12-03T16:06:33+08:00">2020-12-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-12-04 10:00:17" itemprop="dateModified" datetime="2020-12-04T10:00:17+08:00">2020-12-04</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="隊列-queue"><a href="#隊列-queue" class="headerlink" title="隊列(queue)"></a>隊列(queue)</h2><p>想像有一天，你來到了師大最熱門的 TOI 拉麵店，店內空間不大，只有三十個左右，因此門外的人排成了長長的隊伍。你加入到了隊列的尾端，等待老闆叫號。隨著時間過去，前面的人依序進入店裡，也看到不少人帶著滿足的笑容走出。終於，就快輪到你了！</p>
+<p>只能從後方加入，並且只能從前方取出，這就稱作 queue！</p>
+<h2 id="實作"><a href="#實作" class="headerlink" title="實作"></a>實作</h2><p>知道了概念，但要怎麼實作 queue 呢？</p>
+<p>我們可以先開一個足夠大的陣列，並且記錄當前隊伍最前方位置與最後方位置。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> arr[<span class="number">1000005</span>], l=<span class="number">0</span>, r=<span class="number">-1</span>; <span class="comment">// 想想為什麼 r = -1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    r++;</span><br><span class="line">    arr[r] = x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">    assert(l&lt;=r); <span class="comment">// 還有東西</span></span><br><span class="line">    l++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">front</span><span class="params">()</span></span>&#123;</span><br><span class="line">    assert(l&lt;=r);</span><br><span class="line">    <span class="keyword">return</span> arr[l];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">siz</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> r-l+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    push(<span class="number">1</span>); <span class="comment">// 從後方加入元素</span></span><br><span class="line">    push(<span class="number">2</span>); </span><br><span class="line">    push(<span class="number">5</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; front() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看最前方元素</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; siz() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看queue大小</span></span><br><span class="line">    pop(); <span class="comment">// 從前方移除元素</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; front() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看最前方元素</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; siz() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看queue大小</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這樣雖然可以得到正確的答案，但不免會有浪費空間(pop 後前方空間就浪費了)或記憶體不夠大的問題，因此，可將 r mod 陣列長度，當元素存到底時，就再回到第一格，以避免浪費空間，當然，陣列還是要開得夠大，至少必須超過同時存在的元素數量。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1000000</span>;</span><br><span class="line"><span class="keyword">int</span> arr[N+<span class="number">5</span>], l=<span class="number">0</span>, r=<span class="number">-1</span>; <span class="comment">// 想想為什麼 r = -1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    r++;</span><br><span class="line">    arr[r%N] = x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">    assert(l&lt;=r); <span class="comment">// 還有東西</span></span><br><span class="line">    l++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">front</span><span class="params">()</span></span>&#123;</span><br><span class="line">    assert(l&lt;=r);</span><br><span class="line">    <span class="keyword">return</span> arr[l%N];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">siz</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> r-l+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    push(<span class="number">1</span>); <span class="comment">// 從後方加入元素</span></span><br><span class="line">    push(<span class="number">2</span>); </span><br><span class="line">    push(<span class="number">5</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; front() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看最前方元素</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; siz() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看queue大小</span></span><br><span class="line">    pop(); <span class="comment">// 從前方移除元素</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; front() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看最前方元素</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; siz() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看queue大小</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="更好的方法"><a href="#更好的方法" class="headerlink" title="更好的方法"></a>更好的方法</h2><p>放在這個章節，想必可以想到，這東西其實是有 STL 的！</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    q.push(<span class="number">1</span>); <span class="comment">// 從後方加入元素</span></span><br><span class="line">    q.push(<span class="number">2</span>); </span><br><span class="line">    q.push(<span class="number">5</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; q.front() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看最前方元素</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; q.size() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看queue大小</span></span><br><span class="line">    q.pop(); <span class="comment">// 從前方移除元素</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; q.front() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看最前方元素</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; q.size() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看queue大小</span></span><br><span class="line">    q.pop();</span><br><span class="line">    q.pop();</span><br><span class="line">    <span class="keyword">if</span>(q.empty()) <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Empty!\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這樣就完成了一個長度會自己變化的 queue 了！(當然，開太大還是會 RE)</p>
+<p>要注意的一點是，如果在 queue 為空時，呼叫了 pop() 或 front() 等函式，都是會導致 RE 的！</p>
+<h2 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h2><p>吃完了拉麵，要付錢時，你居然發現，錢包不知道為什麼不見了！沒有付錢的你只好乖乖留下來洗碗。</p>
+<p>你每次會從最上方拿出一個碗來洗，有新的髒碗要洗時也會放在最上面。</p>
+<p>只能從上方加入，並且只能從上方取出，這就稱作 stack！</p>
+<h2 id="實作-1"><a href="#實作-1" class="headerlink" title="實作"></a>實作</h2><p>如何實作 stack 呢？</p>
+<p>只需要一個陣列，以及一個紀錄目前位置的變數就可以了！比 queue 簡單很多。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1000000</span>;</span><br><span class="line"><span class="keyword">int</span> arr[N+<span class="number">5</span>], r=<span class="number">-1</span>; <span class="comment">// 想想為什麼 r = -1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    r++;</span><br><span class="line">    arr[r] = x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">    assert(r&gt;=<span class="number">0</span>);</span><br><span class="line">    r--;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">top</span><span class="params">()</span></span>&#123;</span><br><span class="line">    assert(r&gt;=<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> arr[r];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">siz</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> r+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    push(<span class="number">1</span>); <span class="comment">// 從後方加入元素</span></span><br><span class="line">    push(<span class="number">2</span>); </span><br><span class="line">    push(<span class="number">5</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; top() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看最前方元素</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; siz() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看queue大小</span></span><br><span class="line">    pop(); <span class="comment">// 從前方移除元素</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; top() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看最前方元素</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; siz() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看queue大小</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>事實上，也完全可以使用能動態改變長度，並且能從後方加入刪除的 vector 來實作。 </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1000000</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; arr;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    arr.push_back(<span class="number">1</span>); <span class="comment">// 從後方加入元素</span></span><br><span class="line">    arr.push_back(<span class="number">2</span>); </span><br><span class="line">    arr.push_back(<span class="number">5</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; arr.back() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看最前方元素</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; arr.size() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看queue大小</span></span><br><span class="line">    arr.pop_back(); <span class="comment">// 從前方移除元素</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; arr.back() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看最前方元素</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; arr.size() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看queue大小</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不過，還是有一個名為 stack 的 STL，它是這樣用的：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1000000</span>;</span><br><span class="line"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    stk.push(<span class="number">1</span>); <span class="comment">// 從後方加入元素</span></span><br><span class="line">    stk.push(<span class="number">2</span>); </span><br><span class="line">    stk.push(<span class="number">5</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; stk.top() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看最前方元素</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; stk.size() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看queue大小</span></span><br><span class="line">    stk.pop(); <span class="comment">// 從前方移除元素</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; stk.top() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看最前方元素</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; stk.size() &lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 查看queue大小</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="功用"><a href="#功用" class="headerlink" title="功用"></a>功用</h2><p>queue 與 stack 與其說是一種工具，更像是一種概念。queue 代表著的是，先進去的元素一定先出來(FIFO)，而 stack 則是剛好相反。</p>
+<p>STL 的 queue 與 stack 本身，都能夠輕易被其他工具代替。我們使用它們的原因，是因為它們所表達出來的概念，能夠讓程式可讀性更高。</p>
+<p>你可能第一時間看不懂一個 vector 一直 push_back() 又 pop_back()，但只要看到 stack，就可確信這裡用到了先進後出的概念，從而更快理解整段程式碼。</p>
+<h2 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h2><p><a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=b923">ZJ b923</a></p>
+<p><a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=e155">ZJ e155</a></p>
+<p>★★ <a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=c123">ZJ c123</a></p>
+<p><a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=a565">ZJ a565</a></p>
+<p>★★★★ <a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=a813">ZJ a813</a></p>
+<h2 id="AC-code"><a href="#AC-code" class="headerlink" title="AC code"></a>AC code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// b923</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, ope, x;</span><br><span class="line"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">while</span>(n--)&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; ope;</span><br><span class="line">		<span class="keyword">if</span>(ope == <span class="number">1</span>)&#123;</span><br><span class="line">			s.pop();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(ope == <span class="number">2</span>)&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; s.top() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; x;</span><br><span class="line">			s.push(x);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ZJ e155</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dis;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n)&#123;</span><br><span class="line">		<span class="keyword">if</span>(n==<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">		dis.clear();</span><br><span class="line">		<span class="keyword">while</span>(!q.empty()) q.pop();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) q.push(i);</span><br><span class="line">		<span class="keyword">while</span>(q.size() &gt; <span class="number">1</span>)&#123;</span><br><span class="line">			dis.push_back(q.front());</span><br><span class="line">			q.pop();</span><br><span class="line">			q.push(q.front());</span><br><span class="line">			q.pop();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Discarded cards: &quot;</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;dis.size();i++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(i&gt;<span class="number">0</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;, &quot;</span>;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; dis[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Remaining card: &quot;</span> &lt;&lt; q.front() &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ZJ c123</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; station;</span><br><span class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; train;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n)&#123;</span><br><span class="line">		<span class="keyword">if</span>(n == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">			<span class="keyword">bool</span> ok = <span class="number">1</span>, out = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">while</span>(!station.empty()) station.pop();</span><br><span class="line">			<span class="keyword">while</span>(!train.empty()) train.pop();</span><br><span class="line"></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">				train.push(i);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,x;i&lt;=n;i++)&#123;</span><br><span class="line">				<span class="built_in">cin</span> &gt;&gt; x;</span><br><span class="line">				<span class="keyword">if</span>(x == <span class="number">0</span>)&#123;</span><br><span class="line">					out = <span class="number">1</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">while</span>(station.empty() || station.top() != x)&#123;</span><br><span class="line">					<span class="keyword">if</span>(train.empty())&#123;</span><br><span class="line">						ok = <span class="number">0</span>;</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">else</span>&#123;</span><br><span class="line">						station.push(train.front());</span><br><span class="line">						train.pop();</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">if</span>(ok) station.pop();</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(out) <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(ok) <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Yes\n&quot;</span>;</span><br><span class="line">			<span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;No\n&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AB%B6%E8%B3%BD/" rel="tag"># 演算法競賽</a>
+              <a href="/tags/%E6%95%99%E5%AD%B8/" rel="tag"># 教學</a>
+              <a href="/tags/%E5%85%A5%E9%96%80/" rel="tag"># 入門</a>
+              <a href="/tags/%E5%BE%9E%E9%9B%B6%E5%88%B0%E4%B8%80/" rel="tag"># 從零到一</a>
+              <a href="/tags/STL/" rel="tag"># STL</a>
+              <a href="/tags/queue/" rel="tag"># queue</a>
+              <a href="/tags/stack/" rel="tag"># stack</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/02/0-18/" rel="prev" title="0-18 pair">
+      <i class="fa fa-chevron-left"></i> 0-18 pair
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%8A%E5%88%97-queue"><span class="nav-number">1.</span> <span class="nav-text">隊列(queue)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%A6%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">實作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E5%A5%BD%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">更好的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stack"><span class="nav-number">4.</span> <span class="nav-text">stack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%A6%E4%BD%9C-1"><span class="nav-number">5.</span> <span class="nav-text">實作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E7%94%A8"><span class="nav-number">6.</span> <span class="nav-text">功用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92"><span class="nav-number">7.</span> <span class="nav-text">練習</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AC-code"><span class="nav-number">8.</span> <span class="nav-text">AC code</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">emanlaicepsa</p>
+  <div class="site-description" itemprop="description">由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100005895303371" title="聯絡我 → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100005895303371" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>聯絡我</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-github"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">emanlaicepsa</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://emanlaicepsa.github.io/2020/12/03/0-19/";
+    this.page.identifier = "2020/12/03/0-19/";
+    this.page.title = "0-19 queue 與 stack";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://emanlaicepsa.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

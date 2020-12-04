@@ -177,6 +177,116 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/10/21/0-0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/21/0-0/" class="post-title-link" itemprop="url">0-0:Hello World! 標頭檔與命名空間</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-10-21 15:08:00" itemprop="dateCreated datePublished" datetime="2020-10-21T15:08:00+08:00">2020-10-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-11-23 10:48:28" itemprop="dateModified" datetime="2020-11-23T10:48:28+08:00">2020-11-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World!"></a>Hello World!</h2><p>我們直接來看一下，要如何在螢幕上輸出 Hello World 吧！</p>
+<p><del>學完後，就可以說：我會C++喔</del></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Hello World!\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程式應該會輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello World!</span><br></pre></td></tr></table></figure>
+<p>下面，我們就一個一個來看，每一行在做什麼吧！</p>
+<h2 id="標頭檔"><a href="#標頭檔" class="headerlink" title="標頭檔"></a>標頭檔</h2><p>#include<iostream> 這句，意思是引入名為 iostream 的標頭檔。</p>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%A4%B4%E6%96%87%E4%BB%B6">標頭檔wiki</a></p>
+<p>簡單來說，是存放你要使用的功能的地方。</p>
+<p>例如，假如你想要使用 cout 這個功能，便需要在程式的開頭加上這行，因為 cout 是 iostream 裡的功能，所以必須 include 後才能使用。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="命名空間"><a href="#命名空間" class="headerlink" title="命名空間"></a>命名空間</h2><p>using namespace std 這句，意思是使用名為 std 的命名空間。</p>
+<p><a target="_blank" rel="noopener" href="https://atedev.wordpress.com/2007/01/01/c-%E7%9A%84%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93/">教學</a></p>
+<p>若有兩個人同名，我們不知道要如何分辨時，我們可能會說：X年X班的XXX….</p>
+<p>在這裡概念是類似的！using namespace std 就是跟程式說，我接下來叫的人，是在 std 這個班級裡，這樣就不用每次叫人都加上班級了！</p>
+<p>在 include 後，main 前打上這一段。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
+<p>若沒有這一行，每次使用 cout 以及其他在 std 命名空間下的功能時，將需要寫成如下形式，十分麻煩。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x,y;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;HI\n&quot;</span>;</span><br><span class="line">    x = <span class="built_in">std</span>::min(x,y);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;x&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="main-函式"><a href="#main-函式" class="headerlink" title="main 函式"></a>main 函式</h2><p>函式，可以想成一個機器，工作在函式裡執行。之後將有函式的詳細介紹</p>
+<p>一個 C++ 程式裡，開始執行的地方，我們叫它 main 函式。</p>
+<p>語法是：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由大括號包覆起來的區塊，就是我們要寫程式的地方！</p>
+<h2 id="cout"><a href="#cout" class="headerlink" title="cout"></a>cout</h2><p>C++ 裡的輸出指令，cout後面加上&lt;&lt;，再加上你要輸出的東西，就可以將它顯示在螢幕上！</p>
+<p>“Hello World” 是一個字串，以雙引號包覆。</p>
+<p>‘\n’ 為換行字元，雖然看不到，但可以將輸出換行，在 Online Judge 裡非常重要。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Hello World\n&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>這句的意思，就是輸出 Hello World 後換行！</p>
+<h2 id="組合"><a href="#組合" class="headerlink" title="組合"></a>組合</h2><p>將上面全部拼合在一起，就是我們的第一個 C++ 程式啦。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;Hello World!\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>複製到自己的 Dev C++ 裡，按下 F11 試試看吧！</p>
+<p>之後，自己試著寫一次！</p>
+<h2 id="競程上"><a href="#競程上" class="headerlink" title="競程上"></a>競程上</h2><p>競程上，我們通常使用萬用標頭檔 bits/stdc++.h，並且使用 std 命名空間。bits/stdc++.h 包含了如 iostream 以及 algorithm 等競程上 99% 你所需要的標頭檔，直接用就對了，namespace std 也是，你需要的所有東西都在裡面了。</p>
+<h2 id="練習題"><a href="#練習題" class="headerlink" title="練習題"></a>練習題</h2><p><a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=d483">zerojudge d483</a></p>
+<h2 id="AC-code"><a href="#AC-code" class="headerlink" title="AC code"></a>AC code</h2><p>在多數的Online Judge中的共識，是輸出後要換行。且因為輸出是嚴格比對的，即使只少一個換行字元，解答都會被視為完全錯誤。</p>
+<p>因此，請記得一定要在輸出結尾加上一個換行符號(“\n”)！</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;hello, world\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/10/21/0-index/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -208,7 +318,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-12-02 13:50:34" itemprop="dateModified" datetime="2020-12-02T13:50:34+08:00">2020-12-02</time>
+                <time title="修改時間：2020-12-03 16:09:57" itemprop="dateModified" datetime="2020-12-03T16:09:57+08:00">2020-12-03</time>
               </span>
 
           
@@ -264,7 +374,7 @@
 <p><strong>不可替代程度：★★★★★</strong></p>
 <h2 id="0-18-pair"><a href="#0-18-pair" class="headerlink" title="0-18 pair"></a><a href="/2020/12/02/0-18/">0-18 pair</a></h2><p><strong>常見程度：★★★★</strong></p>
 <p><strong>不可替代程度：★★★★</strong></p>
-<h2 id="0-19-queue-與-stack"><a href="#0-19-queue-與-stack" class="headerlink" title="0-19 queue 與 stack"></a>0-19 queue 與 stack</h2><p><strong>常見程度：★★★</strong></p>
+<h2 id="0-19-queue-與-stack"><a href="#0-19-queue-與-stack" class="headerlink" title="0-19 queue 與 stack"></a><a href="/2020/12/03/0-19">0-19 queue 與 stack</a></h2><p><strong>常見程度：★★★</strong></p>
 <p><strong>不可替代程度：★★</strong></p>
 <h2 id="0-20-set-與-map"><a href="#0-20-set-與-map" class="headerlink" title="0-20 set 與 map"></a>0-20 set 與 map</h2><p><strong>常見程度：★★★</strong></p>
 <p><strong>不可替代程度：★★★★★</strong></p>
@@ -356,12 +466,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">標籤</span>
       </div>
   </nav>
