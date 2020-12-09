@@ -270,6 +270,94 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/12/09/0-21/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/09/0-21/" class="post-title-link" itemprop="url">0-21 map</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-12-09 14:01:48 / 修改時間：15:17:37" itemprop="dateCreated datePublished" datetime="2020-12-09T14:01:48+08:00">2020-12-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="map-是什麼？"><a href="#map-是什麼？" class="headerlink" title="map 是什麼？"></a>map 是什麼？</h2><p>之前我們在陣列章節時，介紹了這樣一個語法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a[<span class="number">5</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; a[<span class="number">5</span>] &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>這個的意思，是將 a 的第五項改變為 1，並將其輸出。當我們執行時，程式就去找： a 的第五項是什麼？再從索引(5)對到值(1)，這是一種一對一的對應關係。</p>
+<p>但是，能作為索引的東西，一定只有整數嗎？或者更進一步說，只有從 0 開始到陣列大小 - 1 嗎？能不能自訂？</p>
+<p>是可以的，map 在做的，就是這件事情。map 能夠將一個鍵(key)，對應到一個值(value)。</p>
+<p>假設今天，我們想查詢一本書的資料，於是輸入了書名，我希望書的作者、出版社等等資訊就出現在眼前。在 C++ 裡，可以這樣寫：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; author, publisher;</span><br><span class="line">author[<span class="string">&quot;Le Petit Prince&quot;</span>] = <span class="string">&quot;Antoine de Saint-Exupéry&quot;</span>;</span><br><span class="line">publisher[<span class="string">&quot;Le Petit Prince&quot;</span>] = <span class="string">&quot;Gallimard&quot;</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; author[<span class="string">&quot;Le Petit Prince&quot;</span>] &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; publisher[<span class="string">&quot;Le Petit Prince&quot;</span>] &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>將書名作為 key，對應到一個作者與一個出版社。</p>
+<h2 id="map-的語法"><a href="#map-的語法" class="headerlink" title="map 的語法"></a>map 的語法</h2><p>新增與指派：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; mp;</span><br><span class="line">mp[<span class="number">5</span>] = <span class="number">45</span>;</span><br></pre></td></tr></table></figure>
+<p>如果 key 不存在，則這是一個新增操作。如果 key 已存在，則是會將原來的值改掉，為一個指派操作。</p>
+<p>查詢：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; mp[<span class="number">5</span>] &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; mp[<span class="number">0</span>] &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>如果 key 已存在，會輸出索引所對應的值。如果索引不存在，則會先新增一個值為預設值的索引，再將其輸出。</p>
+<p>刪除：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mp.erase(<span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+<p>與 set 相同。</p>
+<p>遍歷：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; mp;</span><br><span class="line">mp[<span class="number">5</span>] = <span class="number">45</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; mp[<span class="number">0</span>] &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> i:mp)&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; i.first &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; i.second &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>輸出結果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0 0</span><br><span class="line">5 45</span><br></pre></td></tr></table></figure>
+<p>遍歷時，會照著 key 大小由小到大輸出，型態是一個 pair，first 是 key，second 是 value。</p>
+<h2 id="map-的底層結構"><a href="#map-的底層結構" class="headerlink" title="map 的底層結構"></a>map 的底層結構</h2><p>與 set 一樣使用紅黑樹實作，插入、查詢、刪除的複雜度均為$O(log N)$，其中 N 是 map 的大小。</p>
+<h2 id="key-不需要排序？"><a href="#key-不需要排序？" class="headerlink" title="key 不需要排序？"></a>key 不需要排序？</h2><p>跟 set 一樣，在前面加上 unordered，實作方式改為 hash，失去照順序功能，但插入、查詢、刪除的複雜度降為 $O(1)$。</p>
+<h2 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h2><p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/55/">TOJ 55</a></p>
+<p><a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=d518">ZJ d518</a></p>
+<h2 id="AC-Code"><a href="#AC-Code" class="headerlink" title="AC Code"></a>AC Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TOJ 55</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; mp;</span><br><span class="line"><span class="keyword">int</span> n, q;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="number">0</span>), <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,x;i&lt;=n;i++) <span class="built_in">cin</span> &gt;&gt; x, mp[x]++;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; q;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,x;i&lt;=q;i++) <span class="built_in">cin</span> &gt;&gt; x, <span class="built_in">cout</span> &lt;&lt; mp[x] &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ZJ d518</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; mp;</span><br><span class="line"><span class="built_in">string</span> str;</span><br><span class="line"><span class="keyword">int</span> n, id;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="number">0</span>), <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n)&#123;</span><br><span class="line">		mp.clear();</span><br><span class="line">		id = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; str;</span><br><span class="line">			<span class="keyword">if</span>(!mp[str]) <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;New! &quot;</span>, mp[str] = ++id;</span><br><span class="line">			<span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Old! &quot;</span>;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; mp[str] &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/12/07/0-20/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1223,104 +1311,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/11/13/0-12/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="emanlaicepsa">
-      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/13/0-12/" class="post-title-link" itemprop="url">0-12 變數的作用範圍</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              
-
-              <time title="創建時間：2020-11-13 14:05:16 / 修改時間：15:16:14" itemprop="dateCreated datePublished" datetime="2020-11-13T14:05:16+08:00">2020-11-13</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://codingsimplifylife.blogspot.com/2016/05/c-10-scope.html">余柏序學長的教學文</a></p>
-<h2 id="作用範圍"><a href="#作用範圍" class="headerlink" title="作用範圍"></a>作用範圍</h2><p>變數是會失效的！如果有認真寫題目的人，應該會發現這一點。在之前的迴圈、陣列等也有提過區域變數與全域變數。不要將陣列宣告在 main 函式內，而是宣告於全域的其中一個理由就是：如果你的程式裡面需要用到函式，那這個寫在 main 函數外的函式就沒有辦法使用這個陣列裡的資訊了！那麼，現在就來看看，變數的作用範圍，大概是怎麼一回事吧！</p>
-<h2 id="最懶的判斷法"><a href="#最懶的判斷法" class="headerlink" title="最懶的判斷法"></a>最懶的判斷法</h2><p><strong>一個變數的作用範圍，自其宣告開始，到其所屬的右大括號為止</strong></p>
-<p>比如：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> b=<span class="number">0</span>;b&lt;n;b++)&#123;</span><br><span class="line">        <span class="keyword">int</span> c = <span class="number">5</span>;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; c &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>這個 a 的作用範圍，就是 main 函式結尾，而 b 與 c 的範圍，則到 for 迴圈結束為止。</p>
-<p>有大括號的東西，例如 if、for、while、函式…… 都適用這個規則。並且不會因為省略大括號而有改變，也就是說，即使這樣：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="number">9</span> &gt; <span class="number">5</span>) <span class="keyword">int</span> b = <span class="number">6</span>;</span><br></pre></td></tr></table></figure>
-<p>因為 if 只有一行而省略大括號，但變數 b 的作用範圍仍然只在這個 if 中。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="number">9</span> &gt; <span class="number">5</span>) <span class="keyword">int</span> b = <span class="number">6</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<p>這樣是會 CE 的，因為在 cout 那行，這個 b 已經失效，是找不到 b 的。</p>
-<h3 id="更多範例"><a href="#更多範例" class="headerlink" title="更多範例"></a>更多範例</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> g = <span class="number">7</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(a &gt; b)&#123;</span><br><span class="line">        <span class="keyword">int</span> c = <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;a;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> d = <span class="number">4</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(a--)&#123;</span><br><span class="line">        <span class="keyword">int</span> e = <span class="number">5</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    f();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>以上各變數的作用範圍，分別是哪裡呢？</p>
-<p>答案：</p>
-<ul>
-<li>a ： 3 ~ end </li>
-<li>b ： 10 ~ 21</li>
-<li>c ： 12 ~ 13</li>
-<li>d ： 15 ~ 16</li>
-<li>e ： 18 ~ 19</li>
-<li>f 是函式名稱，不是變數</li>
-<li>g ： 6 ~ 7</li>
-</ul>
-<p>這樣，對變數的作用範圍，有大致的了解了嗎？</p>
-<p>接下來，我們就來看看，這樣會造成什麼問題。</p>
-<h2 id="重複宣告"><a href="#重複宣告" class="headerlink" title="重複宣告"></a>重複宣告</h2><p>一般來說，我們無法宣告具有相同名稱之變數，例如：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> a = <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
-<p>這是一段會 CE 的程式碼。</p>
-<p>但若作用範圍不同，則可以順利編譯執行。這會導致程式的執行結果與心中所想的不同，而且不太容易 debug。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 1</span></span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 2</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 3</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; <span class="comment">// 2</span></span><br><span class="line">    print(); <span class="comment">// go out of main function</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>輸出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">3</span><br><span class="line">3</span><br><span class="line">2</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
-
-<p>這段程式碼當中，總共出現了三種不同的 a，但因為他們作用範圍不同，因此不會有編譯錯誤。</p>
-<p>大範圍的變數與小範圍的同時出現時，會優先以小的為主。因此在 11 行的 a 宣告後，雖然第 3 行的 a 仍在作用範圍，但在 11 行的 a 於 main 函式結尾失效前，都會暫時被覆蓋。在此期間，只要程式碼有提到 a，編譯器一律不會當成第 3 行的 a。</p>
-<p>應盡量避免這樣的狀況發生，可於編譯指令中加上 -Wshadow 以自動偵測是否有變數同名。但仍建議平常在練習時養成變數命名的好習慣，勿隨意命名變數。</p>
-<p>若只是用來代表目前迴圈跑到哪裡的 i, j, k 變數等，我會於迴圈的一開始宣告。這樣，兩個不同迴圈中的 i 才不會互相形成干擾。 </p>
-<h2 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h2><p>檢查自己過去的程式碼，有沒有重複命名的現象？是否曾因為重複命名而產生過 bug ？</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1390,12 +1380,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">標籤</span>
       </div>
   </nav>
