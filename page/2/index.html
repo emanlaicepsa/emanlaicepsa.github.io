@@ -177,6 +177,95 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/11/11/0-11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/11/0-11/" class="post-title-link" itemprop="url">0-11 struct</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-11-11 14:14:39 / 修改時間：16:04:01" itemprop="dateCreated datePublished" datetime="2020-11-11T14:14:39+08:00">2020-11-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>被遞迴摧殘後的大家還好嗎？放心，最難的一章過了，之後的會輕鬆許多。</p>
+<p>這是在 11/11 更新的第 11 小節！</p>
+<h2 id="struct-是什麼？"><a href="#struct-是什麼？" class="headerlink" title="struct 是什麼？"></a>struct 是什麼？</h2><p><a target="_blank" rel="noopener" href="https://kopu.chat/2017/05/30/c-%E8%AA%9E%E8%A8%80%EF%BC%9A%E7%B5%90%E6%A7%8B%EF%BC%88struct%EF%BC%89%E8%87%AA%E8%A8%82%E4%B8%8D%E5%90%8C%E8%B3%87%E6%96%99%E5%9E%8B%E6%85%8B%E7%B6%81%E4%B8%80%E8%B5%B7/">這篇寫得太好，偷懶一下XD</a>。這篇由於使用的是 C 語言，因此寫法略有不同，但概念是一樣的。</p>
+<p>總之，struct 的出現，讓我們可以自己定義一個新的變數型態，而這個型態能夠把很多不同的變數包在一起，甚至可以定義自己的函式與運算子。</p>
+<h2 id="基礎語法"><a href="#基礎語法" class="headerlink" title="基礎語法"></a>基礎語法</h2><p>語法是這樣的：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_struct</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">double</span> y;</span><br><span class="line">    <span class="built_in">string</span> s;</span><br><span class="line">&#125; c;<span class="comment">//要有分號</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    my_struct a;</span><br><span class="line">    a.x = <span class="number">45</span>;</span><br><span class="line">    a.y = <span class="number">55.232</span>;</span><br><span class="line">    a.s = <span class="string">&quot;This is a string&quot;</span>;</span><br><span class="line"></span><br><span class="line">    my_struct b&#123;<span class="number">1</span>,<span class="number">1.23</span>,<span class="string">&quot;Another way of declaration.&quot;</span>&#125;; <span class="comment">// 另一種宣告方法</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;a.x&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;a.y&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;a.s&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;b.x&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;b.y&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;b.s&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    c.x = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;c.x&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">45 55.232 This is a string</span><br><span class="line">1 1.23 Another way of declaration.</span><br></pre></td></tr></table></figure>
+
+<p>宣告部分，可以像一般宣告變數那樣，直接 my_struct a。也可以在後方加上大括號{}以傳入值。特別的是，可以直接在 struct 的最後宣告。</p>
+<p>使用上，以 . 來取得元素，a.x 代表的就是 a 的 x 項，可參考上方 code。</p>
+<h2 id="自定義比較"><a href="#自定義比較" class="headerlink" title="自定義比較"></a>自定義比較</h2><p>要如何比較兩個 struct 的大小呢？我們需要告訴程式”怎麼樣是比較小的”。語法稍微有點複雜，也不常用到。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_struct</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">double</span> y;</span><br><span class="line">    <span class="built_in">string</span> s;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(my_struct b)&#123;</span><br><span class="line">        <span class="keyword">return</span> x &lt; b.x; <span class="comment">// 定義小於為 x 較另一個人的 x 小</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;<span class="comment">//要有分號</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    my_struct a;</span><br><span class="line">    a.x = <span class="number">45</span>;</span><br><span class="line">    a.y = <span class="number">55.232</span>;</span><br><span class="line">    a.s = <span class="string">&quot;This is a string&quot;</span>;</span><br><span class="line"></span><br><span class="line">    my_struct b&#123;<span class="number">221</span>,<span class="number">1.23</span>,<span class="string">&quot;Another way of declaration.&quot;</span>&#125;; <span class="comment">// 另一種宣告方法</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(a &lt; b)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;A is smaller than B\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;A is not smaller than B\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A is smaller than B</span><br></pre></td></tr></table></figure>
+
+<h2 id="自定義加減"><a href="#自定義加減" class="headerlink" title="自定義加減"></a>自定義加減</h2><p>當然，我也可以重定義加減。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_struct</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">double</span> y;</span><br><span class="line">    <span class="built_in">string</span> s;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(my_struct b)&#123;</span><br><span class="line">        <span class="keyword">return</span> x &lt; b.x; <span class="comment">// 定義小於為 x 較另一個人的 x 小</span></span><br><span class="line">    &#125;</span><br><span class="line">    my_struct <span class="keyword">operator</span> +(my_struct b)&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;x+b.x, y+b.y, s+b.s&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;<span class="comment">//要有分號</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    my_struct a;</span><br><span class="line">    a.x = <span class="number">45</span>;</span><br><span class="line">    a.y = <span class="number">55.232</span>;</span><br><span class="line">    a.s = <span class="string">&quot;This is a string&quot;</span>;</span><br><span class="line"></span><br><span class="line">    my_struct b&#123;<span class="number">221</span>,<span class="number">1.23</span>,<span class="string">&quot;Another way of declaration.&quot;</span>&#125;; <span class="comment">// 另一種宣告方法</span></span><br><span class="line"></span><br><span class="line">    a = a + b; <span class="comment">// 不可寫 a += b 因為你只定義 + 沒有定義 +=</span></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;a.x&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;a.y&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;a.s&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">266</span><br><span class="line">56.462</span><br><span class="line">This is a string, Another way of declaration.</span><br></pre></td></tr></table></figure>
+<h2 id="建構子"><a href="#建構子" class="headerlink" title="建構子"></a>建構子</h2><p>告訴程式在指定其中幾個值的情況下，struct 中的每個變數是多少，語法有點像函式：my_struct(……){}。</p>
+<p>提醒一下，若未自己寫建構子，系統會預設每一個值都是該型態放在全域變數的預設值，例如 int 是 0，string 是 “” 等等。</p>
+<p><strong>但若自己寫了任何一個，則不會預設</strong>，也就是說，如果你寫了一個需要傳入預設值的建構子，之後在沒有值的情況下單獨宣告：my_struct a，這時，a 裡面所有變數的值將會是未知數，而這是很恐怖的。因此，如果要寫建構子，記得一定要多寫在不傳入任何參數下的預設。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_struct</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">double</span> y;</span><br><span class="line">    <span class="built_in">string</span> s;</span><br><span class="line">	my_struct()&#123; <span class="comment">// 多寫的預設建構子</span></span><br><span class="line">		x = <span class="number">45</span>;</span><br><span class="line">		y = <span class="number">1.23</span>;</span><br><span class="line">		s = <span class="string">&quot;sdaf&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	my_struct(<span class="keyword">int</span> a,<span class="keyword">double</span> b,<span class="built_in">string</span> c)&#123;</span><br><span class="line">		x = a;</span><br><span class="line">		y = b;</span><br><span class="line">		c = <span class="string">&quot;safasf&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;<span class="comment">//要有分號</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    my_struct a;</span><br><span class="line">	<span class="function">my_struct <span class="title">b</span><span class="params">(<span class="number">45</span>,<span class="number">45.45455</span>,<span class="string">&quot;sdfsd&quot;</span>)</span></span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;a.x&lt;&lt;<span class="string">&quot; \n&quot;</span>&lt;&lt;a.y&lt;&lt;<span class="string">&quot; \n&quot;</span>&lt;&lt;a.s&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;b.x&lt;&lt;<span class="string">&quot; \n&quot;</span>&lt;&lt;b.y&lt;&lt;<span class="string">&quot; \n&quot;</span>&lt;&lt;b.s&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">45 1.23 sdaf</span><br><span class="line">12 1.2536 sdfsd</span><br></pre></td></tr></table></figure>
+
+<h2 id="struct-的使用時機"><a href="#struct-的使用時機" class="headerlink" title="struct 的使用時機"></a>struct 的使用時機</h2><p>其實大概可以感覺的出來，struct不會太常用到。但有時，總是會遇到一些時候，我們需要同時儲存超過一個變數，例如：要儲存三維空間中的點(x,y,z)，我們可以這樣寫：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x, y, z;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>這樣的話，我就成功將三個整數包在一起，代表空間中的一個點了！</p>
+<h2 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h2><p>老樣子，因為很多使用struct的時機是在排序時，因此併入下一章節。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/11/09/0-10/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1499,142 +1588,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/10/23/0-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="emanlaicepsa">
-      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/23/0-1/" class="post-title-link" itemprop="url">0-1 變數的宣告</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2020-10-23 15:28:39" itemprop="dateCreated datePublished" datetime="2020-10-23T15:28:39+08:00">2020-10-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-11-23 10:52:00" itemprop="dateModified" datetime="2020-11-23T10:52:00+08:00">2020-11-23</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://www.csie.ntu.edu.tw/~b98902112/cpp_and_algo/cpp/variable_type_and_declare.html">教學文章</a></p>
-<h2 id="變數宣告"><a href="#變數宣告" class="headerlink" title="變數宣告"></a>變數宣告</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> b = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">char</span> c = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line"><span class="keyword">double</span> d = <span class="number">2.564</span>;</span><br><span class="line"><span class="built_in">string</span> e = <span class="string">&quot;ABC&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="競程常見資料型態"><a href="#競程常見資料型態" class="headerlink" title="競程常見資料型態"></a>競程常見資料型態</h2><ol>
-<li><strong>int</strong><ul>
-<li>最常出現</li>
-<li>以二進位方式儲存，占 4 個 Byte，32 個 bit</li>
-<li>因此範圍為 $-2^{31}$ ~ $2^{31}-1$</li>
-<li>超過會產生不可預期的結果</li>
-</ul>
-</li>
-<li><strong>long long</strong><ul>
-<li>占 8 個 Byte</li>
-<li>範圍為 $-2^{63}$ ~ $2^{63}-1$</li>
-<li>運算速度較 int 稍慢</li>
-<li><strong>你絕對會因為忘記使用它而 WA</strong></li>
-</ul>
-</li>
-<li><strong>char</strong><ul>
-<li>儲存的是字元</li>
-<li>字元以 <strong>‘’</strong> 括住</li>
-<li>char 與 int 的轉換請見 ASCII TABLE</li>
-<li>可以使用 int() 得到一個字元的ASCII值  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">int</span>(<span class="string">&#x27;a&#x27;</span>)&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure></li>
-<li>可以使用 char() 得到一個ASCII的值對應的字元  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">char</span>(<span class="number">97</span>)&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><strong>double</strong><ul>
-<li>儲存非整數時使用</li>
-<li>不是精準值，存在誤差。<a target="_blank" rel="noopener" href="https://dotblogs.com.tw/daniel/2018/11/10/161148">原因</a></li>
-</ul>
-</li>
-<li><strong>long double</strong><ul>
-<li>更精準的double</li>
-<li>更慢的double</li>
-</ul>
-</li>
-<li><strong>string</strong><ul>
-<li>儲存字串使用</li>
-<li>字串以 <strong>“”</strong> 括住</li>
-<li>也有人會使用 char[] 儲存字串，但 string 方便又好用</li>
-<li>char[] 與 string 在某些時候語法不同，這份教學都會用 string 的語法寫</li>
-</ul>
-</li>
-<li><strong>bool</strong><ul>
-<li>僅表示1(true) 或 0(false)</li>
-<li>一般用來表示一個東西的狀態(是否活著、是否用過…)</li>
-<li>通常不會拿來輸入輸出</li>
-<li>雖可用 int 替代，但會導致程式可讀性下降</li>
-</ul>
-</li>
-</ol>
-<h2 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h2><ul>
-<li>因誤差極大，請勿於競程中使用 float。</li>
-<li>基本上不需使用到 short，需要整數直接用 int 就好</li>
-<li><strong>若宣告時未指派值，變數的值不一定是 0，可能是任何數。</strong></li>
-</ul>
-<h2 id="指派"><a href="#指派" class="headerlink" title="指派"></a>指派</h2><p>在程式語言的世界裡， <strong>=</strong> 這個符號有著不同的意思。</p>
-<p>它代表著的，並非我們日常生活中的<strong>等於</strong>，而是<strong>指派</strong>。</p>
-<p>因此，當我們寫：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
-<p>並非表示a等於10，而是表示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a，你從現在開始變成10囉！</span><br></pre></td></tr></table></figure>
-<p>因此，以下的程式碼並不存在任何錯誤：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">a = <span class="number">456</span>;</span><br><span class="line">a = <span class="number">731</span>;</span><br></pre></td></tr></table></figure>
-<p>我只是不斷的將新的值指派給a這個變數而已，沒有問題。</p>
-<p>順帶一提，C++中，表示等於的符號是==，在之後的章節會有更進一步的介紹。</p>
-<h2 id="型態互轉"><a href="#型態互轉" class="headerlink" title="型態互轉"></a>型態互轉</h2><p>有些型態是可以互轉的，例如：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> x;</span><br><span class="line"><span class="keyword">int</span> y;</span><br><span class="line"><span class="keyword">double</span> z;</span><br><span class="line">z = <span class="number">123.45</span></span><br><span class="line">y = z;</span><br><span class="line">x = y;</span><br></pre></td></tr></table></figure>
-<p>他們都是數字，因此互轉沒有問題！但要注意的是，浮點數在轉換為整數時，小數點以下所有數字會被直接捨去！因此在上方程式碼執行完畢後，y與x的值都是123。</p>
-<h2 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h2><ul>
-<li>因所有題目都需要輸入/輸出，因此習題合併於下一章節</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1704,12 +1657,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">標籤</span>
       </div>
   </nav>

@@ -177,6 +177,142 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/10/23/0-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/23/0-1/" class="post-title-link" itemprop="url">0-1 變數的宣告</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-10-23 15:28:39" itemprop="dateCreated datePublished" datetime="2020-10-23T15:28:39+08:00">2020-10-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-11-23 10:52:00" itemprop="dateModified" datetime="2020-11-23T10:52:00+08:00">2020-11-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.csie.ntu.edu.tw/~b98902112/cpp_and_algo/cpp/variable_type_and_declare.html">教學文章</a></p>
+<h2 id="變數宣告"><a href="#變數宣告" class="headerlink" title="變數宣告"></a>變數宣告</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> b = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">char</span> c = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line"><span class="keyword">double</span> d = <span class="number">2.564</span>;</span><br><span class="line"><span class="built_in">string</span> e = <span class="string">&quot;ABC&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="競程常見資料型態"><a href="#競程常見資料型態" class="headerlink" title="競程常見資料型態"></a>競程常見資料型態</h2><ol>
+<li><strong>int</strong><ul>
+<li>最常出現</li>
+<li>以二進位方式儲存，占 4 個 Byte，32 個 bit</li>
+<li>因此範圍為 $-2^{31}$ ~ $2^{31}-1$</li>
+<li>超過會產生不可預期的結果</li>
+</ul>
+</li>
+<li><strong>long long</strong><ul>
+<li>占 8 個 Byte</li>
+<li>範圍為 $-2^{63}$ ~ $2^{63}-1$</li>
+<li>運算速度較 int 稍慢</li>
+<li><strong>你絕對會因為忘記使用它而 WA</strong></li>
+</ul>
+</li>
+<li><strong>char</strong><ul>
+<li>儲存的是字元</li>
+<li>字元以 <strong>‘’</strong> 括住</li>
+<li>char 與 int 的轉換請見 ASCII TABLE</li>
+<li>可以使用 int() 得到一個字元的ASCII值  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">int</span>(<span class="string">&#x27;a&#x27;</span>)&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure></li>
+<li>可以使用 char() 得到一個ASCII的值對應的字元  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">char</span>(<span class="number">97</span>)&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><strong>double</strong><ul>
+<li>儲存非整數時使用</li>
+<li>不是精準值，存在誤差。<a target="_blank" rel="noopener" href="https://dotblogs.com.tw/daniel/2018/11/10/161148">原因</a></li>
+</ul>
+</li>
+<li><strong>long double</strong><ul>
+<li>更精準的double</li>
+<li>更慢的double</li>
+</ul>
+</li>
+<li><strong>string</strong><ul>
+<li>儲存字串使用</li>
+<li>字串以 <strong>“”</strong> 括住</li>
+<li>也有人會使用 char[] 儲存字串，但 string 方便又好用</li>
+<li>char[] 與 string 在某些時候語法不同，這份教學都會用 string 的語法寫</li>
+</ul>
+</li>
+<li><strong>bool</strong><ul>
+<li>僅表示1(true) 或 0(false)</li>
+<li>一般用來表示一個東西的狀態(是否活著、是否用過…)</li>
+<li>通常不會拿來輸入輸出</li>
+<li>雖可用 int 替代，但會導致程式可讀性下降</li>
+</ul>
+</li>
+</ol>
+<h2 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h2><ul>
+<li>因誤差極大，請勿於競程中使用 float。</li>
+<li>基本上不需使用到 short，需要整數直接用 int 就好</li>
+<li><strong>若宣告時未指派值，變數的值不一定是 0，可能是任何數。</strong></li>
+</ul>
+<h2 id="指派"><a href="#指派" class="headerlink" title="指派"></a>指派</h2><p>在程式語言的世界裡， <strong>=</strong> 這個符號有著不同的意思。</p>
+<p>它代表著的，並非我們日常生活中的<strong>等於</strong>，而是<strong>指派</strong>。</p>
+<p>因此，當我們寫：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+<p>並非表示a等於10，而是表示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a，你從現在開始變成10囉！</span><br></pre></td></tr></table></figure>
+<p>因此，以下的程式碼並不存在任何錯誤：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">a = <span class="number">456</span>;</span><br><span class="line">a = <span class="number">731</span>;</span><br></pre></td></tr></table></figure>
+<p>我只是不斷的將新的值指派給a這個變數而已，沒有問題。</p>
+<p>順帶一提，C++中，表示等於的符號是==，在之後的章節會有更進一步的介紹。</p>
+<h2 id="型態互轉"><a href="#型態互轉" class="headerlink" title="型態互轉"></a>型態互轉</h2><p>有些型態是可以互轉的，例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> x;</span><br><span class="line"><span class="keyword">int</span> y;</span><br><span class="line"><span class="keyword">double</span> z;</span><br><span class="line">z = <span class="number">123.45</span></span><br><span class="line">y = z;</span><br><span class="line">x = y;</span><br></pre></td></tr></table></figure>
+<p>他們都是數字，因此互轉沒有問題！但要注意的是，浮點數在轉換為整數時，小數點以下所有數字會被直接捨去！因此在上方程式碼執行完畢後，y與x的值都是123。</p>
+<h2 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h2><ul>
+<li>因所有題目都需要輸入/輸出，因此習題合併於下一章節</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/10/21/0-0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -318,7 +454,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-12-03 16:09:57" itemprop="dateModified" datetime="2020-12-03T16:09:57+08:00">2020-12-03</time>
+                <time title="修改時間：2020-12-07 13:45:11" itemprop="dateModified" datetime="2020-12-07T13:45:11+08:00">2020-12-07</time>
               </span>
 
           
@@ -376,13 +512,17 @@
 <p><strong>不可替代程度：★★★★</strong></p>
 <h2 id="0-19-queue-與-stack"><a href="#0-19-queue-與-stack" class="headerlink" title="0-19 queue 與 stack"></a><a href="/2020/12/03/0-19">0-19 queue 與 stack</a></h2><p><strong>常見程度：★★★</strong></p>
 <p><strong>不可替代程度：★★</strong></p>
-<h2 id="0-20-set-與-map"><a href="#0-20-set-與-map" class="headerlink" title="0-20 set 與 map"></a>0-20 set 與 map</h2><p><strong>常見程度：★★★</strong></p>
+<h2 id="0-20-set"><a href="#0-20-set" class="headerlink" title="0-20 set"></a><a href="/2020/12/03/0-20">0-20 set</a></h2><p><strong>常見程度：★★★</strong></p>
 <p><strong>不可替代程度：★★★★★</strong></p>
-<h2 id="0-21-priority-queue"><a href="#0-21-priority-queue" class="headerlink" title="0-21 priority_queue"></a>0-21 priority_queue</h2><p><strong>常見程度：★★</strong></p>
+<h2 id="0-21-map"><a href="#0-21-map" class="headerlink" title="0-21 map"></a>0-21 map</h2><p><strong>常見程度：★★★</strong></p>
+<p><strong>不可替代程度：★★★★★</strong></p>
+<h2 id="0-22-priority-queue"><a href="#0-22-priority-queue" class="headerlink" title="0-22 priority_queue"></a>0-22 priority_queue</h2><p><strong>常見程度：★★</strong></p>
 <p><strong>不可替代程度：★★</strong></p>
-<h2 id="0-22-bitset"><a href="#0-22-bitset" class="headerlink" title="0-22 bitset"></a>0-22 bitset</h2><p><strong>常見程度：★</strong></p>
+<h2 id="0-23-linked-list"><a href="#0-23-linked-list" class="headerlink" title="0-23 linked-list"></a>0-23 linked-list</h2><p><strong>常見程度：★★</strong></p>
+<p><strong>不可替代程度：★★</strong></p>
+<h2 id="0-24-bitset"><a href="#0-24-bitset" class="headerlink" title="0-24 bitset"></a>0-24 bitset</h2><p><strong>常見程度：★</strong></p>
 <p><strong>不可替代程度：★★★★</strong></p>
-<h2 id="0-23-本章總結"><a href="#0-23-本章總結" class="headerlink" title="0-23 本章總結"></a>0-23 本章總結</h2>
+<h2 id="0-25-本章總結"><a href="#0-25-本章總結" class="headerlink" title="0-25 本章總結"></a>0-25 本章總結</h2>
       
     </div>
 
@@ -466,12 +606,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">標籤</span>
       </div>
   </nav>
@@ -560,6 +700,61 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
