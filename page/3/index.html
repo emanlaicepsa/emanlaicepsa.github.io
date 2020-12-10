@@ -177,6 +177,134 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/10/26/0-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/26/0-3/" class="post-title-link" itemprop="url">0-3 四則運算</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-10-26 13:36:45" itemprop="dateCreated datePublished" datetime="2020-10-26T13:36:45+08:00">2020-10-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-11-23 10:52:11" itemprop="dateModified" datetime="2020-11-23T10:52:11+08:00">2020-11-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="四則運算"><a href="#四則運算" class="headerlink" title="四則運算"></a>四則運算</h2><p>在C++裡，四則運算大多就跟平常一樣。也遵從著先乘除後加減、括號先算……等等正常的運算規則。</p>
+<p><strong>在進行很大的數字相加/相乘時務必注意，若於運算中之任何時刻超過int可表示的範圍，即使最終答案在int範圍，也會導致overflow而使答案錯誤</strong></p>
+<p><a target="_blank" rel="noopener" href="https://codingsimplifylife.blogspot.com/2016/04/c-3-acquaintance-to-operators.html">overflow的說明</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>, b = <span class="number">3</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; a+b &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; a-b &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; a*b &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>結果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8 2 15</span><br></pre></td></tr></table></figure>
+
+<h2 id="除法"><a href="#除法" class="headerlink" title="除法"></a>除法</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>, b = <span class="number">3</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; a/b &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>結果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<p>會有這樣的結果是因為，5是一個整數，3也是一個整數，整數之間的運算，結果在C++裡只會是整數。</p>
+<p>因此，小數點以後的部分被捨棄了。</p>
+<h2 id="除以-0"><a href="#除以-0" class="headerlink" title="除以 0"></a>除以 0</h2><p>在除以 0 時，程式會產生執行期間錯誤(Runtime Error)，在 Online Judge 上顯示為 RE / Runtime Error / Segmentation fault。請務必注意此情形，並且預先處理掉除數可能為 0 的情況。</p>
+<h2 id="如何讓整數之間的運算結果產生小數"><a href="#如何讓整數之間的運算結果產生小數" class="headerlink" title="如何讓整數之間的運算結果產生小數"></a>如何讓整數之間的運算結果產生小數</h2><p>你可以在運算時預先乘上 1.0 ，這樣，在進行運算時，數字是以浮點數的方式進行運算，最終結果也自然就是浮點數了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>, b = <span class="number">3</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="number">1.0</span>*a/b &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>結果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.66667</span><br></pre></td></tr></table></figure>
+
+<h2 id="控制小數點以下的輸出位數"><a href="#控制小數點以下的輸出位數" class="headerlink" title="控制小數點以下的輸出位數"></a>控制小數點以下的輸出位數</h2><p>從上面的例子，我們可以發現，答案只輸出到小數點後第五位。</p>
+<p>若要輸出到小數點後第十位，該怎麼做呢？</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="comment">//#include&lt;bits/stdc++.h&gt; // 萬用標頭檔</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">5</span>, b = <span class="number">3</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; fixed &lt;&lt; setprecision(<span class="number">10</span>) &lt;&lt; <span class="number">1.0</span>*a/b &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>結果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.6666666667</span><br></pre></td></tr></table></figure>
+
+<p>其中，fixed表示的，是小數點以下的意思，因此，若沒有fixed，setprecision(10)代表的，其實是總共輸出十位數字。</p>
+<p>fixed與setprecision在iomanip標頭檔中，使用時必須先</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iomanip&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>如使用萬用標頭檔bits/stdc++.h則不須理會。</p>
+<p>設定一次輸出位數後，下一次便不需要重新設定，例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>, b = <span class="number">3</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; fixed &lt;&lt; setprecision(<span class="number">10</span>) &lt;&lt; <span class="number">1.0</span>*a/b &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="number">3.0</span>*a*b/<span class="number">1.24</span>*<span class="number">0.445</span> &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; </span><br></pre></td></tr></table></figure>
+
+<p>結果為：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.6666666667</span><br><span class="line">16.1491935484</span><br></pre></td></tr></table></figure>
+
+<h2 id="模運算"><a href="#模運算" class="headerlink" title="模運算"></a>模運算</h2><p>若我們要取得 a 除以 b 的餘數，可以這樣寫：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a, b;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt; a &gt;&gt; b;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt; a - a/b*b &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>因 $a,b$ 都是整數，因此 $a/b$ 僅會保留整數部分，根據除法原理，$a / b = c … d$ 可改寫為 $a = b * c + d$，其中 $0 \le d &lt; b$。因此，$c$ 就是 $a/b$ 的整數部分，將 $a$ 減去 $b*c$ 後，就得到餘數 $d$ 了！</p>
+<p>其實，在C++裡，有個幫你寫好的餘數功能：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a, b;</span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; a % b &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>% 的優先次序與乘除法相同，因此，若要取 a+b 除以 c 的餘數，必須這樣寫：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a, b, c;</span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; (a + b) % c &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="運算後指派"><a href="#運算後指派" class="headerlink" title="運算後指派"></a>運算後指派</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>, b = <span class="number">4</span>, c = <span class="number">0</span>;</span><br><span class="line">a = a + <span class="number">1</span>; <span class="comment">// 計算 a+1 後 指派給 a，現在 a 是 6</span></span><br><span class="line">b = a - <span class="number">1</span>; <span class="comment">// 計算 a-1 後 指派給 b，現在 b 是 5</span></span><br><span class="line">c = a * b; <span class="comment">// 計算 a*b 後 指派給c，現在 c 是 30</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;a&lt;&lt;b&lt;&lt;c&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>C++ 中，針對 $a = a + 5$ 之類的操作，有著更簡潔的寫法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a += <span class="number">5</span>; <span class="comment">// a = a + 5</span></span><br><span class="line">b -= <span class="number">2</span>; <span class="comment">// b = b - 2</span></span><br><span class="line">c *= <span class="number">3</span>; <span class="comment">// c = c * 3</span></span><br><span class="line">d /= <span class="number">45</span>; <span class="comment">// d = d / 45</span></span><br></pre></td></tr></table></figure>
+
+<p>針對 $a = a + 1$ 之類的操作，還有更簡單的寫法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a++; <span class="comment">// a += 1</span></span><br><span class="line">b--; <span class="comment">// b -= 1</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h2><p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/93/">TOJ 93</a></p>
+<p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/98/">TOJ 98</a></p>
+<p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/522/">TOJ 522</a></p>
+<h2 id="AC-Code-強烈建議自行寫完後再看"><a href="#AC-Code-強烈建議自行寫完後再看" class="headerlink" title="AC Code (強烈建議自行寫完後再看)"></a>AC Code (強烈建議自行寫完後再看)</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TOJ 93</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a,b,c;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;c;</span><br><span class="line">    <span class="keyword">int</span> s=(a+b)*c/<span class="number">2</span>; <span class="comment">// why (a+b)/2*c is wrong???</span></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;s&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TOJ 98</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> a,b,c,d,e,f;</span><br><span class="line">    <span class="comment">// 如果用int，會發生什麼？</span></span><br><span class="line">    a=<span class="number">299792458</span>;</span><br><span class="line">    b=a*<span class="number">60</span>;</span><br><span class="line">    c=b*<span class="number">60</span>;</span><br><span class="line">    d=c*<span class="number">24</span>;</span><br><span class="line">    e=d*<span class="number">7</span>;</span><br><span class="line">    f=d*<span class="number">365</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt;<span class="string">&quot;1 Light-second(LS) is &quot;</span>&lt;&lt;a&lt;&lt;<span class="string">&quot; metres.\n&quot;</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt;<span class="string">&quot;1 Light-minute(LM) is &quot;</span>&lt;&lt;b&lt;&lt;<span class="string">&quot; metres.\n&quot;</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt;<span class="string">&quot;1 Light-hour(LH) is &quot;</span>&lt;&lt;c&lt;&lt;<span class="string">&quot; metres.\n&quot;</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt;<span class="string">&quot;1 Light-day(LD) is &quot;</span>&lt;&lt;d&lt;&lt;<span class="string">&quot; metres.\n&quot;</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt;<span class="string">&quot;1 Light-week(LW) is &quot;</span>&lt;&lt;e&lt;&lt;<span class="string">&quot; metres.\n&quot;</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt;<span class="string">&quot;1 Light-year(LY) is &quot;</span>&lt;&lt;f&lt;&lt;<span class="string">&quot; metres.\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TOJ 522</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;x;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;x*x%<span class="number">10</span>&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/10/26/0-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -584,7 +712,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-12-07 13:45:11" itemprop="dateModified" datetime="2020-12-07T13:45:11+08:00">2020-12-07</time>
+                <time title="修改時間：2020-12-10 14:00:35" itemprop="dateModified" datetime="2020-12-10T14:00:35+08:00">2020-12-10</time>
               </span>
 
           
@@ -642,11 +770,11 @@
 <p><strong>不可替代程度：★★★★</strong></p>
 <h2 id="0-19-queue-與-stack"><a href="#0-19-queue-與-stack" class="headerlink" title="0-19 queue 與 stack"></a><a href="/2020/12/03/0-19">0-19 queue 與 stack</a></h2><p><strong>常見程度：★★★</strong></p>
 <p><strong>不可替代程度：★★</strong></p>
-<h2 id="0-20-set"><a href="#0-20-set" class="headerlink" title="0-20 set"></a><a href="/2020/12/03/0-20">0-20 set</a></h2><p><strong>常見程度：★★★</strong></p>
+<h2 id="0-20-set"><a href="#0-20-set" class="headerlink" title="0-20 set"></a><a href="/2020/12/07/0-20">0-20 set</a></h2><p><strong>常見程度：★★★★</strong></p>
 <p><strong>不可替代程度：★★★★★</strong></p>
-<h2 id="0-21-map"><a href="#0-21-map" class="headerlink" title="0-21 map"></a>0-21 map</h2><p><strong>常見程度：★★★</strong></p>
+<h2 id="0-21-map"><a href="#0-21-map" class="headerlink" title="0-21 map"></a><a href="/2020/12/09/0-21">0-21 map</a></h2><p><strong>常見程度：★★</strong></p>
 <p><strong>不可替代程度：★★★★★</strong></p>
-<h2 id="0-22-priority-queue"><a href="#0-22-priority-queue" class="headerlink" title="0-22 priority_queue"></a>0-22 priority_queue</h2><p><strong>常見程度：★★</strong></p>
+<h2 id="0-22-priority-queue"><a href="#0-22-priority-queue" class="headerlink" title="0-22 priority_queue"></a><a href="/2020/12/10/0-22">0-22 priority_queue</a></h2><p><strong>常見程度：★★</strong></p>
 <p><strong>不可替代程度：★★</strong></p>
 <h2 id="0-23-linked-list"><a href="#0-23-linked-list" class="headerlink" title="0-23 linked-list"></a>0-23 linked-list</h2><p><strong>常見程度：★★</strong></p>
 <p><strong>不可替代程度：★★</strong></p>
@@ -736,7 +864,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
