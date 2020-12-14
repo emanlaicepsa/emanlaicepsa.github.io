@@ -270,6 +270,94 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/12/14/0-25/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/14/0-25/" class="post-title-link" itemprop="url">0-25 bitset</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-12-14 13:13:58 / 修改時間：14:43:30" itemprop="dateCreated datePublished" datetime="2020-12-14T13:13:58+08:00">2020-12-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="bool-陣列"><a href="#bool-陣列" class="headerlink" title="bool 陣列"></a>bool 陣列</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> arr[<span class="number">1000005</span>];</span><br></pre></td></tr></table></figure>
+
+<h2 id="bitset"><a href="#bitset" class="headerlink" title="bitset"></a>bitset</h2><p>bitset 是特別優化過的 bool 陣列，時間與空間均較 bool 陣列少，其中以時間的影響最為顯著。</p>
+<p>bitset 的語法如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bitset</span>&lt;1000005&gt; b;</span><br></pre></td></tr></table></figure>
+<p>特別的地方是，&lt;&gt; 內放的是大小。</p>
+<h2 id="語法"><a href="#語法" class="headerlink" title="語法"></a>語法</h2><p>跟 bool 陣列一樣</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">b[<span class="number">5</span>] = <span class="number">0</span>;</span><br><span class="line">b[<span class="number">4</span>] = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>有一些特別的函式</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; b.count() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>.count() 回傳 bitset 中 1 的個數。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">b.<span class="built_in">set</span>();</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; b[<span class="number">1</span>] &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">b.reset();</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; b[<span class="number">1</span>] &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>.set() 將所有 bit 設為 1，.reset() 將所有 bit 設為 0。</p>
+<h2 id="比-bool-陣列快的地方"><a href="#比-bool-陣列快的地方" class="headerlink" title="比 bool 陣列快的地方"></a>比 bool 陣列快的地方</h2><p>bitset 可以進行位元運算！</p>
+<p>位元運算的速度極快，大約可視為正常的 1/32 倍。因此 bitset 能做到一些沒有其他方法能做到的神奇事情。</p>
+<p>但… 這些事情超少的，我也只在比賽中看過一題，然而就是那一題，讓我進了二階。那題稍微有點難，可能放在這不太適合，就先放其他題目吧！</p>
+<p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/126/">TOJ 126</a></p>
+<p>這題的重點是，要如何知道一個數是不是合理的。</p>
+<p>假設現在合理的分數是(-2, -1, 0, 1, 2)，有一題 2 分的題目，那麼在作答完這題後，可能的分數就是這題答對與這題答錯的聯集。</p>
+<p>這題答對的話，可能的分數會變成(0, 1, 2, 3, 4)，答錯的話，可能的分數會變成(-4, -3, -2, -1, 0)，所以考慮答對跟答錯的情況，可能的分數是兩者的聯集，也就是(-4, -3, -2, -1, 0, 1, 2, 3, 4)。</p>
+<p>假設把可不可能用 bitset 表示，bitset 中若第 i 項是 1，表示 i 是可能的分數，反之 0 是不可能，那麼，若原來的 bitset 是 b，答了一題分數為 2 的題目後，這個 bitset 就會變成 (b &gt;&gt; 2) | (b &lt;&lt; 2)。</p>
+<p>b &gt;&gt; 2 表示答錯的狀況，可能的分數右移兩格(-2, -1, 0, 1, 2) -&gt; (-4, -3, -2, -1, 0)， b &lt;&lt; 2 表示答對的狀況，可能的分數左移兩格(-2, -1, 0, 1, 2) -&gt; (0, 1, 2, 3, 4)。| 將兩者聯集起來。這樣的話，本來需要 N 次的操作，在 bitset 的使用下，變成只需要 N / 32 次了！</p>
+<p>在位元運算時，bitset也不用擔心會 RE，超過的部分都會自動捨去，沒有問題！(但是可能會WA就是了)</p>
+<p>另外，這題其實是一題經典問題：背包(knapsack)問題的一種變形，有興趣的話可以針對這個主題進行學習。之後應該也會有一篇專門的文章來介紹我所知道的背包問題們。</p>
+<p>bitset 的使用時機非常少，但無可替代。</p>
+<h2 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h2><p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/126/">TOJ 126</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.hackerrank.com/contests/accel-hack/challenges/acyclic-graph">Hackerrank Acyclic Graph</a></p>
+<h2 id="AC-Code"><a href="#AC-Code" class="headerlink" title="AC Code"></a>AC Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TOJ 126</span></span><br><span class="line"><span class="comment">// 因為index沒有負數，因此全部加上 10000 處理。</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, q, ans[<span class="number">20005</span>];</span><br><span class="line"><span class="built_in">bitset</span>&lt;20005&gt; b;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="number">0</span>), <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; q;</span><br><span class="line">	b[<span class="number">10000</span>] = <span class="number">1</span>; <span class="comment">// b[0] = 1</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,x;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; x;</span><br><span class="line">		b = (b &gt;&gt; x) | (b &lt;&lt; x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">20000</span>,pre=i;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b[i]) pre = i;</span><br><span class="line">		ans[i] = pre;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,x;i&lt;=q;i++)&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; x;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; ans[x+<span class="number">10000</span>] - <span class="number">10000</span> &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; <span class="comment">// cout &lt;&lt; ans[x] &lt;&lt; &#x27;\n&#x27;;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Acyclic graph</span></span><br><span class="line"><span class="comment">// 建議先了解 dfs 與 vector 存圖 以及 DAG</span></span><br><span class="line"><span class="comment">// 先備知識有點多 可以跳過 之後再回來</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">bitset</span>&lt;50005&gt; b[<span class="number">50005</span>], vis;</span><br><span class="line"><span class="keyword">int</span> n, m, in[<span class="number">50005</span>];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; E[<span class="number">50005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    vis[x] = <span class="number">1</span>;</span><br><span class="line">    b[x][x] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> i:E[x])&#123;</span><br><span class="line">        <span class="keyword">if</span>(!vis[i]) dfs(i);</span><br><span class="line">        b[x] |= b[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="number">0</span>), <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,a,b;i&lt;=m;i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">        E[a].emplace_back(b);</span><br><span class="line">        in[b]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!in[i]) dfs(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(b[i].count()*<span class="number">2</span>&gt;=n) ans++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/12/14/0-24/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -295,7 +383,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-12-14 10:48:54 / 修改時間：12:45:06" itemprop="dateCreated datePublished" datetime="2020-12-14T10:48:54+08:00">2020-12-14</time>
+              <time title="創建時間：2020-12-14 10:48:54 / 修改時間：13:26:43" itemprop="dateCreated datePublished" datetime="2020-12-14T10:48:54+08:00">2020-12-14</time>
             </span>
 
           
@@ -1084,105 +1172,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/11/30/0-16/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="emanlaicepsa">
-      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/30/0-16/" class="post-title-link" itemprop="url">0-16 STL簡介</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              
-
-              <time title="創建時間：2020-11-30 09:44:37 / 修改時間：10:56:35" itemprop="dateCreated datePublished" datetime="2020-11-30T09:44:37+08:00">2020-11-30</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="STL-是什麼？"><a href="#STL-是什麼？" class="headerlink" title="STL 是什麼？"></a>STL 是什麼？</h2><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93">wiki</a></p>
-<p>STL 簡單來說，就是容器，裝資料的容器。</p>
-<p>之前，我們學習過的容器只有array而已，array的缺點有幾個：</p>
-<ol>
-<li>不能改變大小</li>
-<li>不能從前面插入元素(從前面插等於將整個陣列往後，可以想像，這超慢)</li>
-<li>不能自動排序好元素(也就是，插入一個數字後要重新排序很慢)</li>
-</ol>
-<p>但STL裡的容器很特別，他有：</p>
-<ul>
-<li>可以改變陣列大小的 vector</li>
-<li>可以從前方插入或移除元素的 deque、queue</li>
-<li>可以邊插入邊移除，一邊很快的排序的 set、map，以及priority_queue</li>
-<li>可以對 bool 陣列進行位元運算，大幅加快速度的 bitset</li>
-</ul>
-<p>因此，學習使用 STL，能讓你的實力更上一層樓！</p>
-<h2 id="宣告"><a href="#宣告" class="headerlink" title="宣告"></a>宣告</h2><p>STL 的語法大致相近。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; ss;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; v2;</span><br></pre></td></tr></table></figure>
-<p>其中，想特別講一下&lt;&gt;。這是 C++ 裡的 template 功能，要用什麼型態就放在裡面，非常自由。想用二維陣列的話，就在 vector 裡面再包一個 vector 吧！</p>
-<h2 id="迭代器-iterator"><a href="#迭代器-iterator" class="headerlink" title="迭代器(iterator)"></a>迭代器(iterator)</h2><p>STL 中，有一個新的概念：迭代器。</p>
-<p><a target="_blank" rel="noopener" href="https://larry850806.github.io/2016/06/06/STL2/">寫得很好的教學文</a></p>
-<p>以往，如果要找到一個陣列 arr 開頭的位置，我們可以直接寫 arr，因為 arr 本身其實只是一個指標而已。要找到陣列第 N 項的位置，就是 arr+N，因為記憶體在陣列裡是連續的，所以可以直接加，但這些在 STL 中是做不到的。</p>
-<p>假設你宣告了一個 vector 名為 v，那這個 v 在之後的程式中，<strong>不是代表記憶體，而是整個容器。</strong></p>
-<p>因此若需要得到 v 開頭的位置，要寫： v.begin()。v 結束的位置要寫 v.end()。在 set 與 map 中將會有迭代器的進階應用。</p>
-<h2 id="成員函式-member-function"><a href="#成員函式-member-function" class="headerlink" title="成員函式(member function)"></a>成員函式(member function)</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_struct</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a, b, c;</span><br><span class="line">&#125; s;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    s.a = <span class="number">10</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>像是之前的 struct，假設我要得到 s 裡的 a 這個值，要寫 s.a。</p>
-<p>STL 中也有類似的概念，但是，裡面包的是函式！比如剛剛的 .begin()，呼叫它，得到的回傳值就是這個容器的開始位置。</p>
-<p>因為是函式，所以會有()的存在。有些函式需要傳入參數，就像正常使用函式那樣，在()中傳入就可以了。</p>
-<p>常見的成員函式有：</p>
-<ul>
-<li>.begin()：容器的開始位置</li>
-<li>.end() ：容器的結束位置</li>
-<li>.size() ：回傳容器大小，型態是 unsigned int，拿來跟 int 比較(.size() &gt; 5)沒有問題，但編譯器會噴警告。拿來進行運算則存在 overflow 風險(&lt;0的時候，unsigned int 就 overflow)。</li>
-<li>.empty() ：回傳容器是否為空，型態是 bool，盡量多使用 .empty()，而非 .size() == 0。</li>
-<li>(vector).push_back(x)：在後方加入元素 x</li>
-<li>(vector).pop_back()：移除最後方元素</li>
-<li>(set map).insert(x)：加入元素 x</li>
-</ul>
-<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>STL 超好用的！</p>
-<p>從下一章開始，將會一個一個介紹常用的 STL，請不知道是否存在的長期讀者們稍等一下！</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1252,12 +1241,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">標籤</span>
       </div>
   </nav>

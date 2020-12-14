@@ -39,14 +39,14 @@
 <meta property="og:description" content="從中間刪除？如果我要刪除陣列最前最後的元素，可以用 deque 解決。 那，如果我今天要刪除陣列中間某個元素，或是在陣列中間插入某個元素，該怎麼做呢？ 我們可以紀錄一個點的前、後方是誰，這樣的話，假設現在是1 -&gt; 2 -&gt; 3，如果我要刪除 2，我只要將 1 的後方指向 3、3 的前方指向 1，就能夠在 $O(1)$ 時間內完成刪除動作。 缺點無法隨機存取，也就是說，無法快速知道當前">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-12-14T02:48:54.000Z">
-<meta property="article:modified_time" content="2020-12-14T04:45:06.555Z">
+<meta property="article:modified_time" content="2020-12-14T05:26:43.909Z">
 <meta property="article:author" content="emanlaicepsa">
 <meta property="article:tag" content="演算法競賽">
 <meta property="article:tag" content="教學">
 <meta property="article:tag" content="入門">
 <meta property="article:tag" content="從零到一">
 <meta property="article:tag" content="STL">
-<meta property="article:tag" content="deque">
+<meta property="article:tag" content="list">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://emanlaicepsa.github.io/2020/12/14/0-24/">
@@ -205,7 +205,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-12-14 10:48:54 / 修改時間：12:45:06" itemprop="dateCreated datePublished" datetime="2020-12-14T10:48:54+08:00">2020-12-14</time>
+              <time title="創建時間：2020-12-14 10:48:54 / 修改時間：13:26:43" itemprop="dateCreated datePublished" datetime="2020-12-14T10:48:54+08:00">2020-12-14</time>
             </span>
 
           
@@ -260,7 +260,7 @@
               <a href="/tags/%E5%85%A5%E9%96%80/" rel="tag"># 入門</a>
               <a href="/tags/%E5%BE%9E%E9%9B%B6%E5%88%B0%E4%B8%80/" rel="tag"># 從零到一</a>
               <a href="/tags/STL/" rel="tag"># STL</a>
-              <a href="/tags/deque/" rel="tag"># deque</a>
+              <a href="/tags/list/" rel="tag"># list</a>
           </div>
 
         
@@ -272,7 +272,10 @@
     <a href="/2020/12/14/0-23/" rel="prev" title="0-23 deque">
       <i class="fa fa-chevron-left"></i> 0-23 deque
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/14/0-25/" rel="next" title="0-25 bitset">
+      0-25 bitset <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -352,12 +355,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">標籤</span>
       </div>
   </nav>

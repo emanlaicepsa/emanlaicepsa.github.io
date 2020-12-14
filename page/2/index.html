@@ -177,6 +177,105 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/11/30/0-16/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/30/0-16/" class="post-title-link" itemprop="url">0-16 STL簡介</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-11-30 09:44:37 / 修改時間：10:56:35" itemprop="dateCreated datePublished" datetime="2020-11-30T09:44:37+08:00">2020-11-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="STL-是什麼？"><a href="#STL-是什麼？" class="headerlink" title="STL 是什麼？"></a>STL 是什麼？</h2><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93">wiki</a></p>
+<p>STL 簡單來說，就是容器，裝資料的容器。</p>
+<p>之前，我們學習過的容器只有array而已，array的缺點有幾個：</p>
+<ol>
+<li>不能改變大小</li>
+<li>不能從前面插入元素(從前面插等於將整個陣列往後，可以想像，這超慢)</li>
+<li>不能自動排序好元素(也就是，插入一個數字後要重新排序很慢)</li>
+</ol>
+<p>但STL裡的容器很特別，他有：</p>
+<ul>
+<li>可以改變陣列大小的 vector</li>
+<li>可以從前方插入或移除元素的 deque、queue</li>
+<li>可以邊插入邊移除，一邊很快的排序的 set、map，以及priority_queue</li>
+<li>可以對 bool 陣列進行位元運算，大幅加快速度的 bitset</li>
+</ul>
+<p>因此，學習使用 STL，能讓你的實力更上一層樓！</p>
+<h2 id="宣告"><a href="#宣告" class="headerlink" title="宣告"></a>宣告</h2><p>STL 的語法大致相近。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; ss;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; v2;</span><br></pre></td></tr></table></figure>
+<p>其中，想特別講一下&lt;&gt;。這是 C++ 裡的 template 功能，要用什麼型態就放在裡面，非常自由。想用二維陣列的話，就在 vector 裡面再包一個 vector 吧！</p>
+<h2 id="迭代器-iterator"><a href="#迭代器-iterator" class="headerlink" title="迭代器(iterator)"></a>迭代器(iterator)</h2><p>STL 中，有一個新的概念：迭代器。</p>
+<p><a target="_blank" rel="noopener" href="https://larry850806.github.io/2016/06/06/STL2/">寫得很好的教學文</a></p>
+<p>以往，如果要找到一個陣列 arr 開頭的位置，我們可以直接寫 arr，因為 arr 本身其實只是一個指標而已。要找到陣列第 N 項的位置，就是 arr+N，因為記憶體在陣列裡是連續的，所以可以直接加，但這些在 STL 中是做不到的。</p>
+<p>假設你宣告了一個 vector 名為 v，那這個 v 在之後的程式中，<strong>不是代表記憶體，而是整個容器。</strong></p>
+<p>因此若需要得到 v 開頭的位置，要寫： v.begin()。v 結束的位置要寫 v.end()。在 set 與 map 中將會有迭代器的進階應用。</p>
+<h2 id="成員函式-member-function"><a href="#成員函式-member-function" class="headerlink" title="成員函式(member function)"></a>成員函式(member function)</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">my_struct</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a, b, c;</span><br><span class="line">&#125; s;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    s.a = <span class="number">10</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>像是之前的 struct，假設我要得到 s 裡的 a 這個值，要寫 s.a。</p>
+<p>STL 中也有類似的概念，但是，裡面包的是函式！比如剛剛的 .begin()，呼叫它，得到的回傳值就是這個容器的開始位置。</p>
+<p>因為是函式，所以會有()的存在。有些函式需要傳入參數，就像正常使用函式那樣，在()中傳入就可以了。</p>
+<p>常見的成員函式有：</p>
+<ul>
+<li>.begin()：容器的開始位置</li>
+<li>.end() ：容器的結束位置</li>
+<li>.size() ：回傳容器大小，型態是 unsigned int，拿來跟 int 比較(.size() &gt; 5)沒有問題，但編譯器會噴警告。拿來進行運算則存在 overflow 風險(&lt;0的時候，unsigned int 就 overflow)。</li>
+<li>.empty() ：回傳容器是否為空，型態是 bool，盡量多使用 .empty()，而非 .size() == 0。</li>
+<li>(vector).push_back(x)：在後方加入元素 x</li>
+<li>(vector).pop_back()：移除最後方元素</li>
+<li>(set map).insert(x)：加入元素 x</li>
+</ul>
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>STL 超好用的！</p>
+<p>從下一章開始，將會一個一個介紹常用的 STL，請不知道是否存在的長期讀者們稍等一下！</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/11/23/0-15/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1332,124 +1431,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/11/04/0-6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="emanlaicepsa">
-      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/04/0-6/" class="post-title-link" itemprop="url">0-6 進階輸入輸出</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2020-11-04 13:46:55" itemprop="dateCreated datePublished" datetime="2020-11-04T13:46:55+08:00">2020-11-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-11-11 17:45:52" itemprop="dateModified" datetime="2020-11-11T17:45:52+08:00">2020-11-11</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="輸入含空白的字串"><a href="#輸入含空白的字串" class="headerlink" title="輸入含空白的字串"></a>輸入含空白的字串</h2><p>若輸入一個字串，使用 cin 會讀入到空白為止，但是，如果輸入是像這樣：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dasd sakf jfsak fsakl</span><br></pre></td></tr></table></figure>
-
-<p>那該怎麼讀入呢？</p>
-<p>可以使用 4 次 cin，但如果空白個數不定，就糟糕了。</p>
-<p>在這裡，介紹新的輸入字串方式：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s;</span><br><span class="line">getline(<span class="built_in">cin</span>,s);</span><br></pre></td></tr></table></figure>
-<p>getline(cin,字串名) 可以讓你輸入整行的含空白字串，直到讀入換行符號’\n’為止。</p>
-<p>於是可以這樣輸入：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s;</span><br><span class="line">getline(<span class="built_in">cin</span>,s);</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;s&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>getline其實也可以指定讀到特定字元為止，附上<a target="_blank" rel="noopener" href="https://vimsky.com/zh-tw/examples/usage/getline-string-c.html">詳細教學連結</a>。</p>
-<p><strong>注意，若使用char[]宣告字串，語法不同，需這樣寫：</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> s[<span class="number">105</span>];</span><br><span class="line"><span class="built_in">cin</span>.getline(s);</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;s&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<p>這份講義之後的code，會全數使用string。</p>
-<h3 id="getline-與-cin-混用時"><a href="#getline-與-cin-混用時" class="headerlink" title="getline 與 cin 混用時"></a>getline 與 cin 混用時</h3><p>輸入一個整數，然後輸入一個含空白的字串，要怎麼寫呢？</p>
-<p>直覺的想法可能是：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="built_in">string</span> s;</span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">getline(<span class="built_in">cin</span>, s);</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; n &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<p>然而，輸入若是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">dasd fasf gasf </span><br></pre></td></tr></table></figure>
-<p>輸出的結果卻是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>為什麼會這樣呢？</p>
-<p>還記得 cin 一個整數時的運作原理嗎？一直讀入直到遇見不是整數的字元。</p>
-<p>那 getline 的運作原理是，讀入直到遇見換行字元。</p>
-<p>發現了嗎？若輸入的檔案是一整數、換行、一字串，cin 遇到換行停在換行的位置，這時使用 getline，就不幸的吃到那個換行後結束了。因此讀到的字串什麼都沒有。</p>
-<p>要怎麼解決這個問題呢？最簡單的方法是再呼叫一次getline：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="built_in">string</span> s;</span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">getline(<span class="built_in">cin</span>, s);</span><br><span class="line">getline(<span class="built_in">cin</span>, s);</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; n &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<p>然而，這麼寫會影響程式可讀性。因此，可以用 cin.ignore() 來表示我要忽略下一個字元：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="built_in">string</span> s;</span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line"><span class="built_in">cin</span>.ignore();</span><br><span class="line">getline(<span class="built_in">cin</span>, s);</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; n &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<p>這樣一來，換行字元就成功被跳過了！</p>
-<h2 id="cin-cout-加速"><a href="#cin-cout-加速" class="headerlink" title="cin/cout 加速"></a>cin/cout 加速</h2><p>cin/cout 其實是一個速度很慢的功能，原因請點<a target="_blank" rel="noopener" href="https://liam.page/2016/11/19/the-speed-of-reading-files-in-Cpp/#std-cin-%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E9%A2%9D%E5%A4%96%E7%9A%84%E5%B7%A5%E4%BD%9C">連結</a>。</p>
-<p>而速度於程式解題競賽中是相當重要的一部分，因此，我們要想辦法讓 cin/cout 加速。</p>
-<p>加速的方法有以下兩種：</p>
-<ol>
-<li><p>使用輸入優化</p>
-<p> 也就是在上方連結可看到的：</p>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ios::sync_with_stdio(<span class="number">0</span>), <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
-<p> 在main函式的開頭，打上這句，cin就加速許多，原因一樣在上方那篇。</p>
-<p> 因此看起來會像這樣：</p>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="number">0</span>),<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>避免使用 endl</p>
-<p> endl其實是由，’\n’與flush組成，flush會使目前輸出的所有東西立刻顯現至螢幕上，但作為代價，其速度並不高。因此，細心的讀者可以注意到，本講義中，所有需要換行的場合，都是使用’\n’進行換行</p>
-</li>
-</ol>
-<p>以上兩點，需同時使用，才能快速進行高達百萬級的輸入輸出。</p>
-<p>若只使用第一點，不使用第二點，則在輸出時仍然會因為flush過慢拖累整體執行效率。</p>
-<p>若只使用第二點，雖然輸出時不會 flush，但 cin 時預設也會 flush，因此依然很慢。</p>
-<p>雖然目前可能還不需要用到，但是在TLE時，請務必想想：是不是輸入太慢造成的問題？</p>
-<h2 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h2><p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/5/">TOJ 5</a></p>
-<p><a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/pro/355/">TOJ 355</a></p>
-<p>355這題會用到一點迴圈的概念，可以先往後讀，之後再回來。</p>
-<h2 id="AC-Code"><a href="#AC-Code" class="headerlink" title="AC Code"></a>AC Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TOJ 5</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> s;</span><br><span class="line">    getline(<span class="built_in">cin</span>, s);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Hello ,&quot;</span> &lt;&lt; s &lt;&lt; <span class="string">&quot; !\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TOJ 355</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, k;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="number">0</span>), <span class="built_in">cin</span>.tie(<span class="number">0</span>); <span class="comment">// 試試看把這行刪掉會發生什麼事</span></span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k; <span class="comment">// k 無用</span></span><br><span class="line">	<span class="keyword">int</span> mx = <span class="number">0</span>, sec = <span class="number">0</span>; <span class="comment">// 紀錄當前第一大與第二大數</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,x;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; x;</span><br><span class="line">		<span class="keyword">if</span>(x &gt; mx)&#123; <span class="comment">// 比第一大還大</span></span><br><span class="line">			sec = mx;</span><br><span class="line">			mx = x;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(x &gt; sec)&#123; <span class="comment">// 不比第一大還大，但比第二大還大</span></span><br><span class="line">			sec = x;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; sec &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1519,12 +1500,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">標籤</span>
       </div>
   </nav>
