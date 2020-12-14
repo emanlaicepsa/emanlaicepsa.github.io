@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="KtMH6V68Z2PZJ6LKvSp5sqJFn7TxZp3dVQovd_wsgOI" />
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-180989678-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-180989678-1');
+</script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"emanlaicepsa.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="有 stack，有 queue那理論上，應該要有一個 STL，同時具有 stack 跟 queue 的功能啊？ 也就是說，要可以從前面跟後面拿東西、刪東西。 先介紹這個比較厲害的！ 它不只可以從前面跟後面拿東西、刪東西，還可以隨時知道第 k 項是什麼！ 也就是說，它其實更像是可以從前方插入移除的 vector。 語法宣告： 1deque&lt;int&gt; dq;  加入元素： 12dq.pus">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-23 deque">
+<meta property="og:url" content="https://emanlaicepsa.github.io/2020/12/14/0-23/index.html">
+<meta property="og:site_name" content="從零開始的演算法競賽入門教學">
+<meta property="og:description" content="有 stack，有 queue那理論上，應該要有一個 STL，同時具有 stack 跟 queue 的功能啊？ 也就是說，要可以從前面跟後面拿東西、刪東西。 先介紹這個比較厲害的！ 它不只可以從前面跟後面拿東西、刪東西，還可以隨時知道第 k 項是什麼！ 也就是說，它其實更像是可以從前方插入移除的 vector。 語法宣告： 1deque&lt;int&gt; dq;  加入元素： 12dq.pus">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-12-14T00:42:18.000Z">
+<meta property="article:modified_time" content="2020-12-14T02:27:19.931Z">
+<meta property="article:author" content="emanlaicepsa">
+<meta property="article:tag" content="演算法競賽">
+<meta property="article:tag" content="教學">
+<meta property="article:tag" content="入門">
+<meta property="article:tag" content="從零到一">
+<meta property="article:tag" content="STL">
+<meta property="article:tag" content="deque">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://emanlaicepsa.github.io/2020/12/14/0-23/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>0-23 deque | 從零開始的演算法競賽入門教學</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z8B2VTRGNW"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Z8B2VTRGNW');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">從零開始的演算法競賽入門教學</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>文章</a>
+
+  </li>
+        <li class="menu-item menu-item-從零到一：基礎語法">
+
+    <a href="/tags/%E5%BE%9E%E9%9B%B6%E5%88%B0%E4%B8%80/" rel="section"><i class="fa fa-tags fa-fw"></i>從零到一：基礎語法</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/12/14/0-23/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          0-23 deque
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-12-14 08:42:18 / 修改時間：10:27:19" itemprop="dateCreated datePublished" datetime="2020-12-14T08:42:18+08:00">2020-12-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="有-stack，有-queue"><a href="#有-stack，有-queue" class="headerlink" title="有 stack，有 queue"></a>有 stack，有 queue</h2><p>那理論上，應該要有一個 STL，同時具有 stack 跟 queue 的功能啊？</p>
+<p>也就是說，要可以從前面跟後面拿東西、刪東西。</p>
+<p>先介紹這個比較厲害的！</p>
+<p>它不只可以從前面跟後面拿東西、刪東西，還可以隨時知道第 k 項是什麼！</p>
+<p>也就是說，它其實更像是可以從前方插入移除的 vector。</p>
+<h2 id="語法"><a href="#語法" class="headerlink" title="語法"></a>語法</h2><p>宣告：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; dq;</span><br></pre></td></tr></table></figure>
+
+<p>加入元素：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dq.push_back(<span class="number">1</span>);</span><br><span class="line">dq.push_front(<span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+
+<p>刪除元素：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dq.pop_back();</span><br><span class="line">dq.pop_front();</span><br></pre></td></tr></table></figure>
+
+<p>此外，由於支援隨機存取，因此如 sort、lower_bound 等在 vector 可以用的函式，在 deque 中當然也可以用！</p>
+<h2 id="缺點"><a href="#缺點" class="headerlink" title="缺點"></a>缺點</h2><p>慢。</p>
+<p>雖然各操作仍是 $O(1)$，但大約比 vector 慢 3 倍。</p>
+<p>沒事不會用到它，沒事不要用到它。</p>
+<p>對了，stack 跟 queue 其實是基於 deque 上的結構，也就是說，當你以為你在用 stack，其實程式幫你宣告的是 deque，即使你並不需要那些 deque 的功能。</p>
+<p>因此，stack 跟 queue 跟 deque 一樣慢。</p>
+<h2 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h2><p>★★★★<a target="_blank" rel="noopener" href="https://tioj.ck.tp.edu.tw/problems/1618">TIOJ 1618</a></p>
+<p>★★★★<a target="_blank" rel="noopener" href="https://tioj.ck.tp.edu.tw/problems/1566">TIOJ 1566</a></p>
+<h2 id="AC-Code"><a href="#AC-Code" class="headerlink" title="AC Code"></a>AC Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TIOJ 1618</span></span><br><span class="line"><span class="comment">// 搜尋 單調隊列</span></span><br><span class="line"><span class="comment">// 在任何時刻能看到的大樓，其高度必定由左往右遞減</span></span><br><span class="line"><span class="comment">// 用pop_front維護視力、pop_back維護高度遞減</span></span><br><span class="line"><span class="comment">// 可參考https://koios1143.github.io/2020/09/12/TOJ169/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pii pair<span class="meta-string">&lt;ll,ll&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">ll n, k, h[<span class="number">500005</span>], b[<span class="number">500005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="number">0</span>), <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">cin</span> &gt;&gt; h[i];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">cin</span> &gt;&gt; b[i];</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">deque</span>&lt;pii&gt; dq;</span><br><span class="line">	ll cur = <span class="number">0</span>, ans = <span class="number">-1e18</span>, ansid = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">while</span>(!dq.empty() &amp;&amp; dq[<span class="number">0</span>].first &lt;= i-k)&#123;</span><br><span class="line">			cur -= b[dq[<span class="number">0</span>].first];</span><br><span class="line">			dq.pop_front();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span>(!dq.empty() &amp;&amp; dq[dq.size()<span class="number">-1</span>].second &lt;= h[i])&#123;</span><br><span class="line">			cur -= b[dq[dq.size()<span class="number">-1</span>].first];</span><br><span class="line">			dq.pop_back();</span><br><span class="line">		&#125;</span><br><span class="line">		cur += b[i];</span><br><span class="line">		dq.emplace_back(i, h[i]);</span><br><span class="line">		<span class="keyword">if</span>(cur &gt; ans)&#123;</span><br><span class="line">			ans = cur;</span><br><span class="line">			ansid = i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; ansid &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; ans &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TIOJ 1566</span></span><br><span class="line"><span class="comment">// 搜尋 單調隊列</span></span><br><span class="line"><span class="comment">// 維護區間最大值與最小值</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pii pair<span class="meta-string">&lt;ll,ll&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">ll n, m, k, h[<span class="number">10000005</span>];</span><br><span class="line"><span class="built_in">deque</span>&lt;pii&gt; mx, mn;</span><br><span class="line"><span class="built_in">vector</span>&lt;pii&gt; ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="number">0</span>), <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; k;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">cin</span> &gt;&gt; h[i];</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">while</span>(!mx.empty() &amp;&amp; mx[<span class="number">0</span>].first &lt;= i-m) mx.pop_front();</span><br><span class="line">		<span class="keyword">while</span>(!mn.empty() &amp;&amp; mn[<span class="number">0</span>].first &lt;= i-m) mn.pop_front();</span><br><span class="line">		<span class="keyword">while</span>(!mx.empty() &amp;&amp; mx[mx.size()<span class="number">-1</span>].second &lt;= h[i]) mx.pop_back();</span><br><span class="line">		<span class="keyword">while</span>(!mn.empty() &amp;&amp; mn[mn.size()<span class="number">-1</span>].second &gt;= h[i]) mn.pop_back();</span><br><span class="line">		mx.emplace_back(i, h[i]);</span><br><span class="line">		mn.emplace_back(i, h[i]);</span><br><span class="line">		<span class="keyword">if</span>(mx[<span class="number">0</span>].second - mn[<span class="number">0</span>].second == k)&#123;</span><br><span class="line">			<span class="keyword">if</span>(i &lt;= m) ans.emplace_back(<span class="number">1</span>, i);</span><br><span class="line">			<span class="keyword">else</span> ans.emplace_back(i-m+<span class="number">1</span>, i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=n+<span class="number">1</span>;i&lt;n+m;i++)&#123;</span><br><span class="line">		<span class="keyword">while</span>(!mx.empty() &amp;&amp; mx[<span class="number">0</span>].first &lt;= i-m) mx.pop_front();</span><br><span class="line">		<span class="keyword">while</span>(!mn.empty() &amp;&amp; mn[<span class="number">0</span>].first &lt;= i-m) mn.pop_front();</span><br><span class="line">		<span class="keyword">if</span>(mx[<span class="number">0</span>].second - mn[<span class="number">0</span>].second == k)&#123;</span><br><span class="line">			<span class="keyword">if</span>(i-m &gt; <span class="number">0</span>) ans.emplace_back(i-m+<span class="number">1</span>, n);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; ans.size() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> i:ans)&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; i.first &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; i.second &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AB%B6%E8%B3%BD/" rel="tag"># 演算法競賽</a>
+              <a href="/tags/%E6%95%99%E5%AD%B8/" rel="tag"># 教學</a>
+              <a href="/tags/%E5%85%A5%E9%96%80/" rel="tag"># 入門</a>
+              <a href="/tags/%E5%BE%9E%E9%9B%B6%E5%88%B0%E4%B8%80/" rel="tag"># 從零到一</a>
+              <a href="/tags/STL/" rel="tag"># STL</a>
+              <a href="/tags/deque/" rel="tag"># deque</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/10/0-22/" rel="prev" title="0-22 priority_queue">
+      <i class="fa fa-chevron-left"></i> 0-22 priority_queue
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89-stack%EF%BC%8C%E6%9C%89-queue"><span class="nav-number">1.</span> <span class="nav-text">有 stack，有 queue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AA%9E%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">語法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E9%BB%9E"><span class="nav-number">3.</span> <span class="nav-text">缺點</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92"><span class="nav-number">4.</span> <span class="nav-text">練習</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AC-Code"><span class="nav-number">5.</span> <span class="nav-text">AC Code</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">emanlaicepsa</p>
+  <div class="site-description" itemprop="description">由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100005895303371" title="聯絡我 → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100005895303371" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>聯絡我</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-github"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">emanlaicepsa</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://emanlaicepsa.github.io/2020/12/14/0-23/";
+    this.page.identifier = "2020/12/14/0-23/";
+    this.page.title = "0-23 deque";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://emanlaicepsa.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
