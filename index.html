@@ -270,6 +270,91 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/12/14/0-24/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/14/0-24/" class="post-title-link" itemprop="url">0-24 linked-list</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-12-14 10:48:54 / 修改時間：12:45:06" itemprop="dateCreated datePublished" datetime="2020-12-14T10:48:54+08:00">2020-12-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="從中間刪除？"><a href="#從中間刪除？" class="headerlink" title="從中間刪除？"></a>從中間刪除？</h2><p>如果我要刪除陣列最前最後的元素，可以用 deque 解決。</p>
+<p>那，如果我今天要刪除陣列中間某個元素，或是在陣列中間插入某個元素，該怎麼做呢？</p>
+<p>我們可以紀錄一個點的前、後方是誰，這樣的話，假設現在是1 -&gt; 2 -&gt; 3，如果我要刪除 2，我只要將 1 的後方指向 3、3 的前方指向 1，就能夠在 $O(1)$ 時間內完成刪除動作。</p>
+<h2 id="缺點"><a href="#缺點" class="headerlink" title="缺點"></a>缺點</h2><p>無法隨機存取，也就是說，無法快速知道當前的第 k 項是誰。只能知道頭、尾。</p>
+<p>即使刪除一個元素只需要 $O(1)$，但是光是找到那個元素就要花 $O(N)$ 了啊。我要刪掉 2，但我不知道 2 在裡面的位置在哪裡，於是我只好從頭一個一個開始找，直到我找到 2，這也是非常慢的做法。</p>
+<p>因此，linked-list 不太常被使用，雖然 STL 有 list 這個結構，但我還沒用過它。</p>
+<h2 id="唯一的用處"><a href="#唯一的用處" class="headerlink" title="唯一的用處"></a>唯一的用處</h2><p>來看看這題：</p>
+<p><a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=b938">ZJ 938</a></p>
+<p>很明顯的，需要利用 linked-list 的概念來解決，只需要很簡單的刪除一個人後面的人就好。</p>
+<p>那這題的瓶頸就在於，要如何維護一個人後面的人是誰。</p>
+<p>一開始，每個人的後面都是自己的編號 + 1，當我刪除 1 後面的數 2 時，1 的後面就變成了原本 2 的後面 3，而其他人後面的數都不會被改變。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 -&gt; 2 -&gt; 3 -&gt; 4</span><br><span class="line">1 -&gt; X -&gt; 3 -&gt; 4 (2被殺)</span><br><span class="line">1 ------&gt; 3 -&gt; 4 (1後面的人變成了原來2後面的人：3)</span><br></pre></td></tr></table></figure>
+
+<p>所以，我們開個陣列紀錄每個人現在後面是誰就好啦！完全不需要 STL 的 list 呢！事實上，list 根本沒有辦法做這題，因為找到一個人的位置需要 $O(N)$。</p>
+<h2 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h2><p><a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=b938">ZJ b938</a></p>
+<p><a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=d718">ZJ d718</a></p>
+<p>★★★★ <a target="_blank" rel="noopener" href="https://tioj.ck.tp.edu.tw/problems/1225">TIOJ 1225</a></p>
+<p>★★★★ <a target="_blank" rel="noopener" href="https://tioj.ck.tp.edu.tw/problems/1225">TIOJ 1930</a></p>
+<h2 id="AC-Code"><a href="#AC-Code" class="headerlink" title="AC Code"></a>AC Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ZJ b938</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">int</span> nxt[<span class="number">1000005</span>], dead[<span class="number">1000005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="number">0</span>), <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) nxt[i] = i+<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,x;i&lt;=m;i++)&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; x;</span><br><span class="line">		<span class="keyword">if</span>(dead[x] || nxt[x] == n+<span class="number">1</span>)&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;0u0 ...... ?\n&quot;</span>;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; nxt[x] &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">		dead[nxt[x]] = <span class="number">1</span>;</span><br><span class="line">		nxt[x] = nxt[nxt[x]];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ZJ d718</span></span><br><span class="line"><span class="comment">// 將沒有組別的人的編號設為 x + 10000，以避免與組混淆</span></span><br><span class="line"><span class="comment">// 題目沒說清楚，沒有組的人也有可能入列，例如範測 1 的 8</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">ll n, team[<span class="number">1000005</span>];</span><br><span class="line"><span class="keyword">bool</span> inq[<span class="number">10005</span>];</span><br><span class="line"><span class="built_in">queue</span>&lt;ll&gt; q;</span><br><span class="line"><span class="built_in">queue</span>&lt;ll&gt; cur[<span class="number">10005</span>];</span><br><span class="line"><span class="built_in">string</span> s;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	fill(inq, inq+<span class="number">10001</span>, <span class="number">0</span>);</span><br><span class="line">	fill(team, team+<span class="number">1000001</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">while</span>(!q.empty()) q.pop();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">10000</span>;i++) <span class="keyword">while</span>(!cur[i].empty()) cur[i].pop();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,x;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; x;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>,y;j&lt;=x;j++)&#123;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; y;</span><br><span class="line">			team[y] = i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; s;</span><br><span class="line">		<span class="keyword">if</span>(s[<span class="number">0</span>] == <span class="string">&#x27;E&#x27;</span>)&#123;</span><br><span class="line">			<span class="keyword">int</span> x;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; x;</span><br><span class="line">			<span class="keyword">if</span>(x &gt; <span class="number">1000000</span> || team[x] == <span class="number">0</span>)&#123;</span><br><span class="line">				q.push(<span class="number">10000</span>+x);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">				<span class="keyword">if</span>(!inq[team[x]]) q.push(team[x]), inq[team[x]] = <span class="number">1</span>;</span><br><span class="line">				cur[team[x]].push(x);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(s[<span class="number">0</span>] == <span class="string">&#x27;D&#x27;</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(q.front() &gt;= <span class="number">10000</span>)&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; q.front() - <span class="number">10000</span> &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">				q.pop();</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; cur[q.front()].front() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">				cur[q.front()].pop();</span><br><span class="line">				<span class="keyword">if</span>(cur[q.front()].empty())&#123;</span><br><span class="line">					inq[q.front()] = <span class="number">0</span>;</span><br><span class="line">					q.pop();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="number">0</span>), <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">int</span> t = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n)&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Line #&quot;</span> &lt;&lt; ++t &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">		solve();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TIOJ 1225</span></span><br><span class="line"><span class="comment">// 由小到大刪除元素</span></span><br><span class="line"><span class="comment">// 會使得結果變差的原因是，明明 b 能消掉 a，但 b 卻在 a 前就被消掉了。</span></span><br><span class="line"><span class="comment">// 為了不發生上述狀況，只要由小到大刪除元素就沒問題啦！</span></span><br><span class="line"><span class="comment">// 這題有 stack 的解，複雜度相同，但較好寫，可以試試想看看。</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pii pair<span class="meta-string">&lt;ll, ll&gt;</span></span></span><br><span class="line"></span><br><span class="line">ll n, arr[<span class="number">1000005</span>], fr[<span class="number">1000005</span>], bk[<span class="number">1000005</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;pii&gt; v;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="number">0</span>), <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">cin</span> &gt;&gt; arr[i], fr[i] = i<span class="number">-1</span>, bk[i] = i+<span class="number">1</span>;</span><br><span class="line">	fr[n+<span class="number">1</span>] = n;</span><br><span class="line">	bk[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	arr[<span class="number">0</span>] = arr[n+<span class="number">1</span>] = <span class="number">1e12</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) v.emplace_back(arr[i], i);</span><br><span class="line">	sort(v.begin(), v.end());</span><br><span class="line">	</span><br><span class="line">	ll ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n<span class="number">-1</span>;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> idx = v[i].second;</span><br><span class="line">		<span class="keyword">if</span>(arr[fr[idx]] &gt; arr[bk[idx]]) ans += arr[bk[idx]];</span><br><span class="line">		<span class="keyword">else</span> ans += arr[fr[idx]];</span><br><span class="line"></span><br><span class="line">		bk[fr[idx]] = bk[idx];</span><br><span class="line">		fr[bk[idx]] = fr[idx];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TIOJ 1930</span></span><br><span class="line"><span class="comment">// 麻煩的實作題，好好維護前面跟後面是誰</span></span><br><span class="line"><span class="comment">// 為什麼distribute操作不會 TLE 呢？</span></span><br><span class="line"><span class="comment">// 因為總共可能離開隊伍的人數 = 進入隊伍的人數 = N</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, a1, fr[<span class="number">2000005</span>], bk[<span class="number">2000005</span>]; </span><br><span class="line"></span><br><span class="line">ll dump;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(c == <span class="number">1</span>)&#123;</span><br><span class="line">		bk[fr[b]] = a;</span><br><span class="line">		fr[a] = fr[b];</span><br><span class="line">		fr[b] = a;</span><br><span class="line">		bk[a] = b;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		fr[bk[b]] = a;</span><br><span class="line">		bk[a] = bk[b];</span><br><span class="line">		bk[b] = a;</span><br><span class="line">		fr[a] = b;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rebuild</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">	bk[fr[a]] = bk[b];</span><br><span class="line">	fr[bk[b]] = fr[a];</span><br><span class="line">	</span><br><span class="line">	bk[fr[c]] = a;</span><br><span class="line">	fr[a] = fr[c];</span><br><span class="line">	fr[c] = b;</span><br><span class="line">	bk[b] = c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">distribute</span><span class="params">(<span class="keyword">int</span> a, ll b, <span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(c == <span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">int</span> now = a;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=b;i++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(now == <span class="number">0</span>)&#123;</span><br><span class="line">				dump += b-i+<span class="number">1</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			ans.emplace_back(now);</span><br><span class="line">			bk[fr[now]] = bk[now];</span><br><span class="line">			fr[bk[now]] = fr[now];</span><br><span class="line">			now = fr[now];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">int</span> now = a;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=b;i++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(now == n+<span class="number">1</span>)&#123;</span><br><span class="line">				dump += b-i+<span class="number">1</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			ans.emplace_back(now);</span><br><span class="line">			bk[fr[now]] = bk[now];</span><br><span class="line">			fr[bk[now]] = fr[now];</span><br><span class="line">			now = bk[now];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	dump = <span class="number">0</span>;</span><br><span class="line">	ans.clear();</span><br><span class="line">	fill(fr, fr+<span class="number">2000005</span>, <span class="number">0</span>);</span><br><span class="line">	fill(bk, bk+<span class="number">2000005</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; a1;</span><br><span class="line">	bk[<span class="number">0</span>] = a1, bk[a1] = n+<span class="number">1</span>, fr[a1] = <span class="number">0</span>, fr[n+<span class="number">1</span>] = a1;</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,k,a,b,c;i&lt;=m;i++)&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; k &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">		<span class="keyword">if</span>(k == <span class="number">1</span>) insert(a, b, c);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(k == <span class="number">2</span>) rebuild(a, b, c);</span><br><span class="line">		<span class="keyword">else</span> distribute(a, b, c);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; dump &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> i:ans) <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="number">0</span>), <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">int</span> t; <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">	<span class="keyword">while</span>(t--) solve();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/12/14/0-23/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1098,97 +1183,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/11/23/0-15/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="emanlaicepsa">
-      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/23/0-15/" class="post-title-link" itemprop="url">0-15 段落小結</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              
-
-              <time title="創建時間：2020-11-23 10:44:23 / 修改時間：12:28:34" itemprop="dateCreated datePublished" datetime="2020-11-23T10:44:23+08:00">2020-11-23</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="你現在的能力"><a href="#你現在的能力" class="headerlink" title="你現在的能力"></a>你現在的能力</h2><p>如果我說，你現在所學會的東西，足夠你進入奧林匹亞選訓營，你相信嗎？</p>
-<p>相信的人，要不是天真，就是愚蠢。過度的自信可是一點好處都沒有的。</p>
-<p>那麼，你跟演算法競賽選手比起來，到底差在哪裡呢？</p>
-<p>是學的東西不夠多嗎？比如說什麼定理、什麼帶人名的演算法、什麼現象不能解釋、什麼特例、什麼公式……等等，知道的還不夠多嗎？</p>
-<p>即使這句話有一定的正確性，知道一定數量的演算法對想到題目的解答的確有幫助，但我仍想否定它。</p>
-<p><strong>高中時期大多數的題目，不需要任何艱深的演算法</strong></p>
-<p>來看看剛結束的 <a target="_blank" rel="noopener" href="https://contest.cc.ntu.edu.tw/npsc2020/teamclient/semi_senior.pdf">NPSC 初賽</a> 吧 ~</p>
-<p>這份題本中，B 題應該是現在的你可以解出的。(提示：一個數會被減幾次？會被加幾次？)，而 A、C、G，是可以不需要任何前面有掛人名的算法解出的。</p>
-<p>高中程式競賽的目的，是在考驗<strong>自行設計方法解決問題</strong>的能力，而非<strong>知識量的多寡</strong>，請各位務必要記著，思考才是演算法競賽的重點。</p>
-<p>未來的練習題，難度會逐漸提升，但希望各位若以本系列做為程式競賽入門時，不要輕易的跳過任何一題 3 星以下的題目。或許，在以前你學習的所有事情中，每一件都是可以直接掃過去，快速看完，也不會漏掉太多東西。但在這份教學這樣做的話，你的收穫將會少非常多。大約 60% 的知識，藏在例題裡。</p>
-<h2 id="你的迷惘"><a href="#你的迷惘" class="headerlink" title="你的迷惘"></a>你的迷惘</h2><ul>
-<li>要怎麼知道自己的學習成效到底好不好？</li>
-<li>我一天練習兩小時，真的有進步嗎？</li>
-<li>(雖然有點早)我可以放棄課業，全力投入演算法競賽，拚特選/保送嗎？</li>
-</ul>
-<p>針對前兩個問題，我建議可以報名 <strong>APCS</strong>，或是 <strong>TOI 線上練習賽與海選</strong>。他們共同的特點，是定期舉行、以及題目較為基本等，是個自我評量的好選擇。</p>
-<p>加入很多初學者們的新手村(目前來看應該是 APCS 的討論社群)，看看裡面被討論的題目，看看自己能否成功解出，並試著將自己的想法具體為文字，與他人交流解法，也是個不錯的方式。</p>
-<p>或許不少人聽過 Codeforces 這個平台，也可能打過幾場線上競賽。這是一個相當棒的程式解題平台，定時舉辦題目品質不錯的競賽，但我<strong>不建議</strong>初學者參加過多。</p>
-<p>我認為學習是需要有基底的，不停參加競賽，比如一個想學習數學知識的人，整天只刷考古題，刷完了，不會還是不會，但看完題解後又感覺自己懂了，於是再刷下一份。這樣的學習方式並不健康，而且容易導致根基不穩。</p>
-<p>有關 Codeforces，在後續的教學中，可能會有一個章節，來介紹這個平台，以及我使用它的方式。</p>
-<p>第三個問題，我的回答是：<strong>當然可以，但我並不建議</strong>。</p>
-<p>選擇放棄課業，是個人的事情，我並沒有理由阻攔，所以我會說可以。但我不建議的原因是，演算法競賽是活的、多變的。這樣一件需要創造力與想像力的事情，若是背上了升學的沉重壓力，那雙還沒有完全伸展開的翅膀，還能無所顧忌的在藍天中自由飛行嗎？</p>
-<p>給可能頭腦只有 0 跟 1 的人的翻譯：<strong>壓力太大打不好競賽啦</strong></p>
-<h2 id="一些心得"><a href="#一些心得" class="headerlink" title="一些心得"></a>一些心得</h2><p>開始做這個 blog 也已經一個多月了，想來說說為什麼要有這個系列。</p>
-<p>我的高中是台南一中，是目前濁水溪以南，資訊資源最豐富的學校之一。在高一時，我加入了資訊社，從而第一次有機會接觸到程式設計與演算法競賽，在此之前，我甚至不知道有 C++ 這個語言，也未曾寫過任何一行程式。在傳統的教育體制底下，相信著：<strong>你什麼都不用管，好好讀書，考上大學，然後人生勝利</strong>。</p>
-<p><strong>不是每個學習演算法競賽的人，都要當奧林匹亞金牌</strong>。作為接觸程式設計的起點、以及邏輯思考的練習，我認為演算法競賽，是相當有趣的，也應該被更多高中生認識。</p>
-<p>然而，大多數人並沒有這種機會，特別是南部學生。若沒有台南一中資訊社的資源，我不可能踏入門檻這麼高的演算法競賽領域。網路上雖然有學習資源，但要不是已經是寫給稍有程度的人，要不就是散落在各個網站，沒有一個有辦法帶領像兩年前的我一樣的初學者，認識演算法競賽的趣味。看看全國賽、NPSC、與奧林匹亞的名單，便可略知一二。難道除了建中與竹科實中以外，所有人都是笨蛋嗎？當然不是。武陵高中的學生不可能是笨蛋，但在過去幾年，武陵高中幾乎沒有學生進入選訓營與 NPSC 決賽。</p>
-<p><strong>高中演算法競賽，目前缺少了一個引路人，將而我期許自己能成為他</strong></p>
-<p>在拿到銀牌後，透過保送制度，我在開學的一年前，就得到了台大資工教室裡的一個位置。這一年，要做什麼呢？除了持續閱讀、建構自己的世界觀之外，我希望能對世界有所貢獻，畢竟一路走來，我得到的太多、付出的卻太少。在演算法競賽之路上，接受了許多學長們的幫助，卻無以回報。而如今正好有著這一段自由時間，這時不做，更待何時？謹以此系列教學文，向演算法競賽的前輩們，表達我的感謝。</p>
-<p>這系列的文章定位為入門導向，希望能帶領更多學生(特別是南部)走入演算法競賽。在學習的過程中，一定有失敗、有挫折，但唯有高溫，才能讓肉片，散發美味的香氣(沒錯現在12:30 我好餓)。期待在完成這系列的旅程中，與各位讀者攜手前行、共同成長。也請大家不吝提出意見，讓這份教學能真正貼近初學者的需求！</p>
-<blockquote>
-<p>2020.11.23 emanlaicepsa 於台南一中資訊社部</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1258,7 +1252,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
