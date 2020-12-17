@@ -177,6 +177,134 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/11/05/0-7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/05/0-7/" class="post-title-link" itemprop="url">0-7 陣列</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-11-05 12:35:55" itemprop="dateCreated datePublished" datetime="2020-11-05T12:35:55+08:00">2020-11-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-11-10 17:33:24" itemprop="dateModified" datetime="2020-11-10T17:33:24+08:00">2020-11-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="陣列"><a href="#陣列" class="headerlink" title="陣列"></a>陣列</h2><p><a target="_blank" rel="noopener" href="https://openhome.cc/Gossip/CppGossip/OneDimArray.html">詳細的陣列教學文</a></p>
+<p>當我們要儲存 5 個變數時，要怎麼做呢？</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a, b, c, d, e;</span><br></pre></td></tr></table></figure>
+
+<p>我們可能會這樣寫。但，如果今天要儲存 5000 個變數時，要怎麼做呢？</p>
+<h2 id="宣告"><a href="#宣告" class="headerlink" title="宣告"></a>宣告</h2><p>使用陣列，可以以陣列名稱+位置，儲存大量資料，基本語法如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">15</span>];</span><br><span class="line"><span class="keyword">char</span> c[<span class="number">15</span>];</span><br><span class="line"><span class="keyword">double</span> d[<span class="number">20</span>];</span><br><span class="line"><span class="built_in">string</span> strs[<span class="number">15</span>];</span><br></pre></td></tr></table></figure>
+<p>arr 是這個 int 陣列的名稱，而15則是它的大小。</p>
+<p>陣列也可以在宣告時指定值，例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">4</span>] = &#123;<span class="number">1</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;arr[<span class="number">0</span>]&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;arr[<span class="number">3</span>]&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 3</span><br></pre></td></tr></table></figure>
+<p>可以不用指派每一個元素的值，只指派前幾個，不足者會自動補 0。像這樣：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">4</span>] = &#123;<span class="number">1</span>, <span class="number">4</span>&#125;;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;arr[<span class="number">0</span>]&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;arr[<span class="number">3</span>]&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 0</span><br></pre></td></tr></table></figure>
+
+<p><strong>但若全部未指定值，則陣列中每個元素的值可能是任何值！</strong></p>
+<p><strong>陣列宣告過後，不可改變大小或重新宣告。</strong></p>
+<h2 id="取值、修改"><a href="#取值、修改" class="headerlink" title="取值、修改"></a>取值、修改</h2><p>如果我們想輸出陣列中位於 3 號的元素的值，這樣寫：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>&lt;&lt;arr[<span class="number">3</span>]&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>其中，arr是你自己取的陣列名稱，[]是中括號。</p>
+<p>要特別注意的一點是，<strong>在程式語言的世界裡，編號從 0 開始，因此編號 3 其實是這個陣列的第 4 個值。若宣告大小為 5 的陣列，其可用空間為 0 號到 4 號，若使用 5 號元素會產生不可預期的錯誤！</strong></p>
+<p>陣列中的元素就像一般元素一樣，可以加減乘除，可以任意指派值，直接把它當成平常的變數就好：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr[<span class="number">1</span>] += <span class="number">15</span>;</span><br><span class="line">arr[<span class="number">3</span>] = arr[<span class="number">2</span>] - <span class="number">1</span>;</span><br><span class="line">arr[<span class="number">5</span>] = <span class="number">65</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="產生-RE-錯誤"><a href="#產生-RE-錯誤" class="headerlink" title="產生 RE 錯誤"></a>產生 RE 錯誤</h2><p>若存取了超過陣列空間的元素，例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">5</span>];</span><br><span class="line">arr[<span class="number">-1</span>] += <span class="number">5</span>; <span class="comment">// 不可是負的</span></span><br><span class="line">arr[<span class="number">5</span>] --; <span class="comment">// 陣列大小是 5 的話，可用的編號是 0 ~ 4</span></span><br></pre></td></tr></table></figure>
+<p>有機率產生 Runtime Error 錯誤。</p>
+<p>錯誤發生時，其表現與 / 0 時相同，在windows上會當機一小段時間，之後出現非 0 的 return code。</p>
+<p>這樣的錯誤不會導致Compile Error，因此<strong>很危險</strong>。更危險的地方是，這樣的錯誤不一定每一次都會發生，甚至<strong>有機率在本地測試時是正確的！</strong></p>
+<p>因此，務必特別注意此類錯誤，不要再依賴編譯器了！</p>
+<h2 id="競賽中的慣例"><a href="#競賽中的慣例" class="headerlink" title="競賽中的慣例"></a>競賽中的慣例</h2><h3 id="陣列放在全域"><a href="#陣列放在全域" class="headerlink" title="陣列放在全域"></a>陣列放在全域</h3><p>全域，在這裡先理解為：main函式以外。</p>
+<p>全域與它的相反–區域是個重要的概念，之後會有詳細介紹。</p>
+<p>如果要宣告陣列，在競賽中我們通常不會這樣寫：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> arr[<span class="number">5</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我們會這樣寫：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">5</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>為什麼呢？有以下兩個原因</p>
+<ol>
+<li><p>全域變數會自動初始化為每種型態的預設值，在 int 是 0，在 string 是 “” (空字串)，可避免很多不必要的錯誤。</p>
+<ul>
+<li>複習一下，如果宣告在區域又未指定初始值，它的值是<strong>不一定</strong>的喔！</li>
+</ul>
+</li>
+<li><p>在<a target="_blank" rel="noopener" href="https://www.itread01.com/content/1546506197.html">硬體中的儲存位置</a>，導致區域陣列通常只能開到數百萬的大小，但全域陣列可開到數千萬。</p>
+<ul>
+<li>區域陣列開太大超出限制的話，會在運行到那一行時產生RE。</li>
+<li>全域陣列開太大超出限制的話，在編譯時，編譯器就會將其擋住，無法通過編譯。</li>
+</ul>
+</li>
+</ol>
+<p>因此，在競賽上，我們通常將陣列宣告於全域。</p>
+<h3 id="開多大？"><a href="#開多大？" class="headerlink" title="開多大？"></a>開多大？</h3><p>在全域變數宣告的缺點，便是無法依據輸入大小調整陣列大小，不能寫像這樣的code：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;N;</span><br><span class="line">    <span class="keyword">int</span> arr[N+<span class="number">5</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>因為陣列宣告後，是不可改變大小的，因此通常以題目的最大值作為陣列大小。</strong></p>
+<p>你說題目沒有給你最大個數限制？那就亂開吧，發生RE的話，就再開大一點。</p>
+<p>順帶一提，沒有範圍的題目，99%是爛題。</p>
+<h2 id="多維陣列"><a href="#多維陣列" class="headerlink" title="多維陣列"></a>多維陣列</h2><p>陣列是可以有多個維度的，例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">15</span>][<span class="number">15</span>][<span class="number">15</span>][<span class="number">15</span>];</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;arr[<span class="number">1</span>][<span class="number">2</span>][<span class="number">3</span>][<span class="number">4</span>];</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;arr[<span class="number">5</span>][<span class="number">3</span>][<span class="number">1</span>][<span class="number">0</span>]&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>若一個陣列有 n 列 m 行，則其可儲存 n*m 個資料，編號從 [0][0] 、 [0][1] …. [0][m-1] [1][0] … 到 [n-1][m-1]。多維以此類推。</p>
+<p>多維陣列用法與相同。要注意，乘起來不可以超過大小限制(約 $10^8$)，不然會 RE / CE。</p>
+<h2 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h2><p>陣列練習題通常會配合迴圈的使用，以進行讀取或輸出，因此練習題統一置於下一章節。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/11/04/0-6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1207,7 +1335,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-12-14 14:43:32" itemprop="dateModified" datetime="2020-12-14T14:43:32+08:00">2020-12-14</time>
+                <time title="修改時間：2020-12-17 15:58:46" itemprop="dateModified" datetime="2020-12-17T15:58:46+08:00">2020-12-17</time>
               </span>
 
           
@@ -1277,7 +1405,7 @@
 <p><strong>不可替代程度：★★</strong></p>
 <h2 id="0-25-bitset"><a href="#0-25-bitset" class="headerlink" title="0-25 bitset"></a><a href="/2020/12/14/0-25">0-25 bitset</a></h2><p><strong>常見程度：★</strong></p>
 <p><strong>不可替代程度：★★★★</strong></p>
-<h2 id="0-26-本章總結"><a href="#0-26-本章總結" class="headerlink" title="0-26 本章總結"></a>0-26 本章總結</h2>
+<h2 id="0-26-本章總結"><a href="#0-26-本章總結" class="headerlink" title="0-26 本章總結"></a><a href="/2020/12/17/0-26">0-26 本章總結</a></h2>
       
     </div>
 
@@ -1361,7 +1489,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>

@@ -31,24 +31,23 @@
     var CONFIG = {"hostname":"emanlaicepsa.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="非常歡迎您光臨「從零開始的演算法競賽入門指南」（以下簡稱本網站），為了讓您能夠安心的使用本網站的各項服務與資訊，特此向您說明本網站的隱私權保護政策，以保障您的權益，請您詳閱下列內容： 一、隱私權保護政策的適用範圍隱私權保護政策內容，包括本網站如何處理在您使用網站服務時收集到的個人識別資料。隱私權保護政策不適用於本網站以外的相關連結網站，也不適用於非本網站所委託或參與管理的人員。 二、個人資料的蒐集">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Privacy-Policy">
-<meta property="og:url" content="https://emanlaicepsa.github.io/Privacy-Policy/index.html">
+  <meta name="description" content="完結啦！你已經學會了拿下 IOI 金牌所需要的所有語法了！是不是很簡單呢？ 不知道看到例題的感想，是覺得超級簡單、或是難到完全想不到、或是剛剛好呢？ 在後段的 STL 章節裡，我增加了例題的難度，四星的題目約是全國賽門檻等級，也就是說，如果你能不依靠詳解解出四星的題目，而你又幸運的不住台北，那你可能已經有參與全國賽的實力了喔！ 五星以上的題目們，就真的非常難了。其中在 set 中一題被我標為 8">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-26 本章總結">
+<meta property="og:url" content="https://emanlaicepsa.github.io/2020/12/17/0-26/index.html">
 <meta property="og:site_name" content="從零開始的演算法競賽入門教學">
-<meta property="og:description" content="非常歡迎您光臨「從零開始的演算法競賽入門指南」（以下簡稱本網站），為了讓您能夠安心的使用本網站的各項服務與資訊，特此向您說明本網站的隱私權保護政策，以保障您的權益，請您詳閱下列內容： 一、隱私權保護政策的適用範圍隱私權保護政策內容，包括本網站如何處理在您使用網站服務時收集到的個人識別資料。隱私權保護政策不適用於本網站以外的相關連結網站，也不適用於非本網站所委託或參與管理的人員。 二、個人資料的蒐集">
+<meta property="og:description" content="完結啦！你已經學會了拿下 IOI 金牌所需要的所有語法了！是不是很簡單呢？ 不知道看到例題的感想，是覺得超級簡單、或是難到完全想不到、或是剛剛好呢？ 在後段的 STL 章節裡，我增加了例題的難度，四星的題目約是全國賽門檻等級，也就是說，如果你能不依靠詳解解出四星的題目，而你又幸運的不住台北，那你可能已經有參與全國賽的實力了喔！ 五星以上的題目們，就真的非常難了。其中在 set 中一題被我標為 8">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2020-11-05T06:00:34.000Z">
-<meta property="article:modified_time" content="2020-11-05T06:06:08.772Z">
+<meta property="article:published_time" content="2020-12-17T07:52:35.000Z">
+<meta property="article:modified_time" content="2020-12-17T08:46:03.806Z">
 <meta property="article:author" content="emanlaicepsa">
-<meta property="article:tag" content="演算法">
 <meta property="article:tag" content="演算法競賽">
-<meta property="article:tag" content="資訊奧林匹亞">
-<meta property="article:tag" content="入門">
 <meta property="article:tag" content="教學">
+<meta property="article:tag" content="入門">
+<meta property="article:tag" content="從零到一">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://emanlaicepsa.github.io/Privacy-Policy/">
+<link rel="canonical" href="https://emanlaicepsa.github.io/2020/12/17/0-26/">
 
 
 <script id="page-configurations">
@@ -56,13 +55,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-TW'
   };
 </script>
 
-  <title>Privacy-Policy | 從零開始的演算法競賽入門教學
-</title>
+  <title>0-26 本章總結 | 從零開始的演算法競賽入門教學</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z8B2VTRGNW"></script>
     <script>
@@ -173,50 +171,97 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="zh-TW">
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://emanlaicepsa.github.io/2020/12/17/0-26/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="emanlaicepsa">
+      <meta itemprop="description" content="由國際資訊奧林匹亞銀牌得主親自編寫，適合新手的演算法競賽指南。目的為減少南北差距，使每個人在演算法競賽中，都能站在公平的起跑點。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="從零開始的演算法競賽入門教學">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          0-26 本章總結
+        </h1>
 
-<h1 class="post-title" itemprop="name headline">Privacy-Policy
-</h1>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
 
-<div class="post-meta">
+              <time title="創建時間：2020-12-17 15:52:35 / 修改時間：16:46:03" itemprop="dateCreated datePublished" datetime="2020-12-17T15:52:35+08:00">2020-12-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="完結啦！"><a href="#完結啦！" class="headerlink" title="完結啦！"></a>完結啦！</h2><p>你已經學會了拿下 IOI 金牌所需要的所有語法了！是不是很簡單呢？</p>
+<p>不知道看到例題的感想，是覺得超級簡單、或是難到完全想不到、或是剛剛好呢？</p>
+<p>在後段的 STL 章節裡，我增加了例題的難度，四星的題目約是全國賽門檻等級，也就是說，如果你能不依靠詳解解出四星的題目，而你又幸運的不住台北，那你可能已經有參與全國賽的實力了喔！</p>
+<p>五星以上的題目們，就真的非常難了。其中在 set 中一題被我標為 8 顆星的<strong>直升機抓寶</strong>，雖然程式只有十餘行，不過這題在當年的全國賽上，可是只有兩三個人解出來的大難題呢！</p>
+<p>當然，如果你是初學者，寫不出太難的題目不用灰心。擺放高級題目的目的，僅僅是在說明，只需要如此簡單的語法，就能解決這麼多問題而已，對於初學者而言，能了解教學中的概念，並寫出三顆星以下的題目，就算是相當不錯的了！</p>
+<h2 id="接下來"><a href="#接下來" class="headerlink" title="接下來"></a>接下來</h2><p>你已經有了基礎的知識，可能也對於演算法有了初步的了解，之後要做什麼呢？</p>
+<p>參加一場 <a target="_blank" rel="noopener" href="https://codeforces.com/">Codeforces</a> Div.3 或者是 <a target="_blank" rel="noopener" href="https://atcoder.jp/home">AtCoder</a> 的 Beginner Contest 吧！如果可以，請試著在結束後查看出題者提供的題解。</p>
+<p>也可以試著參加一場免費的 APCS 考試，反正免費，考爛了也不虧。</p>
+<p>可以去刷一些題目，檢驗自己的學習成果。如果不知道從何寫起，可以參考一下 <a target="_blank" rel="noopener" href="https://toj.tfcis.org/oj/info/">TOJ</a> 上的高一生程式競技排名賽歷屆試題。</p>
+<p>如果想要學習更多算法知識，請期待下一章！</p>
+<p>下一章的內容基本上會以吳邦一教授的 AP325 作為基底，介紹一些基礎的演算法，以及題解一些講義內的例題。</p>
+<p>敬請期待！</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%AB%B6%E8%B3%BD/" rel="tag"># 演算法競賽</a>
+              <a href="/tags/%E6%95%99%E5%AD%B8/" rel="tag"># 教學</a>
+              <a href="/tags/%E5%85%A5%E9%96%80/" rel="tag"># 入門</a>
+              <a href="/tags/%E5%BE%9E%E9%9B%B6%E5%88%B0%E4%B8%80/" rel="tag"># 從零到一</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/14/0-25/" rel="prev" title="0-25 bitset">
+      <i class="fa fa-chevron-left"></i> 0-25 bitset
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-          <p>非常歡迎您光臨「從零開始的演算法競賽入門指南」（以下簡稱本網站），為了讓您能夠安心的使用本網站的各項服務與資訊，特此向您說明本網站的隱私權保護政策，以保障您的權益，請您詳閱下列內容：</p>
-<p>一、隱私權保護政策的適用範圍<br>隱私權保護政策內容，包括本網站如何處理在您使用網站服務時收集到的個人識別資料。隱私權保護政策不適用於本網站以外的相關連結網站，也不適用於非本網站所委託或參與管理的人員。</p>
-<p>二、個人資料的蒐集、處理及利用方式<br>當您造訪本網站或使用本網站所提供之功能服務時，我們將視該服務功能性質，請您提供必要的個人資料，並在該特定目的範圍內處理及利用您的個人資料；非經您書面同意，本網站不會將個人資料用於其他用途。<br>本網站在您使用服務信箱、問卷調查等互動性功能時，會保留您所提供的姓名、電子郵件地址、聯絡方式及使用時間等。<br>於一般瀏覽時，伺服器會自行記錄相關行徑，包括您使用連線設備的IP位址、使用時間、使用的瀏覽器、瀏覽及點選資料記錄等，做為我們增進網站服務的參考依據，此記錄為內部應用，決不對外公佈。<br>為提供精確的服務，我們會將收集的問卷調查內容進行統計與分析，分析結果之統計數據或說明文字呈現，除供內部研究外，我們會視需要公佈統計數據及說明文字，但不涉及特定個人之資料。<br>三、資料之保護<br>本網站主機均設有防火牆、防毒系統等相關的各項資訊安全設備及必要的安全防護措施，加以保護網站及您的個人資料採用嚴格的保護措施，只由經過授權的人員才能接觸您的個人資料，相關處理人員皆簽有保密合約，如有違反保密義務者，將會受到相關的法律處分。<br>如因業務需要有必要委託其他單位提供服務時，本網站亦會嚴格要求其遵守保密義務，並且採取必要檢查程序以確定其將確實遵守。<br>四、網站對外的相關連結<br>本網站的網頁提供其他網站的網路連結，您也可經由本網站所提供的連結，點選進入其他網站。但該連結網站不適用本網站的隱私權保護政策，您必須參考該連結網站中的隱私權保護政策。</p>
-<p>五、與第三人共用個人資料之政策<br>本網站絕不會提供、交換、出租或出售任何您的個人資料給其他個人、團體、私人企業或公務機關，但有法律依據或合約義務者，不在此限。</p>
-<p>前項但書之情形包括不限於：</p>
-<p>經由您書面同意。<br>法律明文規定。<br>為免除您生命、身體、自由或財產上之危險。<br>與公務機關或學術研究機構合作，基於公共利益為統計或學術研究而有必要，且資料經過提供者處理或蒐集者依其揭露方式無從識別特定之當事人。<br>當您在網站的行為，違反服務條款或可能損害或妨礙網站與其他使用者權益或導致任何人遭受損害時，經網站管理單位研析揭露您的個人資料是為了辨識、聯絡或採取法律行動所必要者。<br>有利於您的權益。<br>本網站委託廠商協助蒐集、處理或利用您的個人資料時，將對委外廠商或個人善盡監督管理之責。<br>六、Cookie之使用<br>為了提供您最佳的服務，本網站會在您的電腦中放置並取用我們的Cookie，若您不願接受Cookie的寫入，您可在您使用的瀏覽器功能項中設定隱私權等級為高，即可拒絕Cookie的寫入，但可能會導致網站某些功能無法正常執行。</p>
-<p>七、隱私權保護政策之修正<br>本網站隱私權保護政策將因應需求隨時進行修正，修正後的條款將刊登於網站上。</p>
-
-      </div>
-      
-      
-      
-    </div>
-    
-
-    
-    
-    
 
 
           </div>
@@ -274,6 +319,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E7%B5%90%E5%95%A6%EF%BC%81"><span class="nav-number">1.</span> <span class="nav-text">完結啦！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E4%B8%8B%E4%BE%86"><span class="nav-number">2.</span> <span class="nav-text">接下來</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -381,14 +427,69 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
 <script>
   var disqus_config = function() {
-    this.page.url = "https://emanlaicepsa.github.io/Privacy-Policy/index.html";
-    this.page.identifier = "Privacy-Policy/index.html";
-    this.page.title = "Privacy-Policy";
+    this.page.url = "https://emanlaicepsa.github.io/2020/12/17/0-26/";
+    this.page.identifier = "2020/12/17/0-26/";
+    this.page.title = "0-26 本章總結";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
